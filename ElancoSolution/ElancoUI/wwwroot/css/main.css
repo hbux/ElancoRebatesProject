@@ -1,0 +1,314 @@
+﻿:root {
+    --primary-dark-blue: #033357;
+    --secondary-light-blue: #0072ce;
+    --tetiary-white: #FFF;
+    --info-card: #caefeb;
+    --info-light: #f8f9fa;
+}
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/* HEADER */
+.header-section {
+    background-color: var(--primary-dark-blue);
+    color: var(--tetiary-white);
+}
+
+.header-container {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    gap: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header-login {
+    border: 2px solid var(--tetiary-white);
+    padding: 5px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/* REBATE UPLOAD AND PRODUCT */
+.rebate-ai-section {
+    background-color: var(--tetiary-white);
+}
+
+.rebate-ai-container {
+    padding: 30px 10px;
+}
+
+.rebate-help {
+    padding: 20px;
+    background-color: var(--info-light);
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.rebate-help a {
+    justify-self: center;
+    text-decoration: underline;
+}
+
+.rebate-ai-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+}
+
+.rebate-upload-and-thumbnail {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 190px 190px;
+    gap: 10px;
+}
+
+.rebate-container {
+    background-color: var(--info-card);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rebate-container h2 {
+    font-size: 18px;
+}
+
+.rebate-invoice-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.rebate-invoice-upload-link {
+    text-align: center;
+    padding: 30px;
+    cursor: pointer;
+}
+
+.rebate-invoice-upload-link svg {
+    width: 40px;
+    height: auto;
+}
+
+.rebate-invoice-upload-link h2 {
+    margin: 5px 0;
+}
+
+.rebate-invoice-upload-link p {
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+.rebate-header > h2 {
+    margin-bottom: 10px;
+}
+
+.rebate-header > a {
+    font-size: 14px;
+}
+
+.rebate-products-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.rebate-product-container {
+    background-color: var(--tetiary-white);
+    padding: 15px;
+}
+
+.rebate-product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+.rebate-product-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    margin: 30px 0;
+}
+
+.rebate-product-details h4 {
+    font-size: 16px;
+}
+
+.rebate-product-details p {
+    font-size: 14px;
+}
+
+.rebate-product-details h4:nth-child(even), p:nth-child(even) {
+    justify-self: end;
+}
+
+.rebate-product-details h4, p {
+    margin: 5px 0;
+} 
+
+.rebate-product-container > a {
+    font-size: 14px;
+}
+
+
+
+
+
+
+/* FORM */
+.rebate-form-container {
+    padding: 20px 10px;
+}
+
+.form-personal-details h3 {
+    padding-bottom: 20px;
+}
+
+.rebate-form-container p {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0;
+}
+
+.form-field label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--primary-dark-blue);
+}
+
+.form-field label > span {
+    color: red;
+}
+
+.form-field input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-dark-blue);
+    background-color: var(--tetiary-white);
+    font-size: 18px;
+}
+
+.form-submit-cta > button {
+    background-color: var(--secondary-light-blue);
+    color: var(--tetiary-white);
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 450px) {
+
+    .rebate-form-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .header-container,  .rebate-form-section {
+        padding: 10px 40px;
+    }
+
+    .rebate-ai-container {
+        padding: 30px 40px;
+    }
+
+    .rebate-form-container {
+        padding: 0;
+    }
+
+    .rebate-product-header {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+    }
+
+    .rebate-product-header h4 {
+        justify-self: start;
+    }
+
+    .rebate-product-details {
+        max-width: 460px;
+    }
+
+    .rebate-product-details h4:nth-child(even), p:nth-child(even) {
+        justify-self: start;
+    }
+}
+
+@media only screen and (min-width: 860px) {
+    .rebate-form-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: unset;
+        margin: 0;
+        max-width: unset;
+        gap: 100px;
+    }
+
+    .rebate-ai-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 190px 380px;
+        gap: 20px;
+    }
+
+    .rebate-upload-and-thumbnail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        grid-template-rows: 1fr;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .header-container, .rebate-ai-container, .rebate-form-section {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
