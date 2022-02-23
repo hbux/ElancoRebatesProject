@@ -4,6 +4,9 @@
     --tetiary-white: #FFF;
     --info-card: #caefeb;
     --info-light: #f8f9fa;
+    --info-error: #f20e16;
+    --info-warning: #ffc107;
+    --info-success: #28a745;
 }
 
 *, ::before, ::after {
@@ -203,6 +206,28 @@ body {
     display: flex;
     flex-direction: column;
     margin: 25px 0;
+}
+
+.invalid-message {
+    color: var(--info-error) !important;
+    font-size: 12px !important;
+}
+
+.low-confidence-message {
+    color: var(--info-warning) !important;
+    font-size: 12px !important;
+}
+
+.success-input {
+   border: 2px solid var(--info-success) !important;
+}
+
+.invalid-input {
+    border: 2px solid var(--info-error) !important;
+}
+
+.low-confidence-input {
+    border: 2px solid var(--info-warning) !important;
 }
 
 .form-field label {
