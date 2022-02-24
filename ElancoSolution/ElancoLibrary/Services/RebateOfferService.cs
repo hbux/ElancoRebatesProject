@@ -25,7 +25,7 @@ namespace ElancoLibrary.Services
 
         public void FindRebateOffers(Dictionary<string, string> rawRebateDetails)
         {
-            // This will find any matching rebates comparing it to data access
+            // This will find any matching rebates comparing it to data access - refactor after to remove dependency of dictionary?
         }
     }
 }

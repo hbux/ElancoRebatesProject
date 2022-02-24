@@ -128,11 +128,13 @@ body {
     margin: 10px 0;
 }
 
-.rebate-header > h2 {
-    margin-bottom: 10px;
+.rebate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.rebate-header > a {
+.rebate-header, .rebate-assistance > a {
     font-size: 14px;
 }
 
@@ -209,25 +211,17 @@ body {
 }
 
 .invalid-message {
+    display: none;
     color: var(--info-error) !important;
     font-size: 12px !important;
-}
-
-.low-confidence-message {
-    color: var(--info-warning) !important;
-    font-size: 12px !important;
-}
-
-.success-input {
-   border: 2px solid var(--info-success) !important;
 }
 
 .invalid-input {
     border: 2px solid var(--info-error) !important;
 }
 
-.low-confidence-input {
-    border: 2px solid var(--info-warning) !important;
+.success-input {
+   border: 2px solid var(--info-success) !important;
 }
 
 .form-field label {
