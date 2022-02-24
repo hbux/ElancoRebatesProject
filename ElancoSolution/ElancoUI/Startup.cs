@@ -1,9 +1,4 @@
-using Azure;
-using Azure.AI.FormRecognizer;
-using ElancoLibrary.DataAccess;
-using ElancoLibrary.Models.Rebates;
-using ElancoLibrary.Models.RebateDetails;
-using ElancoLibrary.Services;
+using ElancoUI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Azure.AI.FormRecognizer.DocumentAnalysis;
 
 namespace ElancoUI
 {
@@ -34,16 +28,6 @@ namespace ElancoUI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
-            services.AddTransient<IRebateOfferModel, RebateOfferModel>();
-            services.AddTransient<IOfferDetailsModel, OfferDetailsModel>();
-
-            services.AddSingleton<IDataAccess, FileDataAccess>();
-            services.AddSingleton<FormRecogniserService>();
-            services.AddSingleton<RebateOfferService>();
-            services.AddSingleton(new FormRecognizerClient(
-                new Uri(Configuration["Endpoint"]), 
-                new AzureKeyCredential(Configuration["ApiKey"])));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
