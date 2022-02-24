@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElancoUI", "ElancoUI\ElancoUI.csproj", "{A5150EA3-F89C-4D98-91DF-09BDE3C40338}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElancoUI", "ElancoUI\ElancoUI.csproj", "{A5150EA3-F89C-4D98-91DF-09BDE3C40338}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElancoLibrary", "ElancoLibrary\ElancoLibrary.csproj", "{423BCB14-1B7F-4280-9C0F-4A9ABDD5821E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A5150EA3-F89C-4D98-91DF-09BDE3C40338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5150EA3-F89C-4D98-91DF-09BDE3C40338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5150EA3-F89C-4D98-91DF-09BDE3C40338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423BCB14-1B7F-4280-9C0F-4A9ABDD5821E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423BCB14-1B7F-4280-9C0F-4A9ABDD5821E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423BCB14-1B7F-4280-9C0F-4A9ABDD5821E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423BCB14-1B7F-4280-9C0F-4A9ABDD5821E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

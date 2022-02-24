@@ -1,5 +1,9 @@
 using Azure;
 using Azure.AI.FormRecognizer;
+using ElancoLibrary.DataAccess;
+using ElancoLibrary.Models.Rebates;
+using ElancoLibrary.Models.RebateDetails;
+using ElancoLibrary.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +34,12 @@ namespace ElancoUI
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
+            services.AddTransient<IRebateOfferModel, RebateOfferModel>();
+            services.AddTransient<IOfferDetailsModel, OfferDetailsModel>();
+
+            services.AddSingleton<IDataAccess, FileDataAccess>();
+            services.AddSingleton<FormRecogniserService>();
+            services.AddSingleton<RebateOfferService>();
             services.AddSingleton(new FormRecognizerClient(
                 new Uri(Configuration["Endpoint"]), 
                 new AzureKeyCredential(Configuration["ApiKey"])));

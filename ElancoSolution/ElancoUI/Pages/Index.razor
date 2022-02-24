@@ -1,5 +1,10 @@
 ﻿@page "/"
 
+@using ElancoLibrary.Models.Rebates
+
+@inject FormRecogniserService recogniserService
+@inject RebateOfferService rebateOfferService
+
 <section class="rebate-ai-section">
     <div class="rebate-ai-container">
         <div class="rebate-help">
@@ -9,7 +14,7 @@
             <div class="rebate-upload-and-thumbnail">
                 <div class="rebate-container">
                     <div class="rebate-invoice-upload">
-                        <label class="rebate-invoice-upload-link">
+                        <label class="rebate-invoice-upload-link" @onclick="FetchRebates">
                             <input type="file" style="display: none !important;" />
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"/>
@@ -23,14 +28,14 @@
                 <div class="rebate-container">
                     <h2>Your invoice</h2>
                     <div class="rebate-invoice-img">
-                        <img src="https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice1.jpg?sp=r&st=2022-02-23T17:09:28Z&se=2022-02-24T01:09:28Z&spr=https&sv=2020-08-04&sr=b&sig=XhH2V6nnEgDmK5x%2BCWP2JZgs9oNfZwjr9XgDESlkKJQ%3D" width="100px" height="120px" />
+                        <img src="https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice1.jpg?sp=r&st=2022-02-24T06:31:12Z&se=2022-02-24T14:31:12Z&spr=https&sv=2020-08-04&sr=b&sig=Z3wijZDzisw5UMwOKNFG%2FcFkXiE6e5H%2BXyFX%2FShGB%2BQ%3D" width="100px" height="120px" />
                     </div>
                 </div>
             </div>
             <div class="rebate-container" id="rebate-found-products">
                 <div class="rebate-header">
                     <h2>We found this matching rebate</h2>
-                    <a href="#">Not your rebate?</a>
+                    <a href="#">Can't find your rebate?</a>
                 </div>
                 <div class="rebate-products-container">
                     <div class="rebate-product-container">
@@ -146,5 +151,15 @@
 </section>
 
 @code {
+    private List<IRebateOfferModel> rebateOffers;
 
+    private async Task FetchRebates() 
+    {
+        string invoiceUrl = "https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice1.jpg?sp=r&st=2022-02-24T05:57:28Z&se=2022-02-24T13:57:28Z&spr=https&sv=2020-08-04&sr=b&sig=OcUB%2F%2FR1jwsTG3vXiQ%2BcEasznUAYG31cvr85G4DxlB0%3D";
+
+        RecognizedFormCollection invoices = await recogniserService.AnalyseInvoice(invoiceUrl);
+        rebateOfferService.FindRebateOffers(recogniserService.MapInvoiceDetails(invoices.Single()));
+
+        rebateOffers = rebateOfferService.GetRebateOffers();
+    }
 }
