@@ -1,6 +1,9 @@
 ﻿@page "/"
 
-@layout LayoutComponent
+@using Azure;
+@using Azure.AI.FormRecognizer.DocumentAnalysis
+@using Azure.AI.FormRecognizer;
+@using Azure.AI.FormRecognizer.Models;
 
 <div class="component-container">
     <section class="header-section">
@@ -192,8 +195,38 @@
 </div>
 
 @code {
+    private static string apiKey = "";
+    private static string endpoint = "";
+    private static string modelId = "";
+    private static FormRecognizerClient client = new FormRecognizerClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
+
     private void UploadFile(InputFileChangeEventArgs e)
     {
-        
+        try
+        {
+            using (FileStream stream = new FileStream(@"wwwroot\images\ElancoInvoice9.png", FileMode.OpenOrCreate))
+            {
+                RecognizedFormCollection invoices = client.StartRecognizeCustomForms(modelId, stream).WaitForCompletion();
+
+                foreach (KeyValuePair<string, FormField> kvp in invoices.Single().Fields)
+                {
+                    if (kvp.Value.ValueData != null)
+                    {
+                        try
+                        {
+                            Console.WriteLine($"{ kvp.Key } : { kvp.Value.ValueData.Text }");
+                        }
+                        catch (Exception)
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception)
+        {
+            
+        }
     }
 }
