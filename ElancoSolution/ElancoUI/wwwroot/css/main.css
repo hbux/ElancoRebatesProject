@@ -18,21 +18,27 @@ body {
 }
 
 #upload-required {
-    display: none !important;
+    display: block !important;
 }
 
 #upload-complete {
-    display: block !important;
+    display: none !important;
 }
 
 #rebate-required {
     height: 120px !important;
-    display: none !important;
+    display: block !important;
 }
 
 #rebate-selected {
     height: inherit !important;
-    display: block !important;
+    display: none !important;
+}
+
+#submit-disabled {
+    background-color: var(--info-card);
+    color: var(--info-card-text);
+    cursor: not-allowed;
 }
 
 

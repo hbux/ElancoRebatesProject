@@ -1,5 +1,8 @@
+using Azure;
+using Azure.AI.FormRecognizer;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
+using ElancoUI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -33,7 +36,7 @@ namespace ElancoUI
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => 
+            services.AddDefaultIdentity<IdentityUser>(options =>
                 options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -43,7 +46,12 @@ namespace ElancoUI
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddSingleton(new FormRecognizerClient(
+                new Uri(Configuration["Endpoint"]),
+                new AzureKeyCredential(Configuration["ApiKey"])));
+
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<FormRecogniserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
