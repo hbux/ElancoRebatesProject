@@ -266,9 +266,10 @@
 
         try
         {
-            string path = "https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice9.png?sp=r&st=2022-02-26T11:31:25Z&se=2022-03-05T19:31:25Z&spr=https&sv=2020-08-04&sr=b&sig=csWVimpo9oPbaoGkL4jRvIJ%2FG7vjNXcMMc1LtHOJ2hM%3D";
+            string path = "https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice10.png?sp=r&st=2022-02-26T18:16:01Z&se=2022-02-27T02:16:01Z&spr=https&sv=2020-08-04&sr=b&sig=sadtU1lt2fQYPhahepkDs51u3T0YNrQbomvYri%2FUEt4%3D";
 
             RecognizedForm invoice = await _recognizer.AnalyseInvoice(path);
+            form = await _recognizer.ParseDataFromInvoice(invoice);
 
             fileUploaded = e.File;
             form.HasUploadedInvoice = fileUploaded != null ? true : false;
