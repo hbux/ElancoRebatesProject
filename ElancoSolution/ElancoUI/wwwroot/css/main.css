@@ -18,28 +18,27 @@ body {
     font-family: sans-serif;
 }
 
-#upload-required {
-    display: block !important;
-}
-
-#upload-complete {
-    display: none !important;
-}
-
 #rebate-required {
     height: 120px !important;
-    display: block !important;
 }
 
 #rebate-selected {
     height: inherit !important;
-    display: none !important;
 }
 
-#submit-disabled {
-    background-color: var(--info-card);
-    color: var(--info-card-text);
-    cursor: not-allowed;
+#loading-modal {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+#loading-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 30vh;
+    max-width: 400px;
 }
 
 
@@ -289,6 +288,11 @@ table td {
     margin-bottom: 5px;
     color: var(--primary-dark-blue);
 }
+.validation-message {
+    color: var(--info-danger);
+    font-size: 12px;
+    margin-top: 5px;
+}
 
 .form-field label > span {
     color: var(--info-danger);
@@ -302,9 +306,14 @@ table td {
     font-size: 16px;
 }
 
+.form-submit-btn-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-submit {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 }
@@ -317,6 +326,50 @@ table td {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.form-other-errors {
+    text-align: left;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.3);
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.loader {
+    border: 5px solid var(--info-card);
+    border-top: 5px solid var(--primary-dark-blue);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media only screen and (min-width: 800px) {

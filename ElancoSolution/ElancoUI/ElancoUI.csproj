@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ElancoUI-1E6EE8EF-D715-4C5B-976F-C53A0C762CD0</UserSecretsId>
   </PropertyGroup>
@@ -14,10 +14,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Development\unsafe_uploads\" />
   </ItemGroup>
 
 </Project>

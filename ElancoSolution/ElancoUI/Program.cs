@@ -1,5 +1,8 @@
+using Azure;
+using Azure.AI.FormRecognizer;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
+using ElancoUI.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -19,7 +22,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+builder.Services.AddSingleton(new FormRecognizerClient(
+    new Uri(builder.Configuration["Endpoint"]), 
+    new AzureKeyCredential(builder.Configuration["ApiKey"])));
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddTransient<FormRecognizerService>();
+builder.Services.AddTransient<RebateService>();
 
 var app = builder.Build();
 
