@@ -15,3 +15,10 @@ approach to streamlining the customer experience.
 * An option will be displayed to allow the user to take a picture of their product, which will find a matching rebate.
 * System auto-auto fills the corresponding form fields with the analysed data.
 * Form validation notifies the customer as they enter details
+
+## Resources
+Below are resources and documentation links to aid with the development.
+
+* [ASP.NET Core Blazor forms and validation](https://docs.microsoft.com/en-us/aspnet/core/blazor/forms-validation?view=aspnetcore-6.0#handle-form-submission)
+* [ASP.NET Core Blazor file uploads](https://docs.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-6.0&pivots=server#upload-files-to-a-server)
+* [ASP.NET Core Blazor performance best practices](https://docs.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-6.0)
