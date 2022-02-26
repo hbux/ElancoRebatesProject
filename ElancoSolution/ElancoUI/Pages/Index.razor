@@ -5,6 +5,8 @@
 @using Azure.AI.FormRecognizer;
 @using Azure.AI.FormRecognizer.Models;
 
+@inject IWebHostEnvironment _env
+
 <div class="component-container">
     <section class="header-section">
         <div class="header-container">
@@ -200,33 +202,46 @@
     private static string modelId = "";
     private static FormRecognizerClient client = new FormRecognizerClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
 
-    private void UploadFile(InputFileChangeEventArgs e)
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+        // string path = Path.Combine(_env.ContentRootPath, _env.EnvironmentName, "unsafe-uploads", e.File.Name);
+        // await using FileStream stream = new(path, FileMode.OpenOrCreate);
+        // await e.File.OpenReadStream(512_000).CopyToAsync(stream);
+        string path = "https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice9.png?sp=r&st=2022-02-26T01:44:48Z&se=2022-03-14T09:44:48Z&spr=https&sv=2020-08-04&sr=b&sig=qbMl5Lu0ZzqdC2iBhAJ9vABokPT305UZcxOPgLfPnVA%3D";
+
+        RecognizeCustomFormsOperation documents = await client.StartRecognizeCustomFormsFromUriAsync(modelId, new Uri(path),
+            new RecognizeCustomFormsOptions
+            {
+                ContentType = FormContentType.Png
+            });
+
+        RecognizedFormCollection invoices = documents.WaitForCompletion();
+
+        foreach (KeyValuePair<string, FormField> kvp in invoices.Single().Fields)
+        {
+            if (kvp.Value.ValueData != null)
+            {
+                try
+                {
+                    Console.WriteLine($"{ kvp.Key } : { kvp.Value.ValueData.Text }");
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }  
+    }
+
+    private void AnalyseDocument(FileStream stream)
     {
         try
         {
-            using (FileStream stream = new FileStream(@"wwwroot\images\ElancoInvoice9.png", FileMode.OpenOrCreate))
-            {
-                RecognizedFormCollection invoices = client.StartRecognizeCustomForms(modelId, stream).WaitForCompletion();
-
-                foreach (KeyValuePair<string, FormField> kvp in invoices.Single().Fields)
-                {
-                    if (kvp.Value.ValueData != null)
-                    {
-                        try
-                        {
-                            Console.WriteLine($"{ kvp.Key } : { kvp.Value.ValueData.Text }");
-                        }
-                        catch (Exception)
-                        {
-                            continue;
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception)
-        {
             
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: { ex.Message }");
         }
     }
 }
