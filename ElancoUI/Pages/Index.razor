@@ -1,0 +1,257 @@
+﻿@page "/"
+@layout LayoutComponent
+
+@using Elanco.Library.Services
+@using ElancoUI.Helpers
+@using ElancoUI.Models
+
+@inject ApiService _api
+@inject FormHelper _formHelper
+
+<section class="main-section">
+    <div class="main-container">
+        <div class="rebate-container">
+            <div class="info-card">
+                <div class="info-card-details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <a>How does our rebate process work?</a>
+                </div>
+            </div>
+            @if (fileUploaded == null)
+            {
+                <div class="card" id="upload-required">
+                    <label class="card-details">
+                        <InputFile OnChange="@UploadFile" type="file" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                            <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                        </svg>
+                        <h3>Upload invoice</h3>
+                        <a>Max file size: 4MB, image type: .png</a>
+                    </label>
+                </div>
+            }
+            else if (fileUploaded != null)
+            {
+                <div class="card" id="upload-complete">
+                    <div class="card-details">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                            <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                            <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                        </svg>
+                        <h3>Invoice uploaded</h3>
+                        <a>Click to view invoice</a>
+                    </div>
+                </div>
+            }
+            <div class="card" id="rebate-required">
+                <div class="card-details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
+                        <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    <h3>Select a rebate</h3>
+                    <a>Click to select a rebate you wish to claim</a>
+                </div>
+            </div>
+            <div class="card" id="rebate-selected">
+                <div class="card-details-rebate">
+                    <div class="rebate-info">
+                        <div class="rebate-images">
+                            <img src="images/credelio.jpg"/>
+                            <img src="images/InterceptorPlus.png" />
+                        </div>
+                        <div class="rebate-details">
+                            <div class="details-header">
+                                <h3>Offer Code: INCR22</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                            </div>
+                            <div class="details-purchased">
+                                <p>Purchase between:</p>
+                                <p>01/01/2022 - 12/31/2022</p>
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>Offer Details</th>
+                                    <th>Rebate Value</th>
+                                </tr>
+                                <tr>
+                                    <td>6 doses of each product</td>
+                                    <td>$6</td>
+                                </tr>
+                                <tr>
+                                    <td>12 doses of each product</td>
+                                    <td>$15</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="rebate-extra">
+                        <a>View more details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <EditForm class="form-container" Model="@form">
+            <DataAnnotationsValidator />
+            <div class="form-split-container">
+                <div class="form-fields">
+                    <h3>Your Information</h3>
+                    <div class="form-field">
+                        <label for="cust-first-name">First Name <span>*</span></label>
+                        <InputText id="cust-first-name" type="text" @bind-Value="form.CustomerFirstName" />
+                        <ValidationMessage For="() => form.CustomerFirstName" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-last-name">Last Name <span>*</span></label>
+                        <InputText id="cust-last-name" type="text" @bind-Value="form.CustomerLastName" />
+                        <ValidationMessage For="() => form.CustomerLastName" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-address">Address <span>*</span></label>
+                        <InputText id="cust-address" type="text" @bind-Value="form.CustomerAddress" />
+                        <ValidationMessage For="() => form.CustomerAddress" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-city">City <span>*</span></label>
+                        <InputText id="cust-city" type="text" @bind-Value="form.CustomerCity" />
+                        <ValidationMessage For="() => form.CustomerCity" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-state">State <span>*</span></label>
+                        <InputText id="cust-state" type="text" @bind-Value="form.CustomerState" />
+                        <ValidationMessage For="() => form.CustomerState" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-zip">Zip Code <span>*</span></label>
+                        <InputText id="cust-zip" type="text" @bind-Value="form.CustomerZipCode" />
+                        <ValidationMessage For="() => form.CustomerZipCode" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-phone">Phone</label>
+                        <InputText id="address" type="text" @bind-Value="form.CustomerPhone" />
+                        <ValidationMessage For="() => form.CustomerPhone" />
+                        <p>By providing my phone number, I consent to my phone number being used to contact me regarding my rebate submission.</p>
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-email">Email <span>*</span></label>
+                        <InputText id="cust-email" type="email" @bind-Value="form.CustomerEmailAddress" />
+                        <ValidationMessage For="() => form.CustomerEmailAddress" />
+                    </div>
+                    <div class="form-field">
+                        <label for="cust-confirm-email">Confirm Email <span>*</span></label>
+                        <InputText id="cust-confirm-email" type="email" @bind-Value="form.CustomerEmailConfirmation" />
+                        <ValidationMessage For="() => form.CustomerEmailConfirmation" />
+                    </div>
+                </div>
+                <div class="form-fields">
+                    <h3>Pet Details</h3>
+                    <p>Add your pet's name below. If you have multiple pets, please just put one of your pet's name.</p>
+                    <div class="form-field">
+                        <label for="pet-name">Pet Name <span>*</span></label>
+                        <InputText id="pet-name" type="text" @bind-Value="form.PetName"/>
+                        <ValidationMessage For="() => form.PetName" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-split-container">
+                <div class="form-fields">
+                    <h3>Purchase Details</h3>
+                    <p>Complete the information about your veterinarian clinic and medication(s).</p>
+                    <div class="form-field">
+                        <label for="clinic-name">Clinic Name <span>*</span></label>
+                        <InputText id="clinic-name" type="text" @bind-Value="form.ClinicName" />
+                        <ValidationMessage For="() => form.ClinicName" />
+                    </div>
+                    <div class="form-field">
+                        <label for="clinic-address">Clinic Address <span>*</span></label>
+                        <InputText id="clinic-address" type="text" @bind-Value="form.ClinicAddress" />
+                        <ValidationMessage For="() => form.ClinicAddress" />
+                    </div>
+                    <div class="form-field">
+                        <label for="clinic-city">Clinic City <span>*</span></label>
+                        <InputText id="clinic-city" type="text" @bind-Value="form.ClinicCity" />
+                        <ValidationMessage For="() => form.ClinicCity" />
+                    </div>
+                    <div class="form-field">
+                        <label for="clinic-state">Clinic State <span>*</span></label>
+                        <InputText id="clinic-state" type="text" @bind-Value="form.ClinicState" />
+                        <ValidationMessage For="() => form.ClinicState" />
+                    </div>
+                    <div class="form-field">
+                        <label for="clinic-zip">Clinic Zip Code <span>*</span></label>
+                        <InputText id="clinic-zip" type="text" @bind-Value="form.ClinicZipCode" />
+                        <ValidationMessage For="() => form.ClinicZipCode" />
+                    </div>
+                    <div class="form-field">
+                        <label for="amount-purchased">Amount Purchased <span>*</span></label>
+                        <InputNumber id="amount-purchased" type="text" @bind-Value="form.AmountPurchased" />
+                        <ValidationMessage For="() => form.AmountPurchased" />
+                    </div>
+                    <div class="form-submit">
+                        <div class="form-other-errors">
+                            <ValidationMessage For="() => form.HasUploadedInvoice" />
+                            <ValidationMessage For="() => form.HasSelectedRebate" />
+                        </div>
+                        <div class="form-submit-btn-container">
+                            <button type="submit" id="">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</section>
+<div class="modal" id="@GetLoadingModalCss()">
+    <div class="card" id="loading-card">
+        <div class="loading-container">
+            <div class="loader"></div>
+            <p>Analysing your upload...</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool isAnalysingUpload;
+    private IBrowserFile fileUploaded;
+    private FormModel form = new FormModel();
+
+    private string GetLoadingModalCss()
+    {
+        if (isAnalysingUpload == true)
+        {
+            return "loading-modal";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+        isAnalysingUpload = true;
+
+        string filePath = "https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice9.png?sp=r&st=2022-02-28T19:15:29Z&se=2022-03-01T03:15:29Z&spr=https&sv=2020-08-04&sr=b&sig=PBsBX0KUVTRsWi%2BhkOLb6t5uEOyvnrBpnvoOer1RSzc%3D";
+
+        try
+        {
+            var fields = await _api.AnalyseInvoice(filePath);
+            form = _formHelper.FormatFields(fields);
+
+            fileUploaded = e.File;
+            form.HasUploadedInvoice = fileUploaded != null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        isAnalysingUpload = false;
+    }
+}
