@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ElancoUI.Helpers
 {
+    /// <summary>
+    ///     This helper class formats the analysed fields into a UI FormModel instance.
+    /// </summary>
     public class FormHelper
     {
         private Dictionary<string, string> states;   
@@ -57,7 +60,7 @@ namespace ElancoUI.Helpers
             form.ClinicAddress = clinicAddress.Trim();
 
             List<string> addressStateZip = addressParts[1].Split().ToList();
-            // E.g. MI + 49660 
+            // E.g. MI + 49660 . Phone
 
             // The format is always going to be STATE followed by ZIP CODE. If the addressStateZip count is
             // greater than 2, we loop over each one, if the states["Example"] suceeds, we assume the zip code
@@ -67,7 +70,7 @@ namespace ElancoUI.Helpers
             {
                 try
                 {
-                    form.ClinicState = states[addressStateZip[i]];
+                    form.ClinicState = states[addressStateZip[i].ToUpper()];
                     form.ClinicZipCode = addressStateZip[i + 1];
 
                     return;
@@ -81,7 +84,7 @@ namespace ElancoUI.Helpers
 
         private Dictionary<string, string> GenerateAllStates()
         {
-            // Easily access the state name from it's abbreviation e.g. TX returns Texas
+            // Easily access the state name from it's abbreviation e.g. states["TX"] returns Texas
             Dictionary<string, string> states = new Dictionary<string, string>();
 
             states.Add("AL", "Alabama"); states.Add("AK", "Alaska"); states.Add("AZ", "Arizona");

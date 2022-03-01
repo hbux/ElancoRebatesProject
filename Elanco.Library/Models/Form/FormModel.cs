@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace Elanco.Library.Models.Form
 {
+    /// <summary>
+    ///     This FormModel will be passed in as a parameter to add into a database of rebate submissions.
+    ///     The UI FormModel values will be mapped into these properites after a valid submission.
+    /// </summary>
     public class FormModel
     {
         public IBrowserFile Invoice { get; set; }
@@ -16,5 +20,6 @@ namespace Elanco.Library.Models.Form
         public PetModel Pet { get; set; }
         public VeterinaryModel Veterinary { get; set; }
         public int AmountPurchased { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
     }
 }

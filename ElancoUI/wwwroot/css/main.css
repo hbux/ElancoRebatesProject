@@ -160,7 +160,7 @@ body {
     display: none !important;
 }
 
-.card-details svg {
+.card-details > svg {
     width: 40px;
     height: 40px;
 }
@@ -219,6 +219,8 @@ body {
 
 .details-header svg {
     cursor: pointer;
+    width: 20px;
+    height: auto;
 }
 
 .details-purchased {

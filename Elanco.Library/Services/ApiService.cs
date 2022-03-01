@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Elanco.Library.Services
 {
+    /// <summary>
+    ///     This service is responsbile for calling the API.
+    /// </summary>
     public class ApiService
     {
         private IConfiguration _config;
@@ -22,7 +25,7 @@ namespace Elanco.Library.Services
 
         public async Task<Dictionary<string, string>> AnalyseInvoice(string filePath)
         {
-            // Calls Azure Form Recognizer API to analyse the document and return a form
+            // Calls Azure Form Recognizer API to analyse the document
             // ModelId is the custom trained form recognizer AI id
             RecognizedFormCollection invoices = await _client.StartRecognizeCustomFormsFromUri(
                 _config["ModelId"],

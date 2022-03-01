@@ -2,6 +2,10 @@
 
 namespace ElancoUI.Models
 {
+    /// <summary>
+    ///     Form properites which represent each field on the user interface. These properites are bound to
+    ///     the user interface input fields.
+    /// </summary>
     public class FormModel
     {
         [Required]
