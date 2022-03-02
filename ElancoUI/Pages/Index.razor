@@ -5,6 +5,7 @@
 @using ElancoUI.Helpers
 @using ElancoUI.Models
 
+@inject NavigationManager _nav
 @inject IWebHostEnvironment _env
 @inject ApiService _api
 @inject FormHelper _formHelper
@@ -98,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <EditForm class="form-container" Model="@form">
+        <EditForm class="form-container" Model="@form" OnValidSubmit="@SubmitRebateForm">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
@@ -222,6 +223,9 @@
     private IBrowserFile fileUploaded;
     private FormModel form;
 
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
     protected override void OnInitialized()
     {
         form = new FormModel();
@@ -266,5 +270,20 @@
         }
 
         isAnalysingUpload = false;
+    }
+
+    private async Task SubmitRebateForm()
+    {
+        AuthenticationState authState = await AuthenticationStateTask;
+
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            // Process the rebate
+        }
+        else
+        {
+            // Redirect the user to the login page
+            _nav.NavigateTo("Identity/Account/Login");
+        }
     }
 }

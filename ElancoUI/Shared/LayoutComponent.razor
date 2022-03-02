@@ -1,24 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-@inject NavigationManager _navigation
-
 <div class="component-container">
     <MenuComponent />
-    <AuthorizeView>
-        <Authorized>
-            @Body
-        </Authorized>
-        <NotAuthorized>
-            <section class="unauthorized-section">
-                <div class="unauthorized-container">
-                    <h1>We're Sorry</h1>
-                    <p>You must be signed in to use this service.</p>
-                    <div class="unauthorized-links">
-                        <a href="Identity/Account/Login">Log In</a>
-                        <a href="Identity/Account/Register">Register</a>
-                    </div>
-                </div>
-            </section>
-        </NotAuthorized>
-    </AuthorizeView>
+    @Body
 </div>

@@ -84,6 +84,8 @@ body {
     border: 2px solid var(--seconary-white);
     font-size: 16px;
     cursor: pointer;
+    color: var(--seconary-white);
+    text-decoration: none;
 }
 
 .header-cta a {
@@ -99,32 +101,27 @@ body {
     display: none;
 }
 
-.header-cta button {
-    background-color: transparent;
-    border: none;
-    color: var(--primary-dark-blue);
+.header-cta-container form {
+    display: none;
 }
 
-
-
-
-/* unauthorized */
-.unauthorized-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    text-align: center;
-    justify-content: center;
-    gap: 10px;
-    max-width: 780px;
-    margin: 30vh auto;
-}
-
-.unauthorized-links {
+.header-cta-container button {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    border: 2px solid var(--seconary-white);
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--seconary-white);
+    background-color: transparent;
 }
+
+
+
+
+
+
 
 /* main */
 .main-section {
@@ -424,6 +421,10 @@ table td {
         display: none;
     }
 
+    .header-cta-container form {
+        display: block;
+    }
+
     .form-container {
         grid-template-columns: 1fr 1fr;
         max-width: 780px;
@@ -432,13 +433,8 @@ table td {
 }
 
 @media only screen and (min-width: 1000px) {
-    .header-container, .rebate-container, .form-container, {
+    .header-container, .rebate-container, .form-container {
         max-width: 780px;
         margin: 0 auto;
-    }
-
-    .unauthorized-container {
-        max-width: 780px;
-        margin: 30vh auto;
     }
 }
