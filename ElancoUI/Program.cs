@@ -1,6 +1,6 @@
 using Azure;
 using Azure.AI.FormRecognizer;
-using Elanco.Library.Services;
+using ElancoLibrary.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
 using ElancoUI.Helpers;

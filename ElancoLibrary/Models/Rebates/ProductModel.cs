@@ -1,4 +1,10 @@
-﻿namespace ElancoUI.Models.Rebates
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ElancoLibrary.Models.Rebates
 {
     public class ProductModel : IProductModel
     {

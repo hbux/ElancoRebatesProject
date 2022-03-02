@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elanco.Library.Services
+namespace ElancoLibrary.Services
 {
     public class ApiService
     {

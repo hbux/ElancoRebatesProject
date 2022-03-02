@@ -1,4 +1,4 @@
-﻿using ElancoUI.Models.Rebates;
+﻿using ElancoLibrary.Models.Rebates;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elanco.Library.Models.Form
+namespace ElancoLibrary.Models.Forms
 {
     /// <summary>
     ///     This FormModel will be passed in as a parameter to add into a database of rebate submissions.

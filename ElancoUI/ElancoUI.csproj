@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-ElancoUI-DA451441-D3F7-4FF0-9E83-5B25D0D5058E</UserSecretsId>
+    <UserSecretsId>aspnet-ElancoUI-CDA36F0B-4463-4A16-9EDF-38D3BBF5DB5F</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elanco.Library\Elanco.Library.csproj" />
+    <ProjectReference Include="..\ElancoLibrary\ElancoLibrary.csproj" />
   </ItemGroup>
 
 </Project>

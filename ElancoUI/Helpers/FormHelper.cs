@@ -1,9 +1,4 @@
 ﻿using ElancoUI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoUI.Helpers
 {
@@ -12,7 +7,7 @@ namespace ElancoUI.Helpers
     /// </summary>
     public class FormHelper
     {
-        private Dictionary<string, string> states;   
+        private Dictionary<string, string> states;
 
         public FormHelper()
         {
