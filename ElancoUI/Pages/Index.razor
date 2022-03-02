@@ -5,6 +5,7 @@
 @using ElancoUI.Helpers
 @using ElancoUI.Models
 
+@inject IWebHostEnvironment _env
 @inject ApiService _api
 @inject FormHelper _formHelper
 
@@ -244,11 +245,16 @@
 
         try
         {
-            // Calls the API when the input file changes
-            var fields = await _api.AnalyseInvoice("https://b7012116pspdata.blob.core.windows.net/elanco-invoices/ElancoInvoice7.png?sp=r&st=2022-03-01T06:50:42Z&se=2022-03-01T14:50:42Z&spr=https&sv=2020-08-04&sr=b&sig=ufmDyC6k4DeibcQLfnK%2BLXCjoGEqUOxd0Ycd1tU1VLA%3D");
+            string localFilePath = Path.Combine(_env.ContentRootPath, "wwwroot", "images", "ElancoInvoice6.png");
 
-            // Pass in the dictionary<string, string> into the format helper to parse the data into a usable format
-            form = _formHelper.FormatFields(fields); 
+            using (FileStream stream = new FileStream(localFilePath, FileMode.Open))
+            {
+                // Calls the API when the input file changes
+                var fields = await _api.AnalyseInvoice(stream);
+
+                // Pass in the dictionary<string, string> into the format helper to parse the data into a usable format
+                form = _formHelper.FormatFields(fields); 
+            };
 
             // Storing the file for form submission and notifiying the FormModel that a file has been uploaded
             fileUploaded = e.File;
