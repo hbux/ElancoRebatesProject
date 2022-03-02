@@ -1,12 +1,18 @@
 ﻿<AuthorizeView>
     <Authorized>
-        <a class="header-cta" href="Identity/Account/Manage"><span class="header-cta-short">Account</span><span class="header-cta-long">Log In</span></a>
-        <form method="post" action="Identity/Account/LogOut">
-            <button class="header-cta" type="submit">Log Out</button>
+        <div class="header-cta">
+            <a href="Identity/Account/Manage"><span class="header-cta-short">Account</span><span class="header-cta-long">Log In</span></a>
+        </div>
+        <form class="header-cta" method="post" action="Identity/Account/LogOut">
+            <button type="submit">Log Out</button>
         </form>
     </Authorized>
     <NotAuthorized>
-        <a class="header-cta" href="Identity/Account/Login"><span class="header-cta-short">Account</span><span class="header-cta-long">Log In</span></a>
-        <a class="header-cta" href="Identity/Account/Register">Register</a>
+        <div class="header-cta">
+            <a href="Identity/Account/Login"><span class="header-cta-short">Account</span><span class="header-cta-long">Log In</span></a>
+        </div>
+        <div class="header-cta">
+            <a href="Identity/Account/Register">Register</a>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
