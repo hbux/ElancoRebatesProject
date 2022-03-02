@@ -120,23 +120,9 @@ body {
 
 
 
-/* unauthorized */
-.unauthorized-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    text-align: center;
-    justify-content: center;
-    gap: 10px;
-    max-width: 780px;
-    margin: 30vh auto;
-}
 
-.unauthorized-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+
+
 
 /* main */
 .main-section {

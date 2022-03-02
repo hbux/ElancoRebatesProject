@@ -4,6 +4,7 @@ using Elanco.Library.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
 using ElancoUI.Helpers;
+using ElancoUI.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -31,6 +32,8 @@ builder.Services.AddSingleton(new FormRecognizerClient(
 
 builder.Services.AddScoped<ApiService>();
 builder.Services.AddScoped<FormHelper>();
+
+builder.Services.AddSingleton<FormModel>();
 
 var app = builder.Build();
 
