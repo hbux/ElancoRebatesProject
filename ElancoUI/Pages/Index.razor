@@ -1,13 +1,11 @@
 ﻿@page "/"
 @layout LayoutComponent
 
-@using Microsoft.AspNetCore.Identity
 @using Elanco.Library.Services
 @using ElancoUI.Helpers
 @using ElancoUI.Models
 
 @inject IWebHostEnvironment _env
-@inject NavigationManager _nav
 @inject ApiService _api
 @inject FormHelper _formHelper
 
@@ -100,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <EditForm class="form-container" Model="@form" OnValidSubmit="@SubmitRebateForm">
+        <EditForm class="form-container" Model="@form">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
@@ -224,9 +222,6 @@
     private IBrowserFile fileUploaded;
     private FormModel form;
 
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
-
     protected override void OnInitialized()
     {
         form = new FormModel();
@@ -271,20 +266,5 @@
         }
 
         isAnalysingUpload = false;
-    }
-
-    private async Task SubmitRebateForm()
-    {
-        AuthenticationState authState = await AuthenticationStateTask;
-
-        if (authState.User.Identity.IsAuthenticated)
-        {
-            // Process the rebate
-        }
-        else
-        {
-            // Redirect the user to the login page
-            _nav.NavigateTo("Identity/Account/Login");
-        }
     }
 }
