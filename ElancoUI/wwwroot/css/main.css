@@ -16,6 +16,7 @@
 
 body {
     font-family: sans-serif;
+    height: 100vh;
 }
 
 #rebate-required {
@@ -85,6 +86,11 @@ body {
     cursor: pointer;
 }
 
+.header-cta a {
+    color: var(--seconary-white);
+    text-decoration: none;
+}
+
 .header-cta-long {
     display: none;
 }
@@ -93,10 +99,32 @@ body {
     display: none;
 }
 
+.header-cta button {
+    background-color: transparent;
+    border: none;
+    color: var(--primary-dark-blue);
+}
 
 
 
 
+/* unauthorized */
+.unauthorized-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 780px;
+    margin: 30vh auto;
+}
+
+.unauthorized-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 /* main */
 .main-section {
@@ -404,8 +432,13 @@ table td {
 }
 
 @media only screen and (min-width: 1000px) {
-    .header-container, .rebate-container, .form-container {
+    .header-container, .rebate-container, .form-container, {
         max-width: 780px;
         margin: 0 auto;
+    }
+
+    .unauthorized-container {
+        max-width: 780px;
+        margin: 30vh auto;
     }
 }
