@@ -123,6 +123,75 @@ body {
 
 
 
+
+
+/* login */
+.auth-section {
+    background-color: var(--seconary-white);
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 20px;
+    justify-items: center;
+    padding: 50px 10px;
+    color: var(--primary-dark-blue);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    font-size: 12px;
+}
+
+.auth-card {
+    background-color: var(--seconary-white);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
+    color: var(--primary-dark-blue);
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.auth-card button {
+    background-color: var(--primary-light-blue);
+    color: var(--seconary-white);
+    padding: 15px 25px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-card > p {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.auth-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+
+
+
 /* main */
 .main-section {
     background-color: var(--seconary-white);
@@ -316,6 +385,7 @@ table td {
     margin-bottom: 5px;
     color: var(--primary-dark-blue);
 }
+
 .validation-message {
     color: var(--info-danger);
     font-size: 12px;

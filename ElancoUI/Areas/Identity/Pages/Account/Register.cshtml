@@ -1,0 +1,40 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="auth-section">
+    <div class="auth-container">
+        <div class="auth-header">
+            <img src="~/images/elanco-logo.png" width="100"  height="50" />
+            <h2>Register with Elanco Rebates</h2>
+        </div>
+        <form class="auth-card" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="form-fields">
+                <div class="form-field">
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="validation-message"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="validation-message"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Input.ConfirmPassword" class="form-label"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="validation-message"></span>
+                </div>
+                <div class="form-submit-btn-container">
+                    <button id="auth-submit" type="submit">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

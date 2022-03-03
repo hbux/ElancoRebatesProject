@@ -1,0 +1,43 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<section class="auth-section">
+    <div class="auth-container">
+        <div class="auth-header">
+            <img src="~/images/elanco-logo.png" width="100"  height="50" />
+            <h2>Log in to Elanco Rebates</h2>
+        </div>
+        <form class="auth-card" id="account" method="post">
+            <div class="form-fields">
+                <div class="form-field">
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="validation-message"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="validation-message"></span>
+                </div>
+                <div class="form-submit-btn-container">
+                    <button id="auth-submit" type="submit">Log in</button>
+                </div>
+            </div>
+        </form>
+        <div class="auth-card">
+            <p>Not got an account?<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a></p>
+        </div>
+        <div class="auth-links">
+            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
