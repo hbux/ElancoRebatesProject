@@ -80,8 +80,14 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 14px;
+    font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
+}
+
+.header-logo a {
+    color: var(--seconary-white);
+    text-decoration: none;
 }
 
 .header-cta-container {
