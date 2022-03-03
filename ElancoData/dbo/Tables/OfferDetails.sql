@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[OfferDetails]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Amount] NVARCHAR(128) NOT NULL,
+	[Value] MONEY NOT NULL,
+	[OfferId] INT FOREIGN KEY REFERENCES Offer(Id)
+)
