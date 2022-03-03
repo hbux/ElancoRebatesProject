@@ -8,6 +8,7 @@ namespace ElancoLibrary.Models.Rebates
 {
     public class ProductModel : IProductModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string OfferCode { get; set; }
         public List<string> Logos { get; set; } = new List<string>();
