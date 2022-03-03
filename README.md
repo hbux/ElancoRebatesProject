@@ -9,12 +9,28 @@ Using Azure Cognitive Services, build a web-based application which represents t
 Elanco will provide sample images of test receipts/products and we’d like to see which useful data we can programmatically extract and display in a web interface to validate this
 approach to streamlining the customer experience. 
 
+#### New Requirements and requirement changes
+There have been new requirements added by the client. Essentially, the client wants every field on the rebate form
+to be auto-filled. This can be achieved by adding a login/register functionality where a customer account contains 
+additional details such as:
+* First name and surname
+* Email address
+* Address
+* Multiple pets
+
+**Requirement changes**
+The client wants to replace the pet input field to an image of the customer's pet(s). Where the user can select an image of their pet.
+
 ## System Design and Flow
 * Customer uploads an invoice from their device - if using mobile, a camera can be used to take a picture of the invoice.
 * Azure Form Recogniser analyses the invoice and returns key value pairs of invoice details.
 * An option will be displayed to allow the user to take a picture of their product, which will find a matching rebate.
 * System auto-auto fills the corresponding form fields with the analysed data.
 * Form validation notifies the customer as they enter details
+
+Following the new requiremets and requirement changes:
+* Microsoft Entity Framework with authorisation will be scaffolded into the project. Additional fields within the EF Core tables will be required.
+* The pages for Authorisation/authentication will be scaffolded into the project and styled with Elanco CSS.
 
 ## Resources
 Below are resources and documentation links to aid with the development.
