@@ -1,0 +1,32 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "../Shared/Layouts/_IdentityLayout.cshtml";
+    }
+}
+
+<section class="account-section">
+    <div class="account-container">
+        <div class="account-header">
+            <img src="~/images/elanco-profile-logo.png" width="120px" height="70px" />
+            <div class="account-header-details">
+                <h3>Welcome!</h3>
+                <p>Your Elanco account</p>
+            </div>
+        </div>
+        <div class="account-nav-and-contents">
+            <div class="account-nav">
+                <partial name="_ManageNav" />
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
