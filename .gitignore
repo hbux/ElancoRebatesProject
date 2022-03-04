@@ -397,3 +397,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 ElancoSolution/ElancoUI/appsettings.json
+ElancoUI/appsettings.json
