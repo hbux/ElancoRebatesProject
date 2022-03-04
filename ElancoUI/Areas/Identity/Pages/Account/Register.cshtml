@@ -12,6 +12,7 @@
         </div>
         <form class="auth-card" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="form-fields">
+                <div asp-validation-summary="All" class="validation-message-summary"></div>
                 <div class="form-field">
                     <label asp-for="Input.Email" class="form-label"></label>
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />

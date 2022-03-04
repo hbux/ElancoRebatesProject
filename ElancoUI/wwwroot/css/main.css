@@ -171,6 +171,18 @@ body {
     font-size: 12px;
 }
 
+.validation-message-summary {
+    text-align: center;
+    list-style-type: none;
+    color: var(--info-danger);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.validation-message-summary ul {
+    list-style-type: none;
+}
+
 .auth-card {
     background-color: var(--seconary-white);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
