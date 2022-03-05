@@ -70,7 +70,7 @@ namespace ElancoUI.Models
 
 
         [Required(ErrorMessage = "Amount purchased cannot be empty!")]
-        [Range(1, 25, ErrorMessage = "Amount purchased must be at least 1!")]
+        [Range(1, int.MaxValue, ErrorMessage = "Amount purchased must be at least 1!")]
         public int AmountPurchased { get; set; }
     }
 }

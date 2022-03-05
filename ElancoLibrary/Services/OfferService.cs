@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoLibrary.Models.Forms
+namespace ElancoLibrary.Services
 {
-    public class PetModel
+    public class OfferService
     {
-        public string Name { get; set; }
+        // Fetch all products to display on UI
     }
 }

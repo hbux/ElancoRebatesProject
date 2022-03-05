@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoLibrary.Models.Forms
+namespace ElancoLibrary.Models.Offers
 {
-    public class VeterinaryModel
+    public class ProductModel
     {
+        public string Id { get; set; }
         public string Name { get; set; }
-        public AddressModel Address { get; set; }
+        public string ImageName { get; set; }
     }
 }

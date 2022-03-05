@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoLibrary.Models.Rebates
+namespace ElancoLibrary.Models.Offers
 {
-    public class ProductOfferModel : IProductOfferModel
+    public class OfferDetails
     {
+        public int Id { get; set; }
         public string Amount { get; set; }
-        public int Value { get; set; }
+        public decimal Value { get; set; }
     }
 }
