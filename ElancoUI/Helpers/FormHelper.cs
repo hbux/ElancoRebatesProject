@@ -14,21 +14,17 @@ namespace ElancoUI.Helpers
             states = GenerateAllStates();
         }
 
-        public FormModel FormatFields(Dictionary<string, string> fields)
+        public void FormatFields(FormModel form, Dictionary<string, string> fields)
         {
-            FormModel _form = new FormModel();
-
             try
             {
-                _form.ClinicName = fields["Name"];
-                FormatAddress(_form, fields["Address"]);
+                form.ClinicName = fields["Name"];
+                FormatAddress(form, fields["Address"]);
             }
             catch (Exception)
             {
-                return _form;
+                return;
             }
-
-            return _form;
         }
 
         private void FormatAddress(FormModel form, string address)

@@ -4,10 +4,9 @@
 @using ElancoUI.Models
 @using ElancoLibrary.Services
 
-@inject NavigationManager _nav
-@inject IWebHostEnvironment _env
-@inject ApiService _api
-@inject FormHelper _formHelper
+@inject IWebHostEnvironment Env
+@inject ApiService Api
+@inject FormHelper FormHelper
 
 <section class="main-section">
     <div class="main-container">
@@ -50,7 +49,7 @@
             }
             @if (form.HasSelectedRebate == false)
             {
-                <div class="card" id="rebate-required" @onclick="NavigateToRebates">
+                <div class="card" id="rebate-required">
                     <div class="card-details">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
                             <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
@@ -102,7 +101,7 @@
                 </div>
             }
         </div>
-        <EditForm class="form-container" Model="@form" OnValidSubmit="@SubmitRebateForm">
+        <EditForm class="form-container" Model="@form">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
@@ -223,16 +222,7 @@
 
 @code {
     private bool isAnalysingUpload;
-    private IBrowserFile fileUploaded;
-    private FormModel form;
-
-    [CascadingParameter]
-    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
-
-    protected override void OnInitialized()
-    {
-        form = new FormModel();
-    }
+    private FormModel form = new FormModel();
 
     private string GetLoadingModalCss()
     {
@@ -252,20 +242,15 @@
 
         try
         {
-            string localFilePath = Path.Combine(_env.ContentRootPath, "wwwroot", "images", "ElancoInvoice6.png");
+            string localFilePath = Path.Combine(Env.ContentRootPath, "wwwroot", "images", "ElancoInvoice6.png");
 
             using (FileStream stream = new FileStream(localFilePath, FileMode.Open))
             {
-                // Calls the API when the input file changes
-                var fields = await _api.AnalyseInvoice(stream);
-
-                // Pass in the dictionary<string, string> into the format helper to parse the data into a usable format
-                form = _formHelper.FormatFields(fields); 
+                var fields = await Api.AnalyseInvoice(stream);
+                FormHelper.FormatFields(form, fields); 
             };
 
-            // Storing the file for form submission and notifiying the FormModel that a file has been uploaded
-            fileUploaded = e.File;
-            form.HasUploadedInvoice = fileUploaded != null;
+            form.HasUploadedInvoice = e.File != null;
         }
         catch (Exception ex)
         {
@@ -273,24 +258,5 @@
         }
 
         isAnalysingUpload = false;
-    }
-
-    private void NavigateToRebates()
-    {
-        _nav.NavigateTo("/rebates");
-    }
-
-    private async Task SubmitRebateForm()
-    {
-        AuthenticationState authState = await AuthenticationStateTask;
-
-        if (authState.User.Identity.IsAuthenticated)
-        {
-            // Process the rebate
-        }
-        else
-        {
-            _nav.NavigateTo("/Identity/Account/Login");
-        }
     }
 }

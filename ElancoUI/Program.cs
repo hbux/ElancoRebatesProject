@@ -1,5 +1,7 @@
 using Azure;
 using Azure.AI.FormRecognizer;
+using ElancoLibrary.Data;
+using ElancoLibrary.DataAccess;
 using ElancoLibrary.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
@@ -29,7 +31,9 @@ builder.Services.AddSingleton(new FormRecognizerClient(
     new Uri(builder.Configuration["Endpoint"]),
     new AzureKeyCredential(builder.Configuration["ApiKey"])));
 
+builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<ApiService>();
+builder.Services.AddScoped<OfferData>();
 builder.Services.AddScoped<FormHelper>();
 
 var app = builder.Build();
