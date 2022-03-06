@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ElancoLibrary.DataAccess
 {
-    public class SqlDataAccess
+    public class SqlDataAccess : ISqlDataAccess
     {
-        public List<T> LoadData<T, U>()
+        public async Task<List<T>> LoadData<T, U>()
         {
             throw new NotImplementedException();
         }
 
-        public void SaveData<T>()
+        public async Task SaveData<T>()
         {
             throw new NotImplementedException();
         }

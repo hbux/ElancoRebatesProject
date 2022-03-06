@@ -61,12 +61,12 @@
     <Folder Include="PublishLocations" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Product.sql" />
-    <Build Include="dbo\Tables\OfferProducts.sql" />
-    <Build Include="dbo\Tables\Offer.sql" />
-    <Build Include="dbo\Tables\OfferDetails.sql" />
+    <None Include="PublishLocations\ElancoData.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PublishLocations\ElancoData.publish.xml" />
+    <Build Include="dbo\Tables\Product.sql" />
+    <Build Include="dbo\Tables\Offer.sql" />
+    <Build Include="dbo\Tables\OfferProducts.sql" />
+    <Build Include="dbo\Tables\OfferDetails.sql" />
   </ItemGroup>
 </Project>
