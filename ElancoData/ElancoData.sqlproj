@@ -59,6 +59,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="PublishLocations" />
+    <Folder Include="dbo\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\ElancoData.publish.xml" />
@@ -68,5 +69,6 @@
     <Build Include="dbo\Tables\Offer.sql" />
     <Build Include="dbo\Tables\OfferProducts.sql" />
     <Build Include="dbo\Tables\OfferDetails.sql" />
+    <Build Include="dbo\Stored Procedures\spOffer_GetAll.sql" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,6 @@ body {
 
 #rebate-selected {
     height: inherit !important;
-    display: none !important;
 }
 
 #loading-modal {
@@ -478,8 +477,7 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--primary-light-blue);
-    text-decoration: underline;
-    cursor: pointer;
+    text-align: center;
 }
 
 .card-details-rebate p {
@@ -659,6 +657,17 @@ table td {
     animation: spin 2s linear infinite;
 }
 
+.available-rebates-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.rebate-select-container {
+    display: flex;
+    justify-content: center;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -706,6 +715,10 @@ table td {
         grid-template-columns: 1fr 1fr;
         max-width: 780px;
         margin: 0 auto;
+    }
+
+    .available-rebates-container {
+        grid-template-columns: 1fr 1fr;
     }
 }
 

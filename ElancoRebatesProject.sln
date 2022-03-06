@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElancoLibrary", "ElancoLibr
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ElancoData", "ElancoData\ElancoData.sqlproj", "{06896722-023B-44E2-A6AF-A46D0EC206DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElancoLibrary.Tests", "ElancoLibrary.Tests\ElancoLibrary.Tests.csproj", "{D112AECC-424B-429E-9CA3-E12DA9522FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElancoLibrary.Tests", "ElancoLibrary.Tests\ElancoLibrary.Tests.csproj", "{D112AECC-424B-429E-9CA3-E12DA9522FBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

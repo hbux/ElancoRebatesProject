@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +12,35 @@ namespace ElancoLibrary.DataAccess
 {
     public class SqlDataAccess : ISqlDataAccess
     {
-        public async Task<List<T>> LoadData<T, U>()
+        private IConfiguration _config;
+
+        public SqlDataAccess(IConfiguration config)
         {
-            throw new NotImplementedException();
+            _config = config;
+        } 
+
+        private string GetConnectionString(string name = "ElancoData")
+        {
+            return _config.GetConnectionString(name);
         }
 
-        public async Task SaveData<T>()
+        public async Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(GetConnectionString(connectionStringName)))
+            {
+                var data = await connection.QueryAsync<T>(storedProcedure, parameters,
+                    commandType: CommandType.StoredProcedure);
+
+                return data.ToList();
+            }
+        }
+
+        public async Task SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
+        {
+            using (IDbConnection connection = new SqlConnection(GetConnectionString(connectionStringName)))
+            {
+                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }

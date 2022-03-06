@@ -1,0 +1,78 @@
+﻿@page "/rebates"
+
+<section class="main-section">
+    <div class="main-container">
+        <div class="rebate-container">
+            <div class="info-card">
+                <div class="info-card-details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <a>Either take a picture of your product, or find a rebate matching your product.</a>
+                </div>
+            </div>
+            <div class="card" id="upload-required">
+                <label class="card-details">
+                    <InputFile OnChange="@UploadFile" type="file" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                      <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+                      <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                    </svg>
+                    <h3>Take a picture</h3>
+                    <a>Take a picture of your purchased product and we'll attempt to match it with a rebate.</a>
+                </label>
+            </div>
+            <div class="available-rebates-container">
+                <div class="card" id="rebate-selected">
+                    <div class="card-details-rebate">
+                        <div class="rebate-info">
+                            <div class="rebate-images">
+                                <img src="images/credelio.jpg"/>
+                                <img src="images/InterceptorPlus.png" />
+                            </div>
+                            <div class="rebate-details">
+                                <div class="details-header">
+                                    <h3>Offer Code: INCR22</h3>
+                                </div>
+                                <div class="details-purchased">
+                                    <p>Purchase between:</p>
+                                    <p>01/01/2022 - 12/31/2022</p>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <th>Offer Details</th>
+                                        <th>Rebate Value</th>
+                                    </tr>
+                                    <tr>
+                                        <td>6 doses of each product</td>
+                                        <td>$6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12 doses of each product</td>
+                                        <td>$15</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="rebate-extra">
+                            <p>Offer also valid for mycoxlin oxide monohydrate purchases.</p>
+                        </div>
+                        <div class="rebate-select-container">
+                            <div class="form-submit">
+                                <button>Select rebate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private void UploadFile(InputFileChangeEventArgs e)
+    {
+        
+    }
+}
