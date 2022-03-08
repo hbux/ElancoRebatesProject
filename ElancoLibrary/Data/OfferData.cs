@@ -19,7 +19,7 @@ namespace ElancoLibrary.Data
 
         public async Task<List<OfferModel>> GetOffers()
         {
-            return await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetAll", new { }, "ElancoData");
+            return await dataAccess.LoadOffers("ElancoData");
         }
     }
 }

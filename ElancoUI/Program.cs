@@ -6,6 +6,7 @@ using ElancoLibrary.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
 using ElancoUI.Helpers;
+using ElancoUI.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -35,6 +36,9 @@ builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<ApiService>();
 builder.Services.AddScoped<OfferData>();
 builder.Services.AddScoped<FormHelper>();
+
+// This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning
+builder.Services.AddSingleton<FormModel>();
 
 var app = builder.Build();
 

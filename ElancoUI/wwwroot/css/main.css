@@ -22,6 +22,7 @@ body {
 
 #rebate-required {
     height: 120px !important;
+    text-decoration: none;
 }
 
 #rebate-selected {
@@ -457,9 +458,9 @@ body {
     height: 40px;
 }
 
-.card-details p {
+.card-details p, .card-details a {
     color: var(--info-card-text);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .card-details-rebate {

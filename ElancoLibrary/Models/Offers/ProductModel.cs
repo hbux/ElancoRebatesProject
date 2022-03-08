@@ -11,5 +11,6 @@ namespace ElancoLibrary.Models.Offers
         public string Id { get; set; }
         public string Name { get; set; }
         public string ImageName { get; set; }
+        public string ImageType { get; set; }
     }
 }

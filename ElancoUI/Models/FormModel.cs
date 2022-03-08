@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ElancoLibrary.Models.Offers;
+using Microsoft.AspNetCore.Components.Forms;
+using System.ComponentModel.DataAnnotations;
 
 namespace ElancoUI.Models
 {
@@ -8,13 +10,36 @@ namespace ElancoUI.Models
     /// </summary>
     public class FormModel
     {
+        public IBrowserFile InvoiceUploaded { get; set; }
+        public OfferModel RebateSelected { get; set; }
+
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "You must upload an invoice!")]
-        public bool HasUploadedInvoice { get; set; }
+        public bool HasUploadedInvoice
+        { 
+            get
+            {
+                return InvoiceUploaded != null;
+            }
+            set
+            {
+                HasUploadedInvoice = value;
+            }
+        }
 
         [Required]
         [Range(typeof(bool), "true", "true", ErrorMessage = "You must select a rebate!")]
-        public bool HasSelectedRebate { get; set; }
+        public bool HasSelectedRebate
+        {
+            get
+            {
+                return RebateSelected != null;
+            }
+            set
+            {
+                HasSelectedRebate = value;
+            }
+        }
 
 
         [Required(ErrorMessage = "First name cannot be empty!")]

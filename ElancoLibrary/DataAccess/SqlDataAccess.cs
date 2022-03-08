@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using ElancoLibrary.Models.Offers;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,31 @@ namespace ElancoLibrary.DataAccess
                     commandType: CommandType.StoredProcedure);
 
                 return data.ToList();
+            }
+        }
+
+        public async Task<List<OfferModel>> LoadOffers(string connectionStringName)
+        {
+            using (IDbConnection connection = new SqlConnection(GetConnectionString(connectionStringName)))
+            {
+                var offers = await connection.QueryAsync<OfferModel>("SELECT * FROM Offer");
+
+                foreach (OfferModel offer in offers)
+                {
+                    var offerDetails = await connection.QueryAsync<OfferDetails>("SELECT * FROM OfferDetails WHERE OfferId = @Id", new { Id = offer.Id });
+                    
+                    var offerProducts = await connection.QueryAsync<ProductModel>(
+                        "SELECT Product.Id, Product.Name, Product.ImageName, Product.ImageType " +
+                        "FROM Product " +
+                        "INNER JOIN OfferProducts " +
+                        "ON OfferProducts.ProductId = Product.Id " +
+                        "WHERE OfferProducts.OfferId = @Id", new { Id = offer.Id });
+
+                    offer.Details = offerDetails.ToList();
+                    offer.Products = offerProducts.ToList();
+                }
+
+                return offers.ToList();
             }
         }
 

@@ -1,5 +1,15 @@
 ﻿@page "/rebates"
 
+@using ElancoUI.Models
+@using ElancoLibrary.Data
+@using ElancoLibrary.Models.Offers
+
+@inject NavigationManager Nav
+@inject OfferData OfferData
+
+<!-- This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning -->
+@inject FormModel Form
+
 <section class="main-section">
     <div class="main-container">
         <div class="rebate-container">
@@ -9,7 +19,7 @@
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                     </svg>
-                    <a>Either take a picture of your product, or find a rebate matching your product.</a>
+                    <a>How does our rebate process work?</a>
                 </div>
             </div>
             <div class="card" id="upload-required">
@@ -24,55 +34,78 @@
                 </label>
             </div>
             <div class="available-rebates-container">
-                <div class="card" id="rebate-selected">
-                    <div class="card-details-rebate">
-                        <div class="rebate-info">
-                            <div class="rebate-images">
-                                <img src="images/credelio.jpg"/>
-                                <img src="images/InterceptorPlus.png" />
-                            </div>
-                            <div class="rebate-details">
-                                <div class="details-header">
-                                    <h3>Offer Code: INCR22</h3>
+                @if (offers.Count == 0)
+                {
+                    <p>Loading offers...</p>
+                }
+
+                @foreach (OfferModel offer in offers)
+                {
+                    <div class="card" id="rebate-selected">
+                        <div class="card-details-rebate">
+                            <div class="rebate-info">
+                                <div class="rebate-images">
+                                    @foreach (ProductModel product in offer.Products)
+                                    {
+                                        <img src="storage/products/@(product.ImageName).@(product.ImageType)" alt="@product.Name" />
+                                    }
                                 </div>
-                                <div class="details-purchased">
-                                    <p>Purchase between:</p>
-                                    <p>01/01/2022 - 12/31/2022</p>
+                                <div class="rebate-details">
+                                    <div class="details-header">
+                                        <h3>Offer Code: @offer.OfferCode</h3>
+                                    </div>
+                                    <div class="details-purchased">
+                                        <p>Purchase between:</p>
+                                        <p>@DateOnly.FromDateTime(offer.ValidPurchaseStart) - @DateOnly.FromDateTime(offer.ValidPurchaseEnd)</p>
+                                    </div>
+                                    <table>
+                                        <tr>
+                                            <th>Offer Details</th>
+                                            <th>Rebate Value</th>
+                                        </tr>
+                                        @foreach (OfferDetails offerDetails in offer.Details)
+                                        {
+                                            <tr>
+                                                <td>@offerDetails.Amount</td>
+                                                <td>@offerDetails.Value.ToString("C")</td>
+                                            </tr>
+                                        }
+                                    </table>
                                 </div>
-                                <table>
-                                    <tr>
-                                        <th>Offer Details</th>
-                                        <th>Rebate Value</th>
-                                    </tr>
-                                    <tr>
-                                        <td>6 doses of each product</td>
-                                        <td>$6</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12 doses of each product</td>
-                                        <td>$15</td>
-                                    </tr>
-                                </table>
                             </div>
-                        </div>
-                        <div class="rebate-extra">
-                            <p>Offer also valid for mycoxlin oxide monohydrate purchases.</p>
-                        </div>
-                        <div class="rebate-select-container">
-                            <div class="form-submit">
-                                <button>Select rebate</button>
+                            <div class="rebate-extra">
+                                <p>@offer.AdditionalInformation</p>
+                            </div>
+                            <div class="rebate-select-container">
+                                <div class="form-submit">
+                                    <button @onclick="(() => SelectRebate(offer))">Select rebate</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
 </section>
 
 @code {
+    private List<OfferModel> offers = new List<OfferModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        offers = await OfferData.GetOffers();
+    }
+
     private void UploadFile(InputFileChangeEventArgs e)
     {
-        
+
+    }
+
+    private void SelectRebate(OfferModel rebate)
+    {
+        Form.RebateSelected = rebate;
+
+        Nav.NavigateTo("/");
     }
 }
