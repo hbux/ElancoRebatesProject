@@ -247,13 +247,15 @@
 
         try
         {
-            string localFilePath = Path.Combine(Env.ContentRootPath, "wwwroot", "images", "ElancoInvoice6.png");
+            string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", e.File.Name);
 
-            using (FileStream stream = new FileStream(localFilePath, FileMode.Open))
+            using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
             {
-                var fields = await Api.AnalyseInvoice(stream);
-                FormHelper.FormatFields(Form, fields); 
+                await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
             };
+
+            var fields = await Api.AnalyseInvoice(localFilePath);
+            FormHelper.FormatFields(Form, fields);
 
             Form.InvoiceUploaded = e.File;
         }

@@ -55,4 +55,8 @@
     <ProjectReference Include="..\ElancoLibrary\ElancoLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Development\unsafe_uploads\" />
+  </ItemGroup>
+
 </Project>

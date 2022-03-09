@@ -20,18 +20,21 @@ namespace ElancoLibrary.Services
             _client = client;
         }
 
-        public async Task<Dictionary<string, string>> AnalyseInvoice(Stream stream)
+        public async Task<Dictionary<string, string>> AnalyseInvoice(string filePath)
         {
             // Calls Azure Form Recognizer API to analyse the document
             // ModelId is the custom trained form recognizer AI id
-            RecognizedFormCollection invoices = await _client.StartRecognizeCustomForms(
-                _config["ModelId"],
-                stream)
-                .WaitForCompletionAsync();
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
+            {
+                RecognizedFormCollection invoices = await _client.StartRecognizeCustomForms(
+                    _config["ModelId"],
+                    stream)
+                    .WaitForCompletionAsync();
 
-            RecognizedForm invoice = invoices.Single();
+                RecognizedForm invoice = invoices.Single();
 
-            return ParseInvoice(invoice);
+                return ParseInvoice(invoice);
+            }
         }
 
         private Dictionary<string, string> ParseInvoice(RecognizedForm invoice)
