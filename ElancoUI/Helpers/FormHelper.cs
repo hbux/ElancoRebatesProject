@@ -5,7 +5,7 @@ namespace ElancoUI.Helpers
     /// <summary>
     ///     This helper class formats the analysed fields into a UI FormModel instance.
     /// </summary>
-    public class FormHelper
+    public class FormHelper : IFormHelper
     {
         private Dictionary<string, string> states;
 

@@ -33,9 +33,9 @@ builder.Services.AddSingleton(new FormRecognizerClient(
     new AzureKeyCredential(builder.Configuration["ApiKey"])));
 
 builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
-builder.Services.AddScoped<ApiService>();
-builder.Services.AddScoped<OfferData>();
-builder.Services.AddScoped<FormHelper>();
+builder.Services.AddScoped<IApiService, ApiService>();
+builder.Services.AddScoped<IOfferData, OfferData>();
+builder.Services.AddScoped<IFormHelper, FormHelper>();
 
 // This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning
 builder.Services.AddSingleton<FormModel>();

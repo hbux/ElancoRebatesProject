@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ElancoLibrary.Services
 {
-    public class ApiService
+    public class ApiService : IApiService
     {
         private IConfiguration _config;
         private FormRecognizerClient _client;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ElancoLibrary.Data
 {
-    public class OfferData
+    public class OfferData : IOfferData
     {
         private ISqlDataAccess dataAccess;
 
