@@ -14,6 +14,11 @@ namespace ElancoUI.Helpers
             states = GenerateAllStates();
         }
 
+        /// <summary>
+        ///     This maps out each field within the dictionary and applies it to the current form the user is filling out.
+        /// </summary>
+        /// <param name="form">The current form the user is filling out.</param>
+        /// <param name="fields">The returned key value pairs from the API call.</param>
         public void FormatFields(FormModel form, Dictionary<string, string> fields)
         {
             try
@@ -27,6 +32,11 @@ namespace ElancoUI.Helpers
             }
         }
 
+        /// <summary>
+        ///     Splits the address analyzed from the API into address line 1, city, state and Zip code.
+        /// </summary>
+        /// <param name="form">The current form the user is filling out.</param>
+        /// <param name="address">The address key within the fields dictionary.</param>
         private void FormatAddress(FormModel form, string address)
         {
             // Original format of address: 4006 Chippewa Manistee, MI 49660
@@ -73,6 +83,11 @@ namespace ElancoUI.Helpers
             }
         }
 
+        /// <summary>
+        ///     Creates a dictionary of state appreviation and the state name to
+        ///     easily access the state name from it's abbreviation. E.g. states["TX"] returns Texas.
+        /// </summary>
+        /// <returns>A dictionary of key: state abbreviation and value: state name.</returns>
         private Dictionary<string, string> GenerateAllStates()
         {
             // Easily access the state name from it's abbreviation e.g. states["TX"] returns Texas

@@ -17,6 +17,10 @@ namespace ElancoLibrary.Data
             this.dataAccess = dataAccess;
         }
 
+        /// <summary>
+        ///     This method retrieves all offers/rebates within the ElancoData database.
+        /// </summary>
+        /// <returns>A complete list of all offers.</returns>
         public async Task<List<OfferModel>> GetOffers()
         {
             var offers = await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetAll", new { }, "ElancoData");

@@ -20,10 +20,15 @@ namespace ElancoLibrary.Services
             _client = client;
         }
 
+        /// <summary>
+        ///     Analyzes an uploaded file. This calls Azure Form Recognizer API which analyzes the document using
+        ///     The model ID found in appsettings.json. The file path is the absolute source to the uploaded file. 
+        ///     Depending on the environment either Development > unsafe_uploads OR Production > unsafe_uploads.
+        /// </summary>
+        /// <param name="filePath">The absolute source to the uploaded file.</param>
+        /// <returns>A dictionary representing the key value pairs analysed from the uploaded file.</returns>
         public async Task<Dictionary<string, string>> AnalyseInvoice(string filePath)
         {
-            // Calls Azure Form Recognizer API to analyse the document
-            // ModelId is the custom trained form recognizer AI id
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
                 RecognizedFormCollection invoices = await _client.StartRecognizeCustomForms(
@@ -37,11 +42,17 @@ namespace ElancoLibrary.Services
             }
         }
 
+        /// <summary>
+        ///     Places the key and value into a usable format.
+        /// </summary>
+        /// <param name="invoice">The single invoice returned from the API call.</param>
+        /// <returns>A dictionary representing the key value pairs from the uploaded document.</returns>
         private Dictionary<string, string> ParseInvoice(RecognizedForm invoice)
         {
             Dictionary<string, string> fields = new Dictionary<string, string>();
 
-            // Places the key and value into the fields dictionary
+            // Loops over each field the API has detected and tries to access it's key and value. If it succeeds 
+            // the key and value are added to the dictionary.
             foreach (KeyValuePair<string, FormField> kvp in invoice.Fields)
             {
                 if (kvp.Value != null && kvp.Value.ValueData != null)
