@@ -1,6 +1,4 @@
 ﻿
-var invoiceModal = document.querySelector(".modal-invoice");
-
 function toggleInvoiceModal() {
     if (document.querySelector(".modal-invoice").style.display === "block") {
         document.querySelector(".modal-invoice").style.display = "none";
