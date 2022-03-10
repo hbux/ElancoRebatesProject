@@ -1,11 +1,7 @@
 ﻿@page "/rebates"
 
-@using ElancoUI.Models
-@using ElancoLibrary.Data
-@using ElancoLibrary.Models.Offers
-
 @inject NavigationManager Nav
-@inject OfferData OfferData
+@inject IOfferData OfferData
 
 <!-- This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning -->
 @inject FormModel Form
