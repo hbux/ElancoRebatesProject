@@ -32,6 +32,19 @@ Following the new requiremets and requirement changes:
 * Microsoft Entity Framework with authorisation will be scaffolded into the project. Additional fields within the EF Core tables will be required.
 * The pages for Authorisation/authentication will be scaffolded into the project and styled with Elanco CSS.
 
+## Tools and Frameworks
+Technologies that have and will be brought into this application down the line.
+* Logging
+* Dependency Injection
+* Unit Testing and Mocking
+* Entity Framework Core
+* Identity Framework Core
+* SendGrid API for email sending
+* Azure Form Recognizer for invoice analysis
+* SOLID Principles
+* SSDT
+* Git
+
 ## Resources
 Below are resources and documentation links to aid with the development.
 
