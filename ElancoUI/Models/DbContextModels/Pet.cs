@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoUI.Data.Models
+namespace ElancoUI.Models.DbContextModels
 {
     public class Pet
     {

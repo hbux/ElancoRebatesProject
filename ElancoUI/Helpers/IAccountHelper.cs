@@ -1,5 +1,5 @@
-﻿using ElancoUI.Data.Models;
-using ElancoUI.Models;
+﻿using ElancoUI.Models;
+using ElancoUI.Models.DbContextModels;
 
 namespace ElancoUI.Helpers
 {

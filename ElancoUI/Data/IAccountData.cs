@@ -1,4 +1,4 @@
-﻿using ElancoUI.Data.Models;
+﻿using ElancoUI.Models.DbContextModels;
 using ElancoUI.Models;
 using Microsoft.AspNetCore.Identity;
 
