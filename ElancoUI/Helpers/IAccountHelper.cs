@@ -5,6 +5,6 @@ namespace ElancoUI.Helpers
 {
     public interface IAccountHelper
     {
-        AccountModel FormatAccountDetails(Account acc);
+
     }
 }

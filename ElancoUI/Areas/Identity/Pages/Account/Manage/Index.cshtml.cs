@@ -67,9 +67,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public ElancoUI.Data.Models.Account Account { get; set; }
         }
-
-        public AccountModel Account { get; set; }
 
         private async Task LoadAsync(IdentityUser user)
         {
@@ -83,9 +82,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber
             };
 
-            // Custom account details 
-            var dbAccount = _accountData.GetAccountDetails(user);
-            Account = _accountHelper.FormatAccountDetails(dbAccount);
+            Input.Account = _accountData.GetAccountDetails(user);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -124,6 +121,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            _accountData.SaveAccountDetails(Input.Account);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

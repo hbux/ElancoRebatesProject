@@ -17,7 +17,7 @@ namespace ElancoUI.Data
         {
             var account = _db.Account
                 .Include(a => a.Addresses)
-                .Include(p => p.Pets)
+                .Include(a => a.Pets)
                 .Where(x => x.User.Id == user.Id)
                 .ToList();
 
@@ -27,6 +27,29 @@ namespace ElancoUI.Data
             }
 
             return account.Single();
+        }
+
+        public void SaveAccountDetails(Account account)
+        {
+            Account acc = _db.Account
+                .Include(a => a.Addresses)
+                .Include(a => a.Pets)
+                .FirstOrDefault(a => a.Id == account.Id);
+
+            if (acc == null)
+            {
+                throw new Exception("Error finding account.");
+            }
+
+            _db.Addresses.RemoveRange(acc.Addresses);
+            _db.Pets.RemoveRange(acc.Pets);
+
+            acc.FirstName = account.FirstName;
+            acc.LastName = account.LastName;
+            acc.Addresses = account.Addresses;
+            acc.Pets = account.Pets;
+
+            _db.SaveChanges();
         }
     }
 }
