@@ -1,4 +1,5 @@
 ﻿using ElancoUI.Data.Models;
+using ElancoUI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,25 +30,29 @@ namespace ElancoUI.Data
             return account.Single();
         }
 
-        public void SaveAccountDetails(Account account)
+        public void SaveAccountDetails(AccountModel account)
         {
-            Account acc = _db.Account
+            Account dbAccount = _db.Account
                 .Include(a => a.Addresses)
                 .Include(a => a.Pets)
                 .FirstOrDefault(a => a.Id == account.Id);
 
-            if (acc == null)
+            if (dbAccount == null)
             {
                 throw new Exception("Error finding account.");
             }
 
-            _db.Addresses.RemoveRange(acc.Addresses);
-            _db.Pets.RemoveRange(acc.Pets);
+            _db.Addresses.RemoveRange(dbAccount.Addresses);
 
-            acc.FirstName = account.FirstName;
-            acc.LastName = account.LastName;
-            acc.Addresses = account.Addresses;
-            acc.Pets = account.Pets;
+            dbAccount.FirstName = account.FirstName;
+            dbAccount.LastName = account.LastName;
+            dbAccount.Addresses.Add(new Address()
+            {
+                AddressLine1 = account.Address,
+                City = account.City,
+                State = account.State,
+                ZipCode = account.ZipCode
+            });
 
             _db.SaveChanges();
         }

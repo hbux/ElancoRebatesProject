@@ -67,7 +67,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-            public ElancoUI.Data.Models.Account Account { get; set; }
+            public AccountModel Account { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -82,7 +82,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber
             };
 
-            Input.Account = _accountData.GetAccountDetails(user);
+            var dbAccount = _accountData.GetAccountDetails(user);
+            Input.Account = _accountHelper.FormatAccountDetails(dbAccount);
         }
 
         public async Task<IActionResult> OnGetAsync()
