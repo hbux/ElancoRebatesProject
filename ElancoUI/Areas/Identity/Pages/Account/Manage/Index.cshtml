@@ -14,12 +14,12 @@
             <h4>Personal</h4>
             <div class="account-card-field">
                 <div class="form-field">
-                    <label class="form-label">First name</label>
-                    <input class="form-control" />
+                    <label asp-for="Account.FirstName" class="form-label">First name</label>
+                    <input asp-for="Account.FirstName" class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label class="form-label">Last name</label>
-                    <input class="form-control" />
+                    <label asp-for="Account.LastName" class="form-label">Last name</label>
+                    <input asp-for="Account.LastName" class="form-control" />
                 </div>
                 <div class="form-field">
                     <label asp-for="Username" class="form-label">Email</label>
@@ -32,20 +32,20 @@
                     <span asp-validation-for="Input.PhoneNumber"></span>
                 </div>
                 <div class="form-field">
-                    <label class="form-label">Address</label>
-                    <input class="form-control" />
+                    <label asp-for="Account.Address" class="form-label">Address</label>
+                    <input asp-for="Account.Address" class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label class="form-label">City</label>
-                    <input class="form-control" />
+                    <label asp-for="Account.City" class="form-label">City</label>
+                    <input asp-for="Account.City" class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label class="form-label">State</label>
-                    <input class="form-control" />
+                    <label asp-for="Account.State" class="form-label">State</label>
+                    <input asp-for="Account.State" class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label class="form-label">Zip code</label>
-                    <input class="form-control" />
+                    <label asp-for="Account.ZipCode" class="form-label">Zip code</label>
+                    <input asp-for="Account.ZipCode" class="form-control" />
                 </div>
             </div>
         </div>

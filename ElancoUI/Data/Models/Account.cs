@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoUI.Data.AccountData
+namespace ElancoUI.Data.Models
 {
     public class Account
     {

@@ -6,6 +6,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ElancoUI.Data;
+using ElancoUI.Helpers;
+using ElancoUI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,13 +19,19 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private IAccountData _accountData;
+        private IAccountHelper _accountHelper;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IAccountData accountData,
+            IAccountHelper accountHelper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _accountData = accountData;
+            _accountHelper = accountHelper;
         }
 
         /// <summary>
@@ -60,6 +69,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
+        public AccountModel Account { get; set; }
+
         private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
@@ -71,6 +82,10 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber
             };
+
+            // Custom account details 
+            var dbAccount = _accountData.GetAccountDetails(user);
+            Account = _accountHelper.FormatAccountDetails(dbAccount);
         }
 
         public async Task<IActionResult> OnGetAsync()
