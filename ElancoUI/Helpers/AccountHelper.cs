@@ -23,7 +23,7 @@ namespace ElancoUI.Helpers
                 account.City = DoesContainElements<Address>(dbAccount.Addresses) ? dbAccount.Addresses.Single().City : null;
                 account.State = DoesContainElements<Address>(dbAccount.Addresses) ? dbAccount.Addresses.Single().State : null;
                 account.ZipCode = DoesContainElements<Address>(dbAccount.Addresses) ? dbAccount.Addresses.Single().ZipCode : null;
-                account.PetName = DoesContainElements<Pet>(dbAccount.Pets) ? dbAccount.Pets.Single().Name : null;
+                account.Pets = dbAccount.Pets;
             }
             catch (Exception)
             {

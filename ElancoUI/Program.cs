@@ -27,6 +27,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
+Console.WriteLine(Guid.NewGuid().ToString());
+
 // Azure Form Recognizer 
 builder.Services.AddSingleton(new FormRecognizerClient(
     new Uri(builder.Configuration["Endpoint"]),

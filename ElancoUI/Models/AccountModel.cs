@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ElancoUI.Models.DbContextModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace ElancoUI.Models
 {
@@ -24,7 +25,6 @@ namespace ElancoUI.Models
         [MaxLength(10)]
         public string ZipCode { get; set; }
 
-        [MaxLength(50)]
-        public string PetName { get; set; }
+        public List<Pet> Pets { get; set; } = new List<Pet>();
     }
 }

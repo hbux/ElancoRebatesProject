@@ -6,6 +6,7 @@
     --info-card-text: #6c757d;
     --info-danger: #dc3545;
     --info-success: #e6f7e8;
+    --info-danger-light: #f8d7da;
 }
 
 *, ::before, ::after {
@@ -313,11 +314,70 @@ body {
     grid-template-columns: 1fr;
     gap: 20px;
     background-color: var(--seconary-white);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
 }
 
 .account-card {
     padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
+}
+
+.account-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-card-header-cta {
+    display: grid;
+    grid-template-columns: 25px 1fr;
+    justify-items: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: var(--primary-light-blue);
+    color: var(--seconary-white);
+    cursor: pointer;
+}
+
+.account-pets-container {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+}
+
+.account-pet {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+}
+
+.account-pet-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+
+.account-pet-details-cta {
+    display: grid;
+    grid-template-columns: 25px 1fr;
+    grid-auto-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background-color: var(--info-card);
+    color: var(--info-card-text);
+    padding: 10px 30px;
+    gap: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.account-pet-details h5 {
+    font-size: 16px;
 }
 
 .account-card-field p {
