@@ -42,7 +42,7 @@ Technologies that have and will be brought into this application down the line.
 * SendGrid API for email sending
 * Azure Form Recognizer for invoice analysis
 * SOLID Principles
-* SSDT
+* SSDT & Dapper
 * Git
 
 ## Resources
