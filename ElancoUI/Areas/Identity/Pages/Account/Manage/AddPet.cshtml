@@ -1,0 +1,31 @@
+﻿@page
+@model ElancoUI.Areas.Identity.Pages.Account.Manage.AddPetModel
+@{
+    ViewData["Title"] = "Add Pet";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<form id="profile-form" method="post" class="account-contents">
+    <h1>Add your pet</h1>
+    <div class="account-cards">
+        <div class="account-card">
+            <div class="account-card-field">
+                <div class="form-field">
+                    <label asp-for="NewPet.Name" class="form-label">Pet Name</label>
+                    <input asp-for="NewPet.Name" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <img src="" width="140px" height="110"/>
+                    <label class="pet-upload-image">
+                        <input type="file" />
+                        <p>Upload image</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="account-save">
+        <button>Cancel</button>
+        <button id="update-profile-button" type="submit">Add pet</button>
+    </div>
+</form>

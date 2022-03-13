@@ -63,6 +63,10 @@ body {
     color: var(--seconary-white) !important;
 }
 
+input[type="file"] {
+    display: none;
+}
+
 
 
 
@@ -329,7 +333,8 @@ body {
 
 .account-card-header-cta {
     display: grid;
-    grid-template-columns: 25px 1fr;
+    grid-template-columns: auto 1fr;
+    gap: 5px;
     justify-items: center;
     align-items: center;
     border-radius: 5px;
@@ -338,6 +343,12 @@ body {
     background-color: var(--primary-light-blue);
     color: var(--seconary-white);
     cursor: pointer;
+    text-decoration: none;
+}
+
+.account-card-header-cta svg {
+    width: 20px;
+    height: auto;
 }
 
 .account-pets-container {
@@ -451,7 +462,22 @@ body {
     width: 130px;
 }
 
+.pet-upload-image {
+    background-color: var(--primary-light-blue);
+    width: 140px;
+    padding: 15px 0;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: center;
+}
 
+.pet-upload-image p {
+    color: var(--seconary-white);
+    font-size: 14px;
+    vertical-align: middle;
+    margin: 0;
+}
 
 
 
@@ -666,6 +692,11 @@ table td {
     border: 2px solid var(--primary-dark-blue);
     background-color: var(--tetiary-white);
     font-size: 16px;
+    transition: 0.2s;
+}
+
+.form-field input:focus {
+    border: 2px solid var(--primary-light-blue);
 }
 
 .form-submit-btn-container {
