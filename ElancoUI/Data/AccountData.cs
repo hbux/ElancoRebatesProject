@@ -53,6 +53,7 @@ namespace ElancoUI.Data
                 State = account.State,
                 ZipCode = account.ZipCode
             });
+            dbAccount.Pets = account.Pets;
 
             _db.SaveChanges();
         }

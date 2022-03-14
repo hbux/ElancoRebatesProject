@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
+
+    string filePath = System.IO.Path.Combine("storage", "account_pets");
 }
 
 <form id="profile-form" method="post" class="account-contents">
@@ -63,9 +65,11 @@
             <div class="account-pets-container">
                 @foreach (ElancoUI.Models.DbContextModels.Pet pet in Model.Input.Account.Pets)
                 {
+                    string file = filePath + "\\" + pet.ImageName;
+
                     <div class="account-pet">
                         <input type="hidden" asp-for="@pet.Id" />
-                        <img src="" width="140" height="120"/>
+                        <img src="@file" width="140" height="120"/>
                         <div class="account-pet-details">
                             <h5>@pet.Name</h5>
                             <div class="account-pet-details-cta">

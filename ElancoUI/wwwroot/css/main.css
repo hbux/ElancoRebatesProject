@@ -63,10 +63,6 @@ body {
     color: var(--seconary-white) !important;
 }
 
-input[type="file"] {
-    display: none;
-}
-
 
 
 

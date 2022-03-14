@@ -22,11 +22,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
         private IAccountData _accountData;
         private IAccountHelper _accountHelper;
 
-        public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            IAccountData accountData,
-            IAccountHelper accountHelper)
+        public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
+            IAccountData accountData, IAccountHelper accountHelper)
         {
             _userManager = userManager;
             _signInManager = signInManager;

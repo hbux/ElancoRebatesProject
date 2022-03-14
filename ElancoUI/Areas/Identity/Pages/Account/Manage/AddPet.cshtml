@@ -5,7 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<form id="profile-form" method="post" class="account-contents">
+<form id="profile-form" enctype="multipart/form-data" method="post" class="account-contents">
     <h1>Add your pet</h1>
     <div class="account-cards">
         <div class="account-card">
@@ -15,11 +15,8 @@
                     <input asp-for="NewPet.Name" class="form-control" />
                 </div>
                 <div class="form-field">
-                    <img src="" width="140px" height="110"/>
-                    <label class="pet-upload-image">
-                        <input type="file" />
-                        <p>Upload image</p>
-                    </label>
+                    <label class="form-label">Pet Picture</label>
+                    <input type="file" asp-for="PetUpload" class="form-control" />
                 </div>
             </div>
         </div>

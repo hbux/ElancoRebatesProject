@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\storage\account_pets\abc4f03d-1c3b-4db3-9556-eb69acdd03bc_pet-dog.jpg" />
     <None Include="wwwroot\storage\products\0da39352-3f4c-4d1f-8fcf-ffded7dc8a12.jpg" />
     <None Include="wwwroot\storage\products\10547b46-38f5-4d29-9f49-18ddff2ee6c3.jpg" />
     <None Include="wwwroot\storage\products\15ddb46f-224d-45d8-9451-aa8fdf6b894f.jpg" />
@@ -56,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Development\account_pets\" />
+    <Folder Include="wwwroot\storage\account_pets\" />
     <Folder Include="Development\unsafe_uploads\" />
   </ItemGroup>
 
