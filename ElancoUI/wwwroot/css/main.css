@@ -63,6 +63,17 @@ body {
     color: var(--seconary-white) !important;
 }
 
+.delete-button {
+    background-color: var(--info-danger-light) !important;
+    color: var(--info-danger) !important;
+    transition: 0.3s;
+}
+
+.delete-button:hover {
+    background-color: var(--info-danger) !important;
+    color: var(--seconary-white) !important;
+}
+
 #address-active {
     background-color: var(--info-success) !important;
 }

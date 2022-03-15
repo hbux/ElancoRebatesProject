@@ -37,6 +37,12 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             }
 
             ElancoUI.Models.DbContextModels.Account account = _accountData.GetAccountDetails(user);
+
+            if (account.Addresses.Count == 0)
+            {
+                NewAddress.IsDefault = true;
+            }
+
             account.Addresses.Add(NewAddress);
             _accountData.SaveAccountDetails();
 

@@ -40,6 +40,23 @@ namespace ElancoUI.Data
             return pet;
         }
 
+        public Pet GetPetByIdNotracking(int id)
+        {
+            Pet pet = _context.Pets.AsNoTracking().FirstOrDefault(p => p.Id == id);
+
+            if (pet == null)
+            {
+                throw new Exception($"Could not find pet with ID: { id }.");
+            }
+
+            return pet;
+        }
+
+        public void RemovePet(Pet pet)
+        {
+            _context.Pets.Remove(pet);
+        }
+
         public void SaveAccountDetails()
         {
             _context.SaveChanges();
