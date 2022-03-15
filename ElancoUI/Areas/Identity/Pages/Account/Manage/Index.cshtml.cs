@@ -19,11 +19,14 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IAccountData _accountData;
 
-        public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
+            IAccountData accountData)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _accountData = accountData;
         }
 
         /// <summary>
@@ -61,6 +64,9 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
+        [BindProperty]
+        public ElancoUI.Models.DbContextModels.Account Account { get; set; }
+
         private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
@@ -72,6 +78,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
             };
+
+            Account = _accountData.GetAccountDetails(user);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -109,6 +117,14 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+
+            var accountToUpdate = _accountData.GetAccountDetails(user);
+
+            if (await TryUpdateModelAsync<ElancoUI.Models.DbContextModels.Account>(accountToUpdate, "account",
+                a => a.FirstName, a => a.LastName))
+            {
+                _accountData.SaveAccountDetails();
             }
 
             await _signInManager.RefreshSignInAsync(user);

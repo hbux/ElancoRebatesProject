@@ -37,6 +37,7 @@ builder.Services.AddSingleton(new FormRecognizerClient(
 builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddScoped<IOfferData, OfferData>();
+builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IFormHelper, FormHelper>();
 
 // This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning

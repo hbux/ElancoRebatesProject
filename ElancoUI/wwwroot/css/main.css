@@ -143,6 +143,10 @@ body {
     background-color: transparent;
 }
 
+#address-active {
+    background-color: var(--info-success) !important;
+}
+
 
 
 
@@ -321,10 +325,22 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
 }
 
+.account-card-address {
+    padding: 20px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.01);
+}
+
 .account-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.account-card-header-address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
 .account-card-header-cta {
@@ -352,6 +368,37 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: 1fr;
+    gap: 10px;
+}
+
+.account-addresses-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.account-address {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.account-address-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.account-address-cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    justify-content: space-between;
     gap: 10px;
 }
 
