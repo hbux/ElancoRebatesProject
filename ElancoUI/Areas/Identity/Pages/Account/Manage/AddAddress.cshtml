@@ -1,0 +1,36 @@
+﻿@page
+@model ElancoUI.Areas.Identity.Pages.Account.Manage.AddAddressModel
+@{
+    ViewData["Title"] = "Add Address";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<form id="profile-form" method="post" class="account-contents">
+    <h1>Add an address</h1>
+    <div class="account-cards">
+        <div class="account-card">
+            <div class="account-card-field">
+                <div class="form-field">
+                    <label asp-for="NewAddress.AddressLine1" class="form-label">Address</label>
+                    <input asp-for="NewAddress.AddressLine1" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label asp-for="NewAddress.City" class="form-label">City</label>
+                    <input asp-for="NewAddress.City" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label asp-for="NewAddress.State" class="form-label">State</label>
+                    <input asp-for="NewAddress.State" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label asp-for="NewAddress.ZipCode" class="form-label">Zip Code</label>
+                    <input asp-for="NewAddress.ZipCode" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="account-save">
+        <button>Cancel</button>
+        <button id="update-profile-button" type="submit">Add address</button>
+    </div>
+</form>

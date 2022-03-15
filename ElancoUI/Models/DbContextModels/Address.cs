@@ -30,5 +30,7 @@ namespace ElancoUI.Models.DbContextModels
         [MaxLength(10)]
         [Column(TypeName = "varchar(10)")]
         public string ZipCode { get; set; }
+
+        public bool IsDefault { get; set; } = false;
     }
 }

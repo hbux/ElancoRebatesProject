@@ -63,6 +63,9 @@ body {
     color: var(--seconary-white) !important;
 }
 
+#address-active {
+    background-color: var(--info-success) !important;
+}
 
 
 
@@ -141,10 +144,6 @@ body {
     cursor: pointer;
     color: var(--seconary-white);
     background-color: transparent;
-}
-
-#address-active {
-    background-color: var(--info-success) !important;
 }
 
 
