@@ -19,16 +19,11 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private IAccountData _accountData;
-        private IAccountHelper _accountHelper;
 
-        public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IAccountData accountData, IAccountHelper accountHelper)
+        public IndexModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _accountData = accountData;
-            _accountHelper = accountHelper;
         }
 
         /// <summary>
@@ -64,7 +59,6 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-            public AccountModel Account { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -76,11 +70,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
             };
-
-            var dbAccount = _accountData.GetAccountDetails(user);
-            Input.Account = _accountHelper.FormatAccountDetails(dbAccount);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -119,8 +110,6 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
-
-            _accountData.SaveAccountDetails(Input.Account);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

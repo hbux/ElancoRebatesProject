@@ -12,17 +12,17 @@
     <div class="account-cards">
         <partial name="_StatusMessage" for="StatusMessage" />
         <div asp-validation-summary="ModelOnly"></div>
-        <input asp-for="Input.Account.Id" type="hidden" />
+        <input type="hidden" />
         <div class="account-card">
             <h4>Personal</h4>
             <div class="account-card-field">
                 <div class="form-field">
-                    <label asp-for="Input.Account.FirstName" class="form-label">First name</label>
-                    <input asp-for="Input.Account.FirstName" class="form-control" />
+                    <label class="form-label">First name</label>
+                    <input class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label asp-for="Input.Account.LastName" class="form-label">Last name</label>
-                    <input asp-for="Input.Account.LastName" class="form-control" />
+                    <label class="form-label">Last name</label>
+                    <input class="form-control" />
                 </div>
                 <div class="form-field">
                     <label asp-for="Username" class="form-label">Email</label>
@@ -35,20 +35,20 @@
                     <span asp-validation-for="Input.PhoneNumber"></span>
                 </div>
                 <div class="form-field">
-                    <label asp-for="Input.Account.Address" class="form-label">Address</label>
-                    <input asp-for="Input.Account.Address" class="form-control" />
+                    <label class="form-label">Address</label>
+                    <input class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label asp-for="Input.Account.City" class="form-label">City</label>
-                    <input asp-for="Input.Account.City" class="form-control" />
+                    <label class="form-label">City</label>
+                    <input class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label asp-for="Input.Account.State" class="form-label">State</label>
-                    <input asp-for="Input.Account.State" class="form-control" />
+                    <label class="form-label">State</label>
+                    <input class="form-control" />
                 </div>
                 <div class="form-field">
-                    <label asp-for="Input.Account.ZipCode" class="form-label">Zip code</label>
-                    <input asp-for="Input.Account.ZipCode" class="form-control" />
+                    <label class="form-label">Zip code</label>
+                    <input class="form-control" />
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 </a>
             </div>
             <div class="account-pets-container">
-                @foreach (ElancoUI.Models.DbContextModels.Pet pet in Model.Input.Account.Pets)
+                @foreach (ElancoUI.Models.DbContextModels.Pet pet in new List<ElancoUI.Models.DbContextModels.Pet>())
                 {
                     string file = filePath + "\\" + pet.ImageName;
 
