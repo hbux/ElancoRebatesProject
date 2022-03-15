@@ -1,0 +1,28 @@
+﻿@page
+@model ElancoUI.Areas.Identity.Pages.Account.Manage.EditPetModel
+@{
+    ViewData["Title"] = "Edit Pet";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<form id="profile-form" enctype="multipart/form-data" method="post" class="account-contents">
+    <h1>Edit your pet</h1>
+    <div class="account-cards">
+        <div class="account-card">
+            <div class="account-card-field">
+                <div class="form-field">
+                    <label asp-for="CurrentPet.Name" class="form-label">Pet Name</label>
+                    <input asp-for="CurrentPet.Name" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Pet Picture</label>
+                    <input type="file" asp-for="PetUpload" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="account-save">
+        <button>Cancel</button>
+        <button id="update-profile-button" type="submit">Save Changes</button>
+    </div>
+</form>

@@ -8,5 +8,6 @@ namespace ElancoUI.Data
     {
         Account GetAccountDetails(IdentityUser user);
         void SaveAccountDetails(AccountModel account);
+        Pet GetPetById(int id);
     }
 }

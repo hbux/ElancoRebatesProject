@@ -57,5 +57,10 @@ namespace ElancoUI.Data
 
             _db.SaveChanges();
         }
+
+        public Pet GetPetById(int id)
+        {
+            return _db.Pets.Where(pet => pet.Id == id).Single();
+        }
     }
 }
