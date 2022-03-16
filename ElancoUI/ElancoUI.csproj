@@ -57,6 +57,7 @@
 
   <ItemGroup>
     <Folder Include="Development\unsafe_uploads\" />
+    <Folder Include="wwwroot\storage\account_pets\" />
   </ItemGroup>
 
 </Project>
