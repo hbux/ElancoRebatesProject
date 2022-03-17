@@ -8,7 +8,10 @@ namespace ElancoUI.Data
         Account GetAccountDetails(IdentityUser user);
         Pet GetPetById(int id);
         Pet GetPetByIdNotracking(int id);
+        Address GetAddressById(int id);
+        Address GetAddressByIdNotracking(int id);
         void RemovePet(Pet pet);
+        void RemoveAddress(Address Address);
         void SaveAccountDetails();
     }
 }

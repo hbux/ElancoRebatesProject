@@ -52,9 +52,38 @@ namespace ElancoUI.Data
             return pet;
         }
 
+        public Address GetAddressById(int id)
+        {
+            Address address = _context.Addresses.FirstOrDefault(a => a.Id == id);
+
+            if (address == null)
+            {
+                throw new Exception($"Could not find address with ID: { id }.");
+            }
+
+            return address;
+        }
+
+        public Address GetAddressByIdNotracking(int id)
+        {
+            Address address = _context.Addresses.AsNoTracking().FirstOrDefault(a => a.Id == id);
+
+            if (address == null)
+            {
+                throw new Exception($"Could not find address with ID: { id }.");
+            }
+
+            return address;
+        }
+
         public void RemovePet(Pet pet)
         {
             _context.Pets.Remove(pet);
+        }
+
+        public void RemoveAddress(Address address)
+        {
+            _context.Addresses.Remove(address);
         }
 
         public void SaveAccountDetails()

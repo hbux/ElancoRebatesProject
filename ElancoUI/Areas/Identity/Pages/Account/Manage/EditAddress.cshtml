@@ -1,0 +1,40 @@
+﻿@page
+@model ElancoUI.Areas.Identity.Pages.Account.Manage.EditAddressModel
+@{
+    ViewData["Title"] = "Edit Address";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<form id="profile-form" method="post" class="account-contents">
+    <h1>Edit an address</h1>
+    <div class="account-cards">
+        <div class="account-card">
+            <div class="account-card-field">
+                <div class="form-field">
+                    <label asp-for="Address.AddressLine1" class="form-label">Address</label>
+                    <input asp-for="Address.AddressLine1" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label asp-for="Address.City" class="form-label">City</label>
+                    <input asp-for="Address.City" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label asp-for="Address.State" class="form-label">State</label>
+                    <input asp-for="Address.State" class="form-control" />
+                </div>
+                <div class="form-field">
+                    <label asp-for="Address.ZipCode" class="form-label">Zip Code</label>
+                    <input asp-for="Address.ZipCode" class="form-control" />
+                </div>
+            </div>
+            <label class="form-field-checked"><p>Set as default address</p>
+                <input asp-for="Address.IsDefault" type="checkbox" checked="@Model.Address.IsDefault" />
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="account-save">
+        <button>Cancel</button>
+        <button id="update-profile-button" type="submit">Save Changes</button>
+    </div>
+</form>
