@@ -1,5 +1,9 @@
 ﻿@page "/"
 
+@using ElancoUI.Models.DbContextModels
+@using ElancoUI.Data
+
+@inject IAccountData AccountData
 @inject IJSRuntime JSRuntime
 @inject NavigationManager Nav
 @inject IWebHostEnvironment Env
@@ -157,12 +161,26 @@
                 </div>
                 <div class="form-fields">
                     <h3>Pet Details</h3>
-                    <p>Add your pet's name below. If you have multiple pets, please just put one of your pet's name.</p>
-                    <div class="form-field">
-                        <label for="pet-name">Pet Name <span>*</span></label>
-                        <InputText id="pet-name" type="text" @bind-Value="Form.PetName"/>
-                        <ValidationMessage For="() => Form.PetName" />
-                    </div>
+                    @if (Form.Pets.Count == 0)
+                    {
+                        <p>Add your pet's name below. If you have multiple pets, please just put one of your pet's name.</p>
+                        <div class="form-field">
+                            <label for="clinic-name">Pet Name <span>*</span></label>
+                            <InputText id="clinic-name" type="text" @bind-Value="Form.PetName" />
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Select your pet below you're claiming the rebate for.</p>
+                        <div class="form-field-pets-container">
+                            @foreach (Pet pet in Form.Pets)
+                            {
+                                <div class="form-field-pet" id="@GetPetSelectedCss(pet)" @onclick="(() => Form.PetSelected = pet)">
+                                    <img src="/storage/account_pets/@pet.ImageName" alt="@pet.Name"/>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
             <div class="form-split-container">
@@ -243,11 +261,38 @@
 @code {
     private bool isAnalysingUpload;
 
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
+            FormHelper.FormatAccountDetails(account, Form);
+        }
+    }
+
     private string GetLoadingModalCss()
     {
         if (isAnalysingUpload == true)
         {
             return "loading-modal";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    private string GetPetSelectedCss(Pet pet)
+    {
+        if (Form.PetSelected == pet)
+        {
+            return "pet-selected";
         }
         else
         {

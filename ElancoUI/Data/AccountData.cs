@@ -28,6 +28,22 @@ namespace ElancoUI.Data
             return account;
         }
 
+        public Account GetAccountDetailsByEmail(string email)
+        {
+            Account account = _context.Account
+                .Include(a => a.Addresses)
+                .Include(a => a.Pets)
+                .Include(a => a.User)
+                .FirstOrDefault(a => a.User.Email == email);
+
+            if (account == null)
+            {
+                throw new Exception("Could not find account.");
+            }
+
+            return account;
+        }
+
         public Pet GetPetById(int id)
         {
             Pet pet = _context.Pets.FirstOrDefault(p => p.Id == id);

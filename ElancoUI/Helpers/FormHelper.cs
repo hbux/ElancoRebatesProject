@@ -1,4 +1,5 @@
 ﻿using ElancoUI.Models;
+using ElancoUI.Models.DbContextModels;
 
 namespace ElancoUI.Helpers
 {
@@ -81,6 +82,22 @@ namespace ElancoUI.Helpers
                     continue;
                 }
             }
+        }
+
+        public void FormatAccountDetails(Account account, FormModel form)
+        {
+            form.CustomerFirstName = account.FirstName;
+            form.CustomerLastName = account.LastName;
+            form.CustomerEmailAddress = account.User.Email;
+            form.CustomerPhone = account.User.PhoneNumber;
+
+            Address defaultAddress = account.Addresses.FirstOrDefault(a => a.IsDefault == true);
+            form.CustomerAddress = defaultAddress.AddressLine1;
+            form.CustomerCity = defaultAddress.City;
+            form.CustomerState = defaultAddress.State;
+            form.CustomerZipCode = defaultAddress.ZipCode;
+
+            form.Pets = account.Pets;
         }
 
         /// <summary>

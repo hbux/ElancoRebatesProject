@@ -6,6 +6,7 @@ namespace ElancoUI.Data
     public interface IAccountData
     {
         Account GetAccountDetails(IdentityUser user);
+        Account GetAccountDetailsByEmail(string email);
         Pet GetPetById(int id);
         Pet GetPetByIdNotracking(int id);
         Address GetAddressById(int id);

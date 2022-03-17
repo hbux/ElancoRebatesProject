@@ -1,4 +1,5 @@
 ﻿using ElancoLibrary.Models.Offers;
+using ElancoUI.Models.DbContextModels;
 using Microsoft.AspNetCore.Components.Forms;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,6 +11,16 @@ namespace ElancoUI.Models
     /// </summary>
     public class FormModel
     {
+        public List<Pet> Pets { get; set; } = new List<Pet>();
+
+        [Required]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "You must upload an invoice!")]
+        public Pet PetSelected { get; set; }
+
+        [Required(ErrorMessage = "Pet name cannot be empty!")]
+        public string PetName { get; set; }
+
+
         public IBrowserFile InvoiceUploaded { get; set; }
         public OfferModel RebateSelected { get; set; }
 
@@ -72,10 +83,6 @@ namespace ElancoUI.Models
         [DataType(DataType.EmailAddress)]
         [Compare("CustomerEmailAddress", ErrorMessage = "Email addresses do not match!")]
         public string CustomerEmailConfirmation { get; set; }
-
-
-        [Required(ErrorMessage = "Pet name cannot be empty!")]
-        public string PetName { get; set; }
 
 
         [Required(ErrorMessage = "Clinic name cannot be empty!")]
