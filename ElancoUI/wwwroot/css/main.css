@@ -479,7 +479,7 @@ body {
     width: 130px;
 }
 
-.account-save button:first-child {
+.account-save a {
     background-color: var(--info-card);
     color: var(--info-card-text);
     padding: 15px 0;
@@ -488,6 +488,9 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 130px;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .email-info-card {
