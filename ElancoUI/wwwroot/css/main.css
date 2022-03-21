@@ -431,18 +431,22 @@ body {
 
 .account-pet-details-cta {
     display: grid;
-    grid-template-columns: 25px 1fr;
+    grid-template-columns: 0.8fr 1fr;
     grid-auto-rows: 1fr;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     background-color: var(--info-card);
     color: var(--info-card-text);
-    padding: 10px 30px;
+    padding: 10px 0;
     gap: 10px;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+}
+
+.account-pet-details-cta svg {
+    justify-self: center;
 }
 
 .account-pet-details h5 {
