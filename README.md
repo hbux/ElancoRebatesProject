@@ -6,10 +6,40 @@ receipts/products.
 
 ## Task
 Using Azure Cognitive Services, build a web-based application which represents the use of image-to-text to extract and display key details from product images and receipts.
-Elanco will provide sample images of test receipts/products and we’d like to see which useful data we can programmatically extract and display in a web interface to validate this
-approach to streamlining the customer experience. 
+Elanco will provide sample images of test receipts/products and we’d like to see which useful data we can programmatically extract and display in a web interface to validate this approach to streamlining the customer experience.
 
-#### New Requirements and requirement changes
+## System Design and Flow
+### Project Structure
+* **ElancoUI:** Holds the user interface pages, user interface models and classes.
+* **ElancoLibrary:** Holds the business logic of the application. Acts as a layer between the UI and Data Access.
+* **ElancoLibrary.Tests:** Holds the unit testing and mocking of the ElancoLibrary classes.
+* **ElancoData:** Holds the tables, stored procedures and data publisher for the products/offers. 
+* **Documentation:** Holds the example receipts, products logos, UML diagrams and user interface mockups.
+
+---
+
+**UML Rebate Offer Database Design:** An offer has multiple details and multiple product logos.
+
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignInitial.png" width="450" height="450" />
+
+### User Interface
+
+**Form Page:** This is the UI for the rebate form.
+<p float="left">
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/main_desktop.png" />
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/main_mobile.png"/> 
+</p>
+
+---
+
+**Select Rebate Page:** This is the UI for selecting a rebate offer.
+<p float="left">
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/rebates_desktop.png" />
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/rebates_mobile.png"/> 
+</p>
+
+## New Requirements and Requirement Changes
+
 There have been new requirements added by the client. Essentially, the client wants every field on the rebate form
 to be auto-filled. This can be achieved by adding a login/register functionality where a customer account contains 
 additional details such as:
@@ -18,22 +48,35 @@ additional details such as:
 * Address
 * Multiple pets
 
-**Requirement changes**
 The client wants to replace the pet input field to an image of the customer's pet(s). Where the user can select an image of their pet.
 
-## System Design and Flow
-* Customer uploads an invoice from their device - if using mobile, a camera can be used to take a picture of the invoice.
-* Azure Form Recogniser analyses the invoice and returns key value pairs of invoice details.
-* An option will be displayed to allow the user to take a picture of their product, which will find a matching rebate.
-* System auto-auto fills the corresponding form fields with the analysed data.
-* Form validation notifies the customer as they enter details
+---
 
-Following the new requiremets and requirement changes:
-* Microsoft Entity Framework with authorisation will be scaffolded into the project. Additional fields within the EF Core tables will be required.
-* The pages for Authorisation/authentication will be scaffolded into the project and styled with Elanco CSS.
+**UML User Account Database Design:** An account can have multiple addresses and multiple pets.
+
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseAccountDesign.png" width="450" height="450" />
+
+---
+
+**Form Page Authenticated:** This is the UI for the rebate form that has been filled when logged in.
+<p float="left">
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/complete_desktop.png" />
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/complete_mobile.png"/> 
+</p>
+
+---
+
+**Account Page:** This is the UI for an authenticated user's account page.
+<p float="left">
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/account_desktop.png" />
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/account_mobile.png"/> 
+</p>
+
 
 ## Tools and Frameworks
 Technologies that have and will be brought into this application down the line.
+* Blazor Server
+* Razor Pages
 * Logging
 * Dependency Injection
 * Unit Testing and Mocking
