@@ -29,7 +29,6 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 **Form Page:** This is the UI for the rebate form.
 <p float="left">
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/main_desktop.png" />
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/main_mobile.png"/> 
 </p>
 
 ---
@@ -37,7 +36,6 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 **Select Rebate Page:** This is the UI for selecting a rebate offer.
 <p float="left">
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/rebates_desktop.png" />
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/rebates_mobile.png"/> 
 </p>
 
 ## New Requirements and Requirement Changes
@@ -63,7 +61,6 @@ The client wants to replace the pet input field to an image of the customer's pe
 **Form Page Authenticated:** This is the UI for the rebate form that has been filled when logged in.
 <p float="left">
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/complete_desktop.png" />
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/complete_mobile.png"/> 
 </p>
 
 ---
@@ -71,7 +68,6 @@ The client wants to replace the pet input field to an image of the customer's pe
 **Account Page:** This is the UI for an authenticated user's account page.
 <p float="left">
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/account_desktop.png" />
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/account_mobile.png"/> 
 </p>
 
 
