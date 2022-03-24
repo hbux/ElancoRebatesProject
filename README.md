@@ -71,6 +71,23 @@ The client wants to replace the pet input field to an image of the customer's pe
 </p>
 
 
+## Progress
+**To-do**
+- [ ] Create UI for rebate submitted
+- [ ] Use local storage to save form data
+
+**Additional features**
+- [ ] Add UI to all scaffolded pages
+- [ ] Add UI to information card modal
+- [ ] Add UI for unverified email on the account page
+- [ ] Add UI for successfully/unsuccessfully updating profile
+- [ ] Add SendGrid API for emails
+- [ ] Add validation for account, pet and address
+
+**Optimisation**
+- [ ] Use razor components in identity
+- [ ] Move sections into components
+
 ## Tools and Frameworks
 Technologies that have and will be brought into this application down the line.
 * Blazor Server
