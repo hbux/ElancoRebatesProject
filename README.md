@@ -75,6 +75,7 @@ The client wants to replace the pet input field to an image of the customer's pe
 **To-do**
 - [ ] Create UI for rebate submitted
 - [ ] Use local storage to save form data
+- [ ] Add functionality to analyse product image and match with a rebate
 
 **Additional features**
 - [ ] Add UI to all scaffolded pages
