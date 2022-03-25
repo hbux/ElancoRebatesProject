@@ -22,7 +22,7 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 
 **UML Rebate Offer Database Design:** An offer has multiple details and multiple product logos.
 
-<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignInitial.png" width="450" height="450" />
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignInitial.png" />
 
 ### User Interface
 
@@ -54,7 +54,7 @@ The client wants to replace the pet input field to an image of the customer's pe
 
 **UML User Account Database Design:** An account can have multiple addresses and multiple pets.
 
-<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseAccountDesign.png" width="450" height="450" />
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseAccountDesign.png" />
 
 ---
 
