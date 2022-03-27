@@ -4,11 +4,14 @@
 3. [System design and flow](#system-design-and-flow)
     1. [Project folder structure](#project-structure)
     2. [User interface showcase](#user-interface)
+    3. [UML rebate offer database design](#uml-rebate-offer-database-design)
 3. [New requirements and requirement changes](#new-requirements-and-requirement-changes)
-4. [Progress tracking](#progress)
-5. [Tools and frameworks used](#tools-and-frameworks)
-6. [Resources and documentation links](#resources)
-7. [Source code examples](#source-code-examples)
+    1. [UML account details database design](#uml-user-account-database-design)
+    2. [User interface showcase](#user-interface-requirement-changes)
+5. [Progress tracking](#progress)
+6. [Tools and frameworks used](#tools-and-frameworks)
+7. [Resources and documentation links](#resources)
+8. [Source code examples](#source-code-examples)
 
 
 ## Introduction
@@ -33,7 +36,8 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 
 ---
 
-**UML Rebate Offer Database Design:** An offer has multiple details and multiple product logos.
+#### UML Rebate Offer Database Design
+An offer has multiple details and multiple product logos.
 
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignInitial.png" />
 
@@ -65,12 +69,14 @@ The client wants to replace the pet input field to an image of the customer's pe
 
 ---
 
-**UML User Account Database Design:** An account can have multiple addresses and multiple pets.
+#### UML User Account Database Design
+An account can have multiple addresses and multiple pets.
 
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseAccountDesign.png" />
 
 ---
 
+#### User Interface Requirement Changes 
 **Form Page Authenticated:** This is the UI for the rebate form that has been filled when logged in.
 <p float="left">
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/complete_desktop.png" />
