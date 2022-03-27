@@ -1,4 +1,17 @@
-# Elanco Rebates
+## Elanco Rebates - Table of contents
+1. [Introduction](#introduction)
+2. [Task](#task)
+3. [System design and flow](#system-design-and-flow)
+    1. [Project folder structure](#project-structure)
+    2. [User interface showcase](#user-interface)
+3. [New requirements and requirement changes](#new-requirements-and-requirement-changes)
+4. [Progress tracking](#progress)
+5. [Tools and frameworks used](#tools-and-frameworks)
+6. [Resources and documentation links](#resources)
+7. [Source code examples](#source-code-examples)
+
+
+## Introduction
 Elanco wants to explore the use of cloud-based cognitive services to complete text analysis on receipts to improve our customer experiences.
 
 We believe this can be achieved by accelerating our rebates process, which today requires our customers to complete multiple forms incorporating details from multiple
