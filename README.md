@@ -110,6 +110,10 @@ An account can have multiple addresses and multiple pets.
 - [ ] Use razor components in identity
 - [ ] Move sections into components
 
+**Publishing**
+- [ ] Migrate from SQLServer to Azure
+- [ ] Host web application on Azure
+
 ## Tools and Frameworks
 Technologies that have and will be brought into this application down the line.
 * Blazor Server
