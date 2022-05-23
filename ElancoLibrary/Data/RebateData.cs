@@ -17,10 +17,10 @@ namespace ElancoLibrary.Data
             this.dataAccess = dataAccess;
         }
 
-        public void SubmitRebate(FormModel form)
+        public async Task SubmitRebate(FormModel form)
         {
-            // Need to still retrieve the userId from authentication
             // Then post data to the database
+            await dataAccess.SaveData<FormModel>("dbo.spRebate_Insert", form, "ElancoData");
         }
     }
 }

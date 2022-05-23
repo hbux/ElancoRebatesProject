@@ -27,8 +27,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
-Console.WriteLine(Guid.NewGuid().ToString());
-
 // Azure Form Recognizer 
 builder.Services.AddSingleton(new FormRecognizerClient(
     new Uri(builder.Configuration["Endpoint"]),
@@ -38,6 +36,7 @@ builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddScoped<IOfferData, OfferData>();
 builder.Services.AddScoped<IAccountData, AccountData>();
+builder.Services.AddScoped<IRebateData, RebateData>();
 builder.Services.AddScoped<IFormHelper, FormHelper>();
 
 // This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElancoLibrary.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace ElancoLibrary.Models
         public string ClinicState { get; set; }
         public string ClinicZipCode { get; set; }
         public int AmountPurchased { get; set; }
-        public DateTime DateSubmitted { get; set; } = DateTime.UtcNow;
-        public string RebateStatus { get; set; } = "Pending Review";
+        public DateTime DateSubmitted { get; private set; } = DateTime.UtcNow;
+        public Status RebateStatus { get; private set; } = Status.Submitted;
     }
 }

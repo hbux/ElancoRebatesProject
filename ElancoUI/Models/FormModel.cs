@@ -17,7 +17,6 @@ namespace ElancoUI.Models
         [Range(typeof(bool), "true", "true", ErrorMessage = "You must upload an invoice!")]
         public Pet PetSelected { get; set; }
 
-        [Required(ErrorMessage = "Pet name cannot be empty!")]
         public string PetName { get; set; }
 
 

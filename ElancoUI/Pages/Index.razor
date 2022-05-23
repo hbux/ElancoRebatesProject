@@ -4,6 +4,7 @@
 @using ElancoUI.Data
 
 @inject IAccountData AccountData
+@inject IRebateData RebateData
 @inject IJSRuntime JSRuntime
 @inject NavigationManager Nav
 @inject IWebHostEnvironment Env
@@ -107,7 +108,7 @@
                 </div>
             }
         </div>
-        <EditForm class="form-container" Model="@Form">
+        <EditForm class="form-container" Model="@Form" OnSubmit="SubmitRebate">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
@@ -340,7 +341,34 @@
     private async Task RemoveInvoice()
     {
         await JSRuntime.InvokeVoidAsync("toggleInvoiceModal");
-        
+
         Form.InvoiceUploaded = null;
+    }
+
+    private async Task SubmitRebate()
+    {
+        // Why is OnValidSubmit not triggering this?
+
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+        string userId = string.Empty;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
+            userId = account.User.Id;
+        }
+        else
+        {
+            // Redirect to login page with return url
+        }
+
+        ElancoLibrary.Models.FormModel dbForm = FormHelper.FormatFormForSubmission(Form, userId);
+
+        await RebateData.SubmitRebate(dbForm);
+
+        Form = new FormModel();
+
+        // redirect user to thank you page
     }
 }

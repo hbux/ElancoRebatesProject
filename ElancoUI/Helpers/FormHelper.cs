@@ -130,5 +130,35 @@ namespace ElancoUI.Helpers
 
             return states;
         }
+
+        public ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, string userId)
+        {
+            ElancoLibrary.Models.FormModel dbForm = new ElancoLibrary.Models.FormModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                OfferId = form.RebateSelected.Id,
+                UserId = userId,
+
+                // This needs to be the random file name it has been assigned
+                InvoiceFileName = form.InvoiceUploaded.Name,
+                CustomerFirstName = form.CustomerFirstName,
+                CustomerLastName = form.CustomerLastName,
+                CustomerEmail = form.CustomerEmailAddress,
+                CustomerAddressLine1 = form.CustomerAddress,
+                CustomerCity = form.CustomerCity,
+                CustomerState = form.CustomerState,
+                CustomerZipCode = form.CustomerZipCode,
+                CustomerPhone = form.CustomerPhone,
+                PetName = form.PetSelected.Name,
+                ClinicName = form.ClinicName,
+                ClinicAddressLine1 = form.ClinicAddress,
+                ClinicCity = form.ClinicCity,
+                ClinicState = form.ClinicState,
+                ClinicZipCode = form.ClinicZipCode,
+                AmountPurchased = form.AmountPurchased
+            };
+
+            return dbForm;
+        }
     }
 }

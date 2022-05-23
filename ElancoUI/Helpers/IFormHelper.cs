@@ -7,5 +7,6 @@ namespace ElancoUI.Helpers
     {
         void FormatFields(FormModel form, Dictionary<string, string> fields);
         void FormatAccountDetails(Account account, FormModel form);
+        ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, string userId);
     }
 }
