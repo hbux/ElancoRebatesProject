@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[Rebate]
+(
+	[Id] NVARCHAR(450) NOT NULL PRIMARY KEY, 
+    [UserId] NVARCHAR(450) NOT NULL, 
+    [OfferId] INT NOT NULL, 
+    [InvoiceFileName] NVARCHAR(MAX) NOT NULL,
+    [CustomerFirstName] NVARCHAR(50) NOT NULL,
+    [CustomerLastName] NVARCHAR(50) NOT NULL,
+    [CustomerEmail] NVARCHAR(50) NOT NULL,
+    [CustomerAddressLine1] NVARCHAR(100) NOT NULL,
+    [CustomerAddressLine2] NVARCHAR(100) NULL,
+    [CustomerAddressLine3] NVARCHAR(100) NULL,
+    [CustomerCity] NVARCHAR(50) NOT NULL,
+    [CustomerState] NVARCHAR(50) NOT NULL,
+    [CustomerZipCode] NVARCHAR(10) NOT NULL,
+    [CustomerPhone] NVARCHAR(20) NULL,
+    [PetName] NVARCHAR(50) NOT NULL,
+    [ClinicName] NVARCHAR(100) NOT NULL,
+    [ClinicAddressLine1] NVARCHAR(100) NOT NULL,
+    [ClinicAddressLine2] NVARCHAR(100) NULL,
+    [ClinicAddressLine3] NVARCHAR(100) NULL,
+    [ClinicCity] NVARCHAR(50) NOT NULL,
+    [ClinicState] NVARCHAR(50) NOT NULL,
+    [ClinicZipCode] NVARCHAR(10) NOT NULL,
+    [AmountPurchased] INT NOT NULL,
+    [DateSubmitted] DATETIME2 NOT NULL,
+    [RebateStatus] NVARCHAR(20) NOT NULL
+)
