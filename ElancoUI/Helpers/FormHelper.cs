@@ -138,9 +138,7 @@ namespace ElancoUI.Helpers
                 Id = Guid.NewGuid().ToString(),
                 OfferId = form.RebateSelected.Id,
                 UserId = userId,
-
-                // This needs to be the random file name it has been assigned
-                InvoiceFileName = form.InvoiceUploaded.Name,
+                InvoiceFileName = form.TrustedFileName,
                 CustomerFirstName = form.CustomerFirstName,
                 CustomerLastName = form.CustomerLastName,
                 CustomerEmail = form.CustomerEmailAddress,

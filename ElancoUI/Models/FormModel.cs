@@ -13,9 +13,21 @@ namespace ElancoUI.Models
     {
         public List<Pet> Pets { get; set; } = new List<Pet>();
 
-        [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "You must upload an invoice!")]
         public Pet PetSelected { get; set; }
+
+        [Required]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "You must select a pet!")]
+        public bool HasSelectedPet
+        {
+            get
+            {
+                return PetSelected != null;
+            }
+            set
+            {
+                HasSelectedPet = value;
+            }
+        }
 
         public string PetName { get; set; }
 
@@ -50,6 +62,8 @@ namespace ElancoUI.Models
                 HasSelectedRebate = value;
             }
         }
+
+        public string TrustedFileName { get; set; }
 
 
         [Required(ErrorMessage = "First name cannot be empty!")]

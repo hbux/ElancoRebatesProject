@@ -108,7 +108,7 @@
                 </div>
             }
         </div>
-        <EditForm class="form-container" Model="@Form" OnSubmit="SubmitRebate">
+        <EditForm class="form-container" Model="@Form" OnValidSubmit="HandleValidSubmit">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
@@ -222,6 +222,7 @@
                         <div class="form-other-errors">
                             <ValidationMessage For="() => Form.HasUploadedInvoice" />
                             <ValidationMessage For="() => Form.HasSelectedRebate" />
+                            <ValidationSummary />
                         </div>
                         <div class="form-submit-btn-container">
                             <button type="submit">Submit</button>
@@ -321,6 +322,7 @@
             FormHelper.FormatFields(Form, fields);
 
             Form.InvoiceUploaded = e.File;
+            Form.TrustedFileName = trustedFileName;
         }
         catch (Exception ex)
         {
@@ -345,10 +347,8 @@
         Form.InvoiceUploaded = null;
     }
 
-    private async Task SubmitRebate()
+    private async Task HandleValidSubmit()
     {
-        // Why is OnValidSubmit not triggering this?
-
         var authState = await AuthenticationStateTask;
         var user = authState.User;
         string userId = string.Empty;
@@ -365,10 +365,16 @@
 
         ElancoLibrary.Models.FormModel dbForm = FormHelper.FormatFormForSubmission(Form, userId);
 
-        await RebateData.SubmitRebate(dbForm);
+        try
+        {
+            await RebateData.SubmitRebate(dbForm);
+            Form = new FormModel();
 
-        Form = new FormModel();
-
-        // redirect user to thank you page
+            // redirect user to thank you page
+        }
+        catch (Exception)
+        {
+            // redirect user to unsuccessful page
+        }
     }
 }
