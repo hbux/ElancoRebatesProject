@@ -3,9 +3,6 @@
 @inject NavigationManager Nav
 @inject IOfferData OfferData
 
-<!-- This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning -->
-@inject FormModel Form
-
 <section class="main-section">
     <div class="main-container">
         <div class="rebate-container">
@@ -87,6 +84,7 @@
 
 @code {
     private List<OfferModel> offers = new List<OfferModel>();
+    private FormInteractionModel formInteraction;
 
     protected override async Task OnInitializedAsync()
     {
@@ -100,7 +98,7 @@
 
     private void SelectRebate(OfferModel rebate)
     {
-        Form.RebateSelected = rebate;
+        formInteraction.RebateSelected = rebate;
 
         Nav.NavigateTo("/");
     }

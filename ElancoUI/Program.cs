@@ -39,9 +39,6 @@ builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IRebateData, RebateData>();
 builder.Services.AddScoped<IFormHelper, FormHelper>();
 
-// This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning
-builder.Services.AddSingleton<FormModel>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

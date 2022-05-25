@@ -84,7 +84,7 @@ namespace ElancoUI.Helpers
             }
         }
 
-        public void FormatAccountDetails(Account account, FormModel form)
+        public void FormatAccountDetails(Account account, FormModel form, FormInteractionModel formInteraction)
         {
             form.CustomerFirstName = account.FirstName;
             form.CustomerLastName = account.LastName;
@@ -97,7 +97,7 @@ namespace ElancoUI.Helpers
             form.CustomerState = defaultAddress.State;
             form.CustomerZipCode = defaultAddress.ZipCode;
 
-            form.Pets = account.Pets;
+            formInteraction.Pets = account.Pets;
         }
 
         /// <summary>
@@ -131,14 +131,15 @@ namespace ElancoUI.Helpers
             return states;
         }
 
-        public ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, string userId)
+        public ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, 
+            FormInteractionModel formInteraction, string userId)
         {
             ElancoLibrary.Models.FormModel dbForm = new ElancoLibrary.Models.FormModel
             {
                 Id = Guid.NewGuid().ToString(),
-                OfferId = form.RebateSelected.Id,
+                OfferId = formInteraction.RebateSelected.Id,
                 UserId = userId,
-                InvoiceFileName = form.TrustedFileName,
+                InvoiceFileName = formInteraction.TrustedFileName,
                 CustomerFirstName = form.CustomerFirstName,
                 CustomerLastName = form.CustomerLastName,
                 CustomerEmail = form.CustomerEmailAddress,
@@ -147,7 +148,7 @@ namespace ElancoUI.Helpers
                 CustomerState = form.CustomerState,
                 CustomerZipCode = form.CustomerZipCode,
                 CustomerPhone = form.CustomerPhone,
-                PetName = form.PetSelected.Name,
+                PetName = formInteraction.PetSelected.Name,
                 ClinicName = form.ClinicName,
                 ClinicAddressLine1 = form.ClinicAddress,
                 ClinicCity = form.ClinicCity,

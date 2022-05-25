@@ -6,7 +6,7 @@ namespace ElancoUI.Helpers
     public interface IFormHelper
     {
         void FormatFields(FormModel form, Dictionary<string, string> fields);
-        void FormatAccountDetails(Account account, FormModel form);
-        ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, string userId);
+        void FormatAccountDetails(Account account, FormModel form, FormInteractionModel formInteraction);
+        ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, FormInteractionModel formInteraction, string userId);
     }
 }

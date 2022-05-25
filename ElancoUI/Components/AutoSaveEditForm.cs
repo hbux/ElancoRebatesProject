@@ -160,7 +160,16 @@ namespace ElancoUI.Components
 
                         if (childValue == null && parentValue == null) continue;
 
-                        currentFormModelProperty.SetValue(currentFormModel, parentValue);
+                        // Custom code added to ensure that the saved form values do not override values autofilled from
+                        // user account details
+                        if (childValue != null)
+                        {
+                            currentFormModelProperty.SetValue(currentFormModel, childValue);
+                        }
+                        else
+                        {
+                            currentFormModelProperty.SetValue(currentFormModel, parentValue);
+                        }
 
                         var fieldIdentifier = new FieldIdentifier(currentFormModel, currentFormModelProperty.Name);
                         _fixedEditContext.NotifyFieldChanged(fieldIdentifier);

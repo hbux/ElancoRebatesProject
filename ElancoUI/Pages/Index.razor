@@ -2,6 +2,7 @@
 
 @using ElancoUI.Models.DbContextModels
 @using ElancoUI.Data
+@using ElancoUI.Components
 
 @inject IAccountData AccountData
 @inject IRebateData RebateData
@@ -10,9 +11,6 @@
 @inject IWebHostEnvironment Env
 @inject IApiService Api
 @inject IFormHelper FormHelper
-
-<!-- This is temporary to get the basic application working -> switch to use local/session storage once the app is functioning -->
-@inject FormModel Form
 
 <section class="main-section">
     <div class="main-container">
@@ -26,7 +24,7 @@
                     <a>How does our rebate process work?</a>
                 </div>
             </div>
-            @if (Form.HasUploadedInvoice == false)
+            @if (formInteraction.HasUploadedInvoice == false)
             {
                 <div class="card" id="upload-required">
                     <label class="card-details">
@@ -40,7 +38,7 @@
                     </label>
                 </div>
             }
-            else if (Form.HasUploadedInvoice == true)
+            else if (formInteraction.HasUploadedInvoice == true)
             {
                 <div class="card" id="upload-complete" onclick="toggleInvoiceModal()">
                     <div class="card-details">
@@ -53,7 +51,7 @@
                     </div>
                 </div>
             }
-            @if (Form.HasSelectedRebate == false)
+            @if (formInteraction.HasSelectedRebate == false)
             {
                 <a class="card" id="rebate-required" href="/rebates">
                     <div class="card-details">
@@ -65,35 +63,35 @@
                     </div>
                 </a>
             }
-            else if (Form.HasSelectedRebate == true)
+            else if (formInteraction.HasSelectedRebate == true)
             {
                 <div class="card" id="rebate-selected">
                     <div class="card-details-rebate">
                         <div class="rebate-info">
                             <div class="rebate-images">
-                                @foreach (ProductModel product in Form.RebateSelected.Products)
+                                @foreach (ProductModel product in formInteraction.RebateSelected.Products)
                                 {
                                     <img src="storage/products/@(product.ImageName).@(product.ImageType)" alt="@product.Name" />
                                 }
                             </div>
                             <div class="rebate-details">
                                 <div class="details-header">
-                                    <h3>Offer Code: @Form.RebateSelected.OfferCode</h3>
-                                    <svg @onclick="(() => Form.RebateSelected = null)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <h3>Offer Code: @formInteraction.RebateSelected.OfferCode</h3>
+                                    <svg @onclick="(() => formInteraction.RebateSelected = null)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                     </svg>
                                 </div>
                                 <div class="details-purchased">
                                     <p>Purchase between:</p>
-                                    <p>@DateOnly.FromDateTime(Form.RebateSelected.ValidPurchaseStart) - @DateOnly.FromDateTime(Form.RebateSelected.ValidPurchaseEnd)</p>
+                                    <p>@DateOnly.FromDateTime(formInteraction.RebateSelected.ValidPurchaseStart) - @DateOnly.FromDateTime(formInteraction.RebateSelected.ValidPurchaseEnd)</p>
                                 </div>
                                 <table>
                                     <tr>
                                         <th>Offer Details</th>
                                         <th>Rebate Value</th>
                                     </tr>
-                                    @foreach (OfferDetails details in Form.RebateSelected.Details)
+                                    @foreach (OfferDetails details in formInteraction.RebateSelected.Details)
                                     {
                                         <tr>
                                             <td>@details.Amount</td>
@@ -108,75 +106,75 @@
                 </div>
             }
         </div>
-        <EditForm class="form-container" Model="@Form" OnValidSubmit="HandleValidSubmit">
+        <AutoSaveEditForm class="form-container" Id="form-one" Model="@form" OnValidSubmit="HandleValidSubmit">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
                     <h3>Your Information</h3>
                     <div class="form-field">
                         <label for="cust-first-name">First Name <span>*</span></label>
-                        <InputText id="cust-first-name" type="text" @bind-Value="Form.CustomerFirstName" />
-                        <ValidationMessage For="() => Form.CustomerFirstName" />
+                        <InputText id="cust-first-name" type="text" @bind-Value="form.CustomerFirstName" />
+                        <ValidationMessage For="() => form.CustomerFirstName" />
                     </div>
                     <div class="form-field">
                         <label for="cust-last-name">Last Name <span>*</span></label>
-                        <InputText id="cust-last-name" type="text" @bind-Value="Form.CustomerLastName" />
-                        <ValidationMessage For="() => Form.CustomerLastName" />
+                        <InputText id="cust-last-name" type="text" @bind-Value="form.CustomerLastName" />
+                        <ValidationMessage For="() => form.CustomerLastName" />
                     </div>
                     <div class="form-field">
                         <label for="cust-address">Address <span>*</span></label>
-                        <InputText id="cust-address" type="text" @bind-Value="Form.CustomerAddress" />
-                        <ValidationMessage For="() => Form.CustomerAddress" />
+                        <InputText id="cust-address" type="text" @bind-Value="form.CustomerAddress" />
+                        <ValidationMessage For="() => form.CustomerAddress" />
                     </div>
                     <div class="form-field">
                         <label for="cust-city">City <span>*</span></label>
-                        <InputText id="cust-city" type="text" @bind-Value="Form.CustomerCity" />
-                        <ValidationMessage For="() => Form.CustomerCity" />
+                        <InputText id="cust-city" type="text" @bind-Value="form.CustomerCity" />
+                        <ValidationMessage For="() => form.CustomerCity" />
                     </div>
                     <div class="form-field">
                         <label for="cust-state">State <span>*</span></label>
-                        <InputText id="cust-state" type="text" @bind-Value="Form.CustomerState" />
-                        <ValidationMessage For="() => Form.CustomerState" />
+                        <InputText id="cust-state" type="text" @bind-Value="form.CustomerState" />
+                        <ValidationMessage For="() => form.CustomerState" />
                     </div>
                     <div class="form-field">
                         <label for="cust-zip">Zip Code <span>*</span></label>
-                        <InputText id="cust-zip" type="text" @bind-Value="Form.CustomerZipCode" />
-                        <ValidationMessage For="() => Form.CustomerZipCode" />
+                        <InputText id="cust-zip" type="text" @bind-Value="form.CustomerZipCode" />
+                        <ValidationMessage For="() => form.CustomerZipCode" />
                     </div>
                     <div class="form-field">
                         <label for="cust-phone">Phone</label>
-                        <InputText id="address" type="text" @bind-Value="Form.CustomerPhone" />
-                        <ValidationMessage For="() => Form.CustomerPhone" />
+                        <InputText id="address" type="text" @bind-Value="form.CustomerPhone" />
+                        <ValidationMessage For="() => form.CustomerPhone" />
                         <p>By providing my phone number, I consent to my phone number being used to contact me regarding my rebate submission.</p>
                     </div>
                     <div class="form-field">
                         <label for="cust-email">Email <span>*</span></label>
-                        <InputText id="cust-email" type="email" @bind-Value="Form.CustomerEmailAddress" />
-                        <ValidationMessage For="() => Form.CustomerEmailAddress" />
+                        <InputText id="cust-email" type="email" @bind-Value="form.CustomerEmailAddress" />
+                        <ValidationMessage For="() => form.CustomerEmailAddress" />
                     </div>
                     <div class="form-field">
                         <label for="cust-confirm-email">Confirm Email <span>*</span></label>
-                        <InputText id="cust-confirm-email" type="email" @bind-Value="Form.CustomerEmailConfirmation" />
-                        <ValidationMessage For="() => Form.CustomerEmailConfirmation" />
+                        <InputText id="cust-confirm-email" type="email" @bind-Value="form.CustomerEmailConfirmation" />
+                        <ValidationMessage For="() => form.CustomerEmailConfirmation" />
                     </div>
                 </div>
                 <div class="form-fields">
                     <h3>Pet Details</h3>
-                    @if (Form.Pets.Count == 0)
+                    @if (formInteraction.Pets.Count == 0)
                     {
                         <p>Add your pet's name below. If you have multiple pets, please just put one of your pet's name.</p>
                         <div class="form-field">
                             <label for="clinic-name">Pet Name <span>*</span></label>
-                            <InputText id="clinic-name" type="text" @bind-Value="Form.PetName" />
+                            <InputText id="clinic-name" type="text" @bind-Value="formInteraction.PetName" />
                         </div>
                     }
                     else
                     {
                         <p>Select your pet below you're claiming the rebate for.</p>
                         <div class="form-field-pets-container">
-                            @foreach (Pet pet in Form.Pets)
+                            @foreach (Pet pet in formInteraction.Pets)
                             {
-                                <div class="form-field-pet" id="@GetPetSelectedCss(pet)" @onclick="(() => Form.PetSelected = pet)">
+                                <div class="form-field-pet" id="@GetPetSelectedCss(pet)" @onclick="(() => formInteraction.PetSelected = pet)">
                                     <img src="/storage/account_pets/@pet.ImageName" alt="@pet.Name"/>
                                 </div>
                             }
@@ -190,38 +188,38 @@
                     <p>Complete the information about your veterinarian clinic and medication(s).</p>
                     <div class="form-field">
                         <label for="clinic-name">Clinic Name <span>*</span></label>
-                        <InputText id="clinic-name" type="text" @bind-Value="Form.ClinicName" />
-                        <ValidationMessage For="() => Form.ClinicName" />
+                        <InputText id="clinic-name" type="text" @bind-Value="form.ClinicName" />
+                        <ValidationMessage For="() => form.ClinicName" />
                     </div>
                     <div class="form-field">
                         <label for="clinic-address">Clinic Address <span>*</span></label>
-                        <InputText id="clinic-address" type="text" @bind-Value="Form.ClinicAddress" />
-                        <ValidationMessage For="() => Form.ClinicAddress" />
+                        <InputText id="clinic-address" type="text" @bind-Value="form.ClinicAddress" />
+                        <ValidationMessage For="() => form.ClinicAddress" />
                     </div>
                     <div class="form-field">
                         <label for="clinic-city">Clinic City <span>*</span></label>
-                        <InputText id="clinic-city" type="text" @bind-Value="Form.ClinicCity" />
-                        <ValidationMessage For="() => Form.ClinicCity" />
+                        <InputText id="clinic-city" type="text" @bind-Value="form.ClinicCity" />
+                        <ValidationMessage For="() => form.ClinicCity" />
                     </div>
                     <div class="form-field">
                         <label for="clinic-state">Clinic State <span>*</span></label>
-                        <InputText id="clinic-state" type="text" @bind-Value="Form.ClinicState" />
-                        <ValidationMessage For="() => Form.ClinicState" />
+                        <InputText id="clinic-state" type="text" @bind-Value="form.ClinicState" />
+                        <ValidationMessage For="() => form.ClinicState" />
                     </div>
                     <div class="form-field">
                         <label for="clinic-zip">Clinic Zip Code <span>*</span></label>
-                        <InputText id="clinic-zip" type="text" @bind-Value="Form.ClinicZipCode" />
-                        <ValidationMessage For="() => Form.ClinicZipCode" />
+                        <InputText id="clinic-zip" type="text" @bind-Value="form.ClinicZipCode" />
+                        <ValidationMessage For="() => form.ClinicZipCode" />
                     </div>
                     <div class="form-field">
                         <label for="amount-purchased">Amount Purchased <span>*</span></label>
-                        <InputNumber id="amount-purchased" type="text" @bind-Value="Form.AmountPurchased" />
-                        <ValidationMessage For="() => Form.AmountPurchased" />
+                        <InputNumber id="amount-purchased" type="text" @bind-Value="form.AmountPurchased" />
+                        <ValidationMessage For="() => form.AmountPurchased" />
                     </div>
                     <div class="form-submit">
                         <div class="form-other-errors">
-                            <ValidationMessage For="() => Form.HasUploadedInvoice" />
-                            <ValidationMessage For="() => Form.HasSelectedRebate" />
+                            <ValidationMessage For="() => formInteraction.HasUploadedInvoice" />
+                            <ValidationMessage For="() => formInteraction.HasSelectedRebate" />
                             <ValidationSummary />
                         </div>
                         <div class="form-submit-btn-container">
@@ -230,7 +228,7 @@
                     </div>
                 </div>
             </div>
-        </EditForm>
+        </AutoSaveEditForm>
     </div>
 </section>
 <div class="modal-load" id="@GetLoadingModalCss()">
@@ -261,6 +259,8 @@
 </div>
 
 @code {
+    private FormModel form = new FormModel();
+    private FormInteractionModel formInteraction = new FormInteractionModel();
     private bool isAnalysingUpload;
 
     [CascadingParameter]
@@ -274,7 +274,7 @@
         if (user.Identity.IsAuthenticated)
         {
             Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
-            FormHelper.FormatAccountDetails(account, Form);
+            FormHelper.FormatAccountDetails(account, form, formInteraction);
         }
     }
 
@@ -292,7 +292,7 @@
 
     private string GetPetSelectedCss(Pet pet)
     {
-        if (Form.PetSelected == pet)
+        if (formInteraction.PetSelected == pet)
         {
             return "pet-selected";
         }
@@ -319,10 +319,10 @@
             await StreamInvoice(e.File);
 
             var fields = await Api.AnalyseInvoice(localFilePath);
-            FormHelper.FormatFields(Form, fields);
+            FormHelper.FormatFields(form, fields);
 
-            Form.InvoiceUploaded = e.File;
-            Form.TrustedFileName = trustedFileName;
+            formInteraction.InvoiceUploaded = e.File;
+            formInteraction.TrustedFileName = trustedFileName;
         }
         catch (Exception ex)
         {
@@ -344,37 +344,53 @@
     {
         await JSRuntime.InvokeVoidAsync("toggleInvoiceModal");
 
-        Form.InvoiceUploaded = null;
+        formInteraction.InvoiceUploaded = null;
     }
 
-    private async Task HandleValidSubmit()
+    private async Task<bool> HandleValidSubmit(EditContext editContext)
     {
-        var authState = await AuthenticationStateTask;
-        var user = authState.User;
-        string userId = string.Empty;
+        var isValid = editContext.Validate();
 
-        if (user.Identity.IsAuthenticated)
+        if (isValid)
         {
-            Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
-            userId = account.User.Id;
+            var authState = await AuthenticationStateTask;
+            var user = authState.User;
+            string userId = string.Empty;
+
+            if (user.Identity.IsAuthenticated)
+            {
+                Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
+                userId = account.User.Id;
+            }
+            else
+            {
+                // Redirect to login page with return url
+            }
+
+            ElancoLibrary.Models.FormModel dbForm = FormHelper.FormatFormForSubmission(form, formInteraction, userId);
+
+            try
+            {
+                await RebateData.SubmitRebate(dbForm);
+                form = new FormModel();
+                formInteraction = new FormInteractionModel();
+
+                // redirect user to thank you page
+
+                return true;
+            }
+            catch (Exception)
+            {
+                // redirect user to unsuccessful page
+
+                return false;
+            }
         }
-        else
+        else 
         {
-            // Redirect to login page with return url
-        }
-
-        ElancoLibrary.Models.FormModel dbForm = FormHelper.FormatFormForSubmission(Form, userId);
-
-        try
-        {
-            await RebateData.SubmitRebate(dbForm);
-            Form = new FormModel();
-
-            // redirect user to thank you page
-        }
-        catch (Exception)
-        {
-            // redirect user to unsuccessful page
+            StateHasChanged();
+            
+            return false;
         }
     }
 }
