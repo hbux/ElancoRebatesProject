@@ -13,7 +13,10 @@
 @inject IFormHelper FormHelper
 
 <section class="main-section">
-    <div class="main-container">
+    <AutoSaveEditForm class="main-container" Id="form-one" Model="@form" OnValidSubmit="HandleValidSubmit">
+        <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceId" />
+        <InputText id="selected-rebate-id" type="hidden" @bind-Value="form.SelectedRebateId" />
+        <InputText id="selected-pet-name" type="hidden" @bind-Value="form.SelectedPetName" />
         <div class="rebate-container">
             <div class="info-card">
                 <div class="info-card-details">
@@ -106,7 +109,7 @@
                 </div>
             }
         </div>
-        <AutoSaveEditForm class="form-container" Id="form-one" Model="@form" OnValidSubmit="HandleValidSubmit">
+        <div class="form-container">
             <DataAnnotationsValidator />
             <div class="form-split-container">
                 <div class="form-fields">
@@ -218,9 +221,8 @@
                     </div>
                     <div class="form-submit">
                         <div class="form-other-errors">
-                            <ValidationMessage For="() => formInteraction.HasUploadedInvoice" />
-                            <ValidationMessage For="() => formInteraction.HasSelectedRebate" />
-                            <ValidationSummary />
+                            <ValidationMessage For="() => form.UploadedInvoiceId" />
+                            <ValidationMessage For="() => form.SelectedRebateId" />
                         </div>
                         <div class="form-submit-btn-container">
                             <button type="submit">Submit</button>
@@ -228,8 +230,8 @@
                     </div>
                 </div>
             </div>
-        </AutoSaveEditForm>
-    </div>
+        </div>
+    </AutoSaveEditForm>
 </section>
 <div class="modal-load" id="@GetLoadingModalCss()">
     <div class="card" id="loading-card">

@@ -11,6 +11,14 @@ namespace ElancoUI.Models
     /// </summary>
     public class FormModel
     {
+        [Required(ErrorMessage = "You must upload an invoice!")]
+        public string UploadedInvoiceId { get; set; }
+        [Required(ErrorMessage = "You must select a rebate!")]
+        public string SelectedRebateId { get; set; }
+        [Required(ErrorMessage = "You must select a pet!")]
+        public string SelectedPetName { get; set; }
+
+
         [Required(ErrorMessage = "First name cannot be empty!")]
         public string CustomerFirstName { get; set; }
 
