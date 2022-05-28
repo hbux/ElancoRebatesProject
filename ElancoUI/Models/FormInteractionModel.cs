@@ -7,8 +7,6 @@ namespace ElancoUI.Models
 {
     public class FormInteractionModel
     {
-        [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "You must select a pet!")]
         public bool HasSelectedPet
         {
             get
@@ -24,8 +22,6 @@ namespace ElancoUI.Models
         public Pet PetSelected { get; set; }
         public string PetName { get; set; }
 
-        [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "You must upload an invoice!")]
         public bool HasUploadedInvoice
         {
             get
@@ -40,8 +36,6 @@ namespace ElancoUI.Models
         public IBrowserFile InvoiceUploaded { get; set; }
         public string TrustedFileName { get; set; }
 
-        [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "You must select a rebate!")]
         public bool HasSelectedRebate
         {
             get
