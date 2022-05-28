@@ -1,5 +1,7 @@
 ﻿@page "/rebates"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
+@inject ProtectedLocalStorage ProtectedLocalStore
 @inject NavigationManager Nav
 @inject IOfferData OfferData
 
@@ -96,9 +98,9 @@
 
     }
 
-    private void SelectRebate(OfferModel rebate)
+    private async Task SelectRebate(OfferModel rebate)
     {
-        formInteraction.RebateSelected = rebate;
+        await ProtectedLocalStore.SetAsync("form-one-rebate", rebate);
 
         Nav.NavigateTo("/");
     }

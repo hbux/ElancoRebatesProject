@@ -3,7 +3,9 @@
 @using ElancoUI.Models.DbContextModels
 @using ElancoUI.Data
 @using ElancoUI.Components
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
+@inject ProtectedLocalStorage ProtectedLocalStore
 @inject IAccountData AccountData
 @inject IRebateData RebateData
 @inject IJSRuntime JSRuntime
@@ -177,7 +179,7 @@
                         <div class="form-field-pets-container">
                             @foreach (Pet pet in formInteraction.Pets)
                             {
-                                <div class="form-field-pet" id="@GetPetSelectedCss(pet)" @onclick="(() => formInteraction.PetSelected = pet)">
+                                <div class="form-field-pet" id="@GetPetSelectedCss(pet)" @onclick="(() => SetSelectedPet(pet))">
                                     <img src="/storage/account_pets/@pet.ImageName" alt="@pet.Name"/>
                                 </div>
                             }
@@ -263,6 +265,7 @@
 @code {
     private FormModel form = new FormModel();
     private FormInteractionModel formInteraction = new FormInteractionModel();
+    private OfferModel selectedRebate;
     private bool isAnalysingUpload;
 
     [CascadingParameter]
@@ -273,12 +276,25 @@
         var authState = await AuthenticationStateTask;
         var user = authState.User;
 
+        var result = await ProtectedLocalStore.GetAsync<OfferModel>("form-one-rebate");
+        selectedRebate = result.Success ? result.Value : null;
+        formInteraction.RebateSelected = selectedRebate;
+        form.SelectedRebateId = selectedRebate?.Id.ToString();
+
         if (user.Identity.IsAuthenticated)
         {
             Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
             FormHelper.FormatAccountDetails(account, form, formInteraction);
+
+            var petResult = await ProtectedLocalStore.GetAsync<Pet>("form-one-pet");
+            Pet pet = petResult.Success ? petResult.Value : null;
+            formInteraction.PetSelected = pet;
+            form.SelectedPetName = pet?.Name;
         }
+
+        StateHasChanged();
     }
+
 
     private string GetLoadingModalCss()
     {
@@ -294,7 +310,7 @@
 
     private string GetPetSelectedCss(Pet pet)
     {
-        if (formInteraction.PetSelected == pet)
+        if (formInteraction.PetSelected.Id == pet.Id)
         {
             return "pet-selected";
         }
@@ -302,6 +318,13 @@
         {
             return "";
         }
+    }
+
+    private async Task SetSelectedPet(Pet pet)
+    {
+        formInteraction.PetSelected = pet;
+
+        await ProtectedLocalStore.SetAsync("form-one-pet", pet);
     }
 
     private async Task UploadFile(InputFileChangeEventArgs e)
