@@ -162,7 +162,7 @@ namespace ElancoUI.Components
 
                         // Custom code added to ensure that the saved form values do not override values autofilled from
                         // user account details
-                        if (childValue != null)
+                        if (childValue != null && savedFormModelProperty.Name != "AmountPurchased")
                         {
                             currentFormModelProperty.SetValue(currentFormModel, childValue);
                         }
