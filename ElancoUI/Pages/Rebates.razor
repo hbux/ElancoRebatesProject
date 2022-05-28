@@ -100,7 +100,7 @@
 
     private async Task SelectRebate(OfferModel rebate)
     {
-        await ProtectedLocalStore.SetAsync("form-one-rebate", rebate);
+        await ProtectedLocalStore.SetAsync("er-form-reb", rebate);
 
         Nav.NavigateTo("/");
     }

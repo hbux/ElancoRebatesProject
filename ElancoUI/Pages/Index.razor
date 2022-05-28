@@ -15,7 +15,7 @@
 @inject IFormHelper FormHelper
 
 <section class="main-section">
-    <AutoSaveEditForm class="main-container" Id="form-one" Model="@form" OnValidSubmit="HandleValidSubmit">
+    <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnValidSubmit="HandleValidSubmit">
         <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceId" />
         <InputText id="selected-rebate-id" type="hidden" @bind-Value="form.SelectedRebateId" />
         <InputText id="selected-pet-name" type="hidden" @bind-Value="form.SelectedPetName" />
@@ -276,7 +276,7 @@
         var authState = await AuthenticationStateTask;
         var user = authState.User;
 
-        var result = await ProtectedLocalStore.GetAsync<OfferModel>("form-one-rebate");
+        var result = await ProtectedLocalStore.GetAsync<OfferModel>("er-form-reb");
         selectedRebate = result.Success ? result.Value : null;
         formInteraction.RebateSelected = selectedRebate;
         form.SelectedRebateId = selectedRebate?.Id.ToString();
@@ -286,7 +286,7 @@
             Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
             FormHelper.FormatAccountDetails(account, form, formInteraction);
 
-            var petResult = await ProtectedLocalStore.GetAsync<Pet>("form-one-pet");
+            var petResult = await ProtectedLocalStore.GetAsync<Pet>("er-form-selPet");
             Pet pet = petResult.Success ? petResult.Value : null;
             formInteraction.PetSelected = pet;
             form.SelectedPetName = pet?.Name;
@@ -324,14 +324,15 @@
     {
         formInteraction.RebateSelected = null;
 
-        await ProtectedLocalStore.DeleteAsync("form-one-rebate");
+        await ProtectedLocalStore.DeleteAsync("er-form-reb");
     }
 
     private async Task SetSelectedPet(Pet pet)
     {
         formInteraction.PetSelected = pet;
+        form.SelectedPetName = pet.Name;
 
-        await ProtectedLocalStore.SetAsync("form-one-pet", pet);
+        await ProtectedLocalStore.SetAsync("er-form-selPet", pet);
     }
 
     private async Task UploadFile(InputFileChangeEventArgs e)
