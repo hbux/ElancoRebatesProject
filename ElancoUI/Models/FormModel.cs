@@ -1,7 +1,4 @@
-﻿using ElancoLibrary.Models.Offers;
-using ElancoUI.Models.DbContextModels;
-using Microsoft.AspNetCore.Components.Forms;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ElancoUI.Models
 {
@@ -15,8 +12,8 @@ namespace ElancoUI.Models
         public string UploadedInvoiceId { get; set; }
         [Required(ErrorMessage = "You must select a rebate!")]
         public string SelectedRebateId { get; set; }
-        [Required(ErrorMessage = "You must select a pet!")]
-        public string SelectedPetName { get; set; }
+        [Required(ErrorMessage = "You must choose a pet!")]
+        public string PetName { get; set; }
 
 
         [Required(ErrorMessage = "First name cannot be empty!")]

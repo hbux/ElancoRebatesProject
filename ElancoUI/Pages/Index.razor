@@ -18,7 +18,7 @@
     <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnValidSubmit="HandleValidSubmit">
         <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceId" />
         <InputText id="selected-rebate-id" type="hidden" @bind-Value="form.SelectedRebateId" />
-        <InputText id="selected-pet-name" type="hidden" @bind-Value="form.SelectedPetName" />
+        <InputText id="selected-pet-name" type="hidden" @bind-Value="form.PetName" />
         <div class="rebate-container">
             <div class="info-card">
                 <div class="info-card-details">
@@ -170,7 +170,7 @@
                         <p>Add your pet's name below. If you have multiple pets, please just put one of your pet's name.</p>
                         <div class="form-field">
                             <label for="clinic-name">Pet Name <span>*</span></label>
-                            <InputText id="clinic-name" type="text" @bind-Value="formInteraction.PetName" />
+                            <InputText id="clinic-name" type="text" @bind-Value="form.PetName" />
                         </div>
                     }
                     else
@@ -289,7 +289,7 @@
             var petResult = await ProtectedLocalStore.GetAsync<Pet>("er-form-selPet");
             Pet pet = petResult.Success ? petResult.Value : null;
             formInteraction.PetSelected = pet;
-            form.SelectedPetName = pet?.Name;
+            form.PetName = pet?.Name;
         }
 
         StateHasChanged();
@@ -330,7 +330,7 @@
     private async Task SetSelectedPet(Pet pet)
     {
         formInteraction.PetSelected = pet;
-        form.SelectedPetName = pet.Name;
+        form.PetName = pet.Name;
 
         await ProtectedLocalStore.SetAsync("er-form-selPet", pet);
     }
