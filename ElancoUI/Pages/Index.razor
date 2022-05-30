@@ -15,7 +15,7 @@
 @inject IFormHelper FormHelper
 
 <section class="main-section">
-    <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnValidSubmit="HandleValidSubmit">
+    <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnSubmit="HandleValidSubmit">
         <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceFileName" />
         <InputText id="selected-rebate-id" type="hidden" @bind-Value="form.SelectedRebateId" />
         <InputText id="selected-pet-name" type="hidden" @bind-Value="form.PetName" />
@@ -323,6 +323,7 @@
     private async Task RemoveSelectedRebate()
     {
         formInteraction.RebateSelected = null;
+        form.SelectedRebateId = null;
 
         await ProtectedLocalStore.DeleteAsync("er-form-reb");
     }
@@ -397,7 +398,9 @@
             }
             else
             {
-                // Redirect to login page with return url
+                // Nav.NavigateTo("Identity/Account/Login");
+
+                return false;
             }
 
             ElancoLibrary.Models.FormModel dbForm = FormHelper.FormatFormForSubmission(form, formInteraction, userId);
