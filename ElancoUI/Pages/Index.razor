@@ -16,7 +16,7 @@
 
 <section class="main-section">
     <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnValidSubmit="HandleValidSubmit">
-        <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceId" />
+        <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceFileName" />
         <InputText id="selected-rebate-id" type="hidden" @bind-Value="form.SelectedRebateId" />
         <InputText id="selected-pet-name" type="hidden" @bind-Value="form.PetName" />
         <div class="rebate-container">
@@ -29,7 +29,7 @@
                     <a>How does our rebate process work?</a>
                 </div>
             </div>
-            @if (formInteraction.HasUploadedInvoice == false)
+            @if (string.IsNullOrEmpty(form.UploadedInvoiceFileName) == true)
             {
                 <div class="card" id="upload-required">
                     <label class="card-details">
@@ -43,7 +43,7 @@
                     </label>
                 </div>
             }
-            else if (formInteraction.HasUploadedInvoice == true)
+            else if (string.IsNullOrEmpty(form.UploadedInvoiceFileName) == false)
             {
                 <div class="card" id="upload-complete" onclick="toggleInvoiceModal()">
                     <div class="card-details">
@@ -223,7 +223,7 @@
                     </div>
                     <div class="form-submit">
                         <div class="form-other-errors">
-                            <ValidationMessage For="() => form.UploadedInvoiceId" />
+                            <ValidationMessage For="() => form.UploadedInvoiceFileName" />
                             <ValidationMessage For="() => form.SelectedRebateId" />
                         </div>
                         <div class="form-submit-btn-container">
@@ -354,8 +354,7 @@
             var fields = await Api.AnalyseInvoice(localFilePath);
             FormHelper.FormatFields(form, fields);
 
-            formInteraction.InvoiceUploaded = e.File;
-            formInteraction.TrustedFileName = trustedFileName;
+            form.UploadedInvoiceFileName = trustedFileName;
         }
         catch (Exception ex)
         {
@@ -367,6 +366,7 @@
 
     private async Task StreamInvoice(IBrowserFile fileUploaded)
     {
+        // Only available to view if you don't navigate away
         var jsImageStream = fileUploaded.OpenReadStream(4_000_000);
 
         DotNetStreamReference dotnetImageStream = new DotNetStreamReference(jsImageStream);
@@ -377,7 +377,7 @@
     {
         await JSRuntime.InvokeVoidAsync("toggleInvoiceModal");
 
-        formInteraction.InvoiceUploaded = null;
+        form.UploadedInvoiceFileName = null;
     }
 
     private async Task<bool> HandleValidSubmit(EditContext editContext)
@@ -405,6 +405,8 @@
             try
             {
                 await RebateData.SubmitRebate(dbForm);
+                await ProtectedLocalStore.DeleteAsync("er-form-reb");
+                await ProtectedLocalStore.DeleteAsync("er-form-selPet");
                 form = new FormModel();
                 formInteraction = new FormInteractionModel();
 

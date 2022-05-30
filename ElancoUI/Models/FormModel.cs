@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ElancoUI.Models
 {
@@ -9,7 +10,7 @@ namespace ElancoUI.Models
     public class FormModel
     {
         [Required(ErrorMessage = "You must upload an invoice!")]
-        public string UploadedInvoiceId { get; set; }
+        public string UploadedInvoiceFileName { get; set; }
         [Required(ErrorMessage = "You must select a rebate!")]
         public string SelectedRebateId { get; set; }
         [Required(ErrorMessage = "You must choose a pet!")]
