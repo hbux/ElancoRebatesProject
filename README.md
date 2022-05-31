@@ -93,7 +93,7 @@ An account can have multiple addresses and multiple pets.
 ## Progress
 **To-do**
 - [ ] Create UI for rebate submitted
-- [ ] Use local storage to save form data
+- [x] Use local storage to save form data
 - [ ] Add functionality to analyse product image and match with a rebate
 - [ ] Add logging
 - [ ] Add unit testing and mocking
