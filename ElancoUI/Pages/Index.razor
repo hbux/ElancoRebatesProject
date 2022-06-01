@@ -413,13 +413,14 @@
                 form = new FormModel();
                 formInteraction = new FormInteractionModel();
 
-                // redirect user to thank you page
+                // Redirect user to thank you page
+                Nav.NavigateTo($"/Confirmation/ThankYou/{ dbForm.Id }");
 
                 return true;
             }
             catch (Exception)
             {
-                // redirect user to unsuccessful page
+                // Redirect user to unsuccessful page
 
                 return false;
             }

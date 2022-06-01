@@ -1,0 +1,18 @@
+﻿@page "/Confirmation/ThankYou/{submissionId}"
+
+<p>Submission ID: @SubmissionId</p>
+
+@code {
+
+    // 1. Gather submitted rebate details from DB
+    // 2. Gather rebate selected based on offerId
+
+    // Add DB row for rebate submittion to include HasAccessed bool 
+    // If the user access the thank you page, set this to true
+    // If true, redirect the user to the homepage or an info box saying the rebate status
+    // but do not display the information again.
+    // If false, display the rebate details and then set the HasAccessed to true
+
+    [Parameter]
+    public string SubmissionId { get; set; }
+}
