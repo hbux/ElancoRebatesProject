@@ -34,5 +34,6 @@ namespace ElancoLibrary.Models
         public int AmountPurchased { get; set; }
         public DateTime DateSubmitted { get; private set; } = DateTime.UtcNow;
         public Status RebateStatus { get; private set; } = Status.Submitted;
+        public bool HasAccessed { get; set; } = false;
     }
 }

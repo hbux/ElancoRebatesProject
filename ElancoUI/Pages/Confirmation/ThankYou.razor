@@ -1,9 +1,21 @@
 ﻿@page "/Confirmation/ThankYou/{submissionId}"
 
-<p>Submission ID: @SubmissionId</p>
+@inject IRebateData RebateData
+@inject IOfferData OfferData
+
+@if (form != null)
+{
+    if (form.HasAccessed == false)
+    {
+        
+    }
+}
+else
+{
+    <p>Loading...</p>
+}
 
 @code {
-
     // 1. Gather submitted rebate details from DB
     // 2. Gather rebate selected based on offerId
 
@@ -13,6 +25,15 @@
     // but do not display the information again.
     // If false, display the rebate details and then set the HasAccessed to true
 
+    private ElancoLibrary.Models.FormModel form;
+    private OfferModel rebateOffer;
+
     [Parameter]
     public string SubmissionId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        form = await RebateData.GetSubmissionDetails(SubmissionId);
+        rebateOffer = await OfferData.GetOfferById(form.OfferId);
+    }
 }

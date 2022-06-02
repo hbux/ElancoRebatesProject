@@ -24,5 +24,6 @@
     [ClinicZipCode] NVARCHAR(10) NOT NULL,
     [AmountPurchased] INT NOT NULL,
     [DateSubmitted] DATETIME2 NOT NULL,
-    [RebateStatus] NVARCHAR(20) NOT NULL
+    [RebateStatus] NVARCHAR(20) NOT NULL, 
+    [HasAccessed] BIT NOT NULL DEFAULT 0
 )

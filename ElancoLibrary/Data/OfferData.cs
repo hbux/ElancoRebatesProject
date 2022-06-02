@@ -41,5 +41,21 @@ namespace ElancoLibrary.Data
 
             return offers;
         }
+
+        public async Task<OfferModel> GetOfferById(int offerId)
+        {
+            var p = new
+            {
+                OfferId = offerId
+            };
+
+            var rawOffer = await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetById", p, "ElancoData");
+            OfferModel offer = rawOffer.FirstOrDefault();
+
+            offer.Details = await dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
+            offer.Products = await dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+
+            return offer;
+        }
     }
 }

@@ -23,7 +23,8 @@
     @ClinicZipCode NVARCHAR(10),
     @AmountPurchased int,
     @DateSubmitted DATETIME2,
-    @RebateStatus NVARCHAR(20)
+    @RebateStatus NVARCHAR(20),
+    @HasAccessed BIT
 AS
 BEGIN 
     SET NOCOUNT ON;
@@ -31,9 +32,9 @@ BEGIN
     INSERT INTO dbo.Rebate(Id, UserId, OfferId, InvoiceFileName, CustomerFirstName, CustomerLastName, CustomerEmail, 
         CustomerAddressLine1, CustomerAddressLine2, CustomerAddressLine3, CustomerCity, CustomerState, CustomerZipCode, CustomerPhone,
         PetName, ClinicName, ClinicAddressLine1, ClinicAddressLine2, ClinicAddressLine3, ClinicCity, ClinicState, ClinicZipCode,
-        AmountPurchased, DateSubmitted, RebateStatus)
+        AmountPurchased, DateSubmitted, RebateStatus, HasAccessed)
     VALUES (@Id, @UserId, @OfferId, @InvoiceFileName, @CustomerFirstName, @CustomerLastName, @CustomerEmail, 
         @CustomerAddressLine1, @CustomerAddressLine2, @CustomerAddressLine3, @CustomerCity, @CustomerState, @CustomerZipCode, 
         @CustomerPhone, @PetName, @ClinicName, @ClinicAddressLine1, @ClinicAddressLine2, @ClinicAddressLine3, @ClinicCity, 
-        @ClinicState, @ClinicZipCode, @AmountPurchased, @DateSubmitted, @RebateStatus);
+        @ClinicState, @ClinicZipCode, @AmountPurchased, @DateSubmitted, @RebateStatus, @HasAccessed);
 END

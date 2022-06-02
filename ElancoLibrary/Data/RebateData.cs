@@ -19,8 +19,19 @@ namespace ElancoLibrary.Data
 
         public async Task SubmitRebate(FormModel form)
         {
-            // Then post data to the database
             await dataAccess.SaveData<FormModel>("dbo.spRebate_Insert", form, "ElancoData");
+        }
+
+        public async Task<FormModel> GetSubmissionDetails(string submissionId)
+        {
+            var p = new
+            {
+                SubmissionId = submissionId,
+            };
+
+            var rebateSubmission = await dataAccess.LoadData<FormModel, dynamic>("dbo.spRebate_GetById", p, "ElancoData");
+
+            return rebateSubmission.FirstOrDefault();
         }
     }
 }
