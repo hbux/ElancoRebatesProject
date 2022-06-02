@@ -976,9 +976,41 @@ table td {
 .confirmation-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 120px;
+    grid-template-rows: 120px auto auto auto;
     gap: 10px;
     max-width: 780px;
+}
+
+.confirmation-summary-title {
+    font-size: 16px;
+    color: var(--info-card-text);
+    padding: 3px 0;
+}
+
+.confirmation-summary-content {
+    font-size: 16px;
+    color: var(--primary-dark-blue);
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.confirmation-summary-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.confirmation-card {
+    padding: 10px;
+}
+
+.confirmation-summary-address p {
+    margin: 3px 0;
+}
+
+.confirmation-card .confirmation-summary-title {
+    font-size: 14px;
+    color: var(--info-card-text);
 }
 
 @keyframes spin {
@@ -1031,6 +1063,10 @@ table td {
     }
 
     .available-rebates-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .confirmation-summary-details {
         grid-template-columns: 1fr 1fr;
     }
 }

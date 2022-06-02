@@ -28,8 +28,79 @@
                                 <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
                                 <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
                             </svg>
-                            <h3>Thanks for submitting</h3>
+                            <h3>Submission summary</h3>
+                            <a>A copy has been sent to @form.CustomerEmail</a>
                         </div>
+                    </div>
+                    <div class="confirmation-summary">
+                        <p class="confirmation-summary-title">Submission ID: <span class="confirmation-summary-content">@form.Id</span></p>
+                        <p class="confirmation-summary-title">Submission Date: <span class="confirmation-summary-content">@DateOnly.FromDateTime(form.DateSubmitted)</span></p>
+                        <p class="confirmation-summary-title">Submission Status: <span class="confirmation-summary-content">@form.RebateStatus</span></p>
+                    </div>
+                    <div class="confirmation-summary">
+                        <div class="card" id="rebate-selected">
+                            <div class="card-details-rebate">
+                                <div class="rebate-info">
+                                    <div class="rebate-images">
+                                        @foreach (ProductModel product in rebateOffer.Products)
+                                        {
+                                            <img src="storage/products/@(product.ImageName).@(product.ImageType)" alt="@product.Name" />
+                                        }
+                                    </div>
+                                    <div class="rebate-details">
+                                        <div class="details-header">
+                                            <h3>Offer Code: @rebateOffer.OfferCode</h3>
+                                            <div/>
+                                        </div>
+                                        <div class="details-purchased">
+                                            <p>Purchase between:</p>
+                                            <p>@DateOnly.FromDateTime(rebateOffer.ValidPurchaseStart) - @DateOnly.FromDateTime(rebateOffer.ValidPurchaseEnd)</p>
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <th>Offer Details</th>
+                                                <th>Rebate Value</th>
+                                            </tr>
+                                            @foreach (OfferDetails details in rebateOffer.Details)
+                                            {
+                                                <tr>
+                                                    <td>@details.Amount</td>
+                                                    <td>@details.Value.ToString("C")</td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="rebate-extra"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="confirmation-summary-details">
+                        <div class="card">
+                            <div class="confirmation-card">
+                                <p class="confirmation-summary-title">Your address</p>
+                                <div class="confirmation-summary-address">
+                                    <p>@form.CustomerAddressLine1</p>
+                                    <p>@form.CustomerCity</p>
+                                    <p>@form.CustomerState</p>
+                                    <p>@form.CustomerZipCode</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="confirmation-card">
+                                <p class="confirmation-summary-title">Clinic address</p>
+                                <div class="confirmation-summary-address">
+                                    <p>@form.ClinicAddressLine1</p>
+                                    <p>@form.ClinicCity</p>
+                                    <p>@form.ClinicState</p>
+                                    <p>@form.ClinicZipCode</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account-save">
+                        <button>Download</button>
                     </div>
                 }
             }
