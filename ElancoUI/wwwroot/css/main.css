@@ -973,6 +973,14 @@ table td {
     justify-content: center;
 }
 
+.confirmation-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px;
+    gap: 10px;
+    max-width: 780px;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -988,7 +996,7 @@ table td {
         padding: 5px 0;
     }
 
-    .header-container, .rebate-container {
+    .header-container, .rebate-container, .confirmation-container {
         margin: 0 auto;
     }
 
@@ -1028,7 +1036,7 @@ table td {
 }
 
 @media only screen and (min-width: 1000px) {
-    .header-container, .rebate-container, .form-container {
+    .header-container, .rebate-container, .form-container, .confirmation-container {
         max-width: 780px;
         margin: 0 auto;
     }
