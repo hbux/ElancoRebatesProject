@@ -97,14 +97,18 @@ An account can have multiple addresses and multiple pets.
 - [ ] Add functionality to analyse product image and match with a rebate
 - [ ] Add logging
 - [ ] Add unit testing and mocking
+- [ ] Switch over to using Azure blobs for account pets and invoices
+- [ ] Add download rebate as PDF functionality
 
 **Additional features**
 - [ ] Add UI to all scaffolded pages
 - [ ] Add UI to information card modal
 - [ ] Add UI for unverified email on the account page
 - [ ] Add UI for successfully/unsuccessfully updating profile
+- [ ] Add UI loading indicator during login
 - [ ] Add SendGrid API for emails
 - [ ] Add validation for account, pet and address
+- [ ] Add sticky navigation menu for the account page
 
 **Optimisation**
 - [ ] Use razor components in identity
