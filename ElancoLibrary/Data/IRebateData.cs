@@ -6,5 +6,6 @@ namespace ElancoLibrary.Data
     {
         Task SubmitRebate(FormModel form);
         Task<FormModel> GetSubmissionDetails(string submissionId);
+        Task UpdateUserAccess(string submissionId);
     }
 }

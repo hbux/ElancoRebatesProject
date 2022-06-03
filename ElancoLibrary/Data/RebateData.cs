@@ -33,5 +33,15 @@ namespace ElancoLibrary.Data
 
             return rebateSubmission.FirstOrDefault();
         }
+
+        public async Task UpdateUserAccess(string submissionId)
+        {
+            var p = new
+            {
+                SubmissionId = submissionId,
+            };
+
+            await dataAccess.SaveData<dynamic>("dbo.spRebate_UpdateById", p, "ElancoData");
+        }
     }
 }

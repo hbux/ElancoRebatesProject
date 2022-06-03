@@ -76,5 +76,6 @@
     <Build Include="dbo\Stored Procedures\spRebate_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spRebate_GetById.sql" />
     <Build Include="dbo\Stored Procedures\spOffer_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spRebate_UpdateById.sql" />
   </ItemGroup>
 </Project>

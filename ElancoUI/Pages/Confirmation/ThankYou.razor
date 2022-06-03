@@ -19,6 +19,9 @@
                             <a>Displaying submission information session has expired, a copy should have been sent to your registered email address.</a>
                         </div>
                     </div>
+                    <div class="account-save">
+                        <button>Home</button>
+                    </div>
                 }
                 else
                 {
@@ -80,6 +83,7 @@
                             <div class="confirmation-card">
                                 <p class="confirmation-summary-title">Your address</p>
                                 <div class="confirmation-summary-address">
+                                    <p>@form.CustomerFirstName @form.CustomerLastName</p>
                                     <p>@form.CustomerAddressLine1</p>
                                     <p>@form.CustomerCity</p>
                                     <p>@form.CustomerState</p>
@@ -95,6 +99,7 @@
                                     <p>@form.ClinicCity</p>
                                     <p>@form.ClinicState</p>
                                     <p>@form.ClinicZipCode</p>
+                                    <p>Product purchased is for @form.PetName</p>
                                 </div>
                             </div>
                         </div>
@@ -124,6 +129,6 @@
         form = await RebateData.GetSubmissionDetails(SubmissionId);
         rebateOffer = await OfferData.GetOfferById(form.OfferId);
 
-        // Update HasAccessed to true
+        await RebateData.UpdateUserAccess(form.Id);
     }
 }
