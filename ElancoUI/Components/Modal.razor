@@ -1,0 +1,23 @@
+﻿<div class="modal-load" id="loading-modal">
+    <div class="card" id="loading-card">
+        <div class="loading-container">
+            @Icon
+            <p>@Message</p>
+            @if (Action is not null)
+            {
+                @Action
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+
+    [Parameter]
+    public RenderFragment Icon { get; set; }
+
+    [Parameter]
+    public RenderFragment Action { get; set; }
+}

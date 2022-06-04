@@ -915,6 +915,7 @@ table td {
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    text-align: center;
 }
 
 .loader {
@@ -1011,6 +1012,16 @@ table td {
 .confirmation-card .confirmation-summary-title {
     font-size: 14px;
     color: var(--info-card-text);
+}
+
+.full-primary-btn {
+    background-color: var(--primary-light-blue);
+    color: var(--seconary-white);
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
 }
 
 @keyframes spin {
