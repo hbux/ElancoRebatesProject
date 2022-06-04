@@ -916,6 +916,7 @@ table td {
     flex-direction: column;
     gap: 20px;
     text-align: center;
+    padding: 20%;
 }
 
 .loader {
@@ -1022,6 +1023,8 @@ table td {
     width: 100%;
     padding: 10px;
     cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 @keyframes spin {
