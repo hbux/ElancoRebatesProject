@@ -15,7 +15,7 @@
 @inject IFormHelper FormHelper
 
 <section class="main-section">
-    <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnSubmit="HandleValidSubmit">
+    <AutoSaveEditForm class="main-container" Id="er-form" Model="@form" OnSubmit="HandleSubmit">
         <InputText id="uploaded-invoice-id" type="hidden" @bind-Value="form.UploadedInvoiceFileName" />
         <InputText id="selected-rebate-id" type="hidden" @bind-Value="form.SelectedRebateId" />
         <InputText id="selected-pet-name" type="hidden" @bind-Value="form.PetName" />
@@ -381,7 +381,7 @@
         form.UploadedInvoiceFileName = null;
     }
 
-    private async Task<bool> HandleValidSubmit(EditContext editContext)
+    private async Task<bool> HandleSubmit(EditContext editContext)
     {
         var isValid = editContext.Validate();
 

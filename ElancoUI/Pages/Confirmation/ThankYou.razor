@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="account-save">
-                        <button>Home</button>
+                        <a href="/">Home</a>
                     </div>
                 }
                 else
@@ -37,7 +37,7 @@
                     </div>
                     <div class="confirmation-summary">
                         <p class="confirmation-summary-title">Submission ID: <span class="confirmation-summary-content">@form.Id</span></p>
-                        <p class="confirmation-summary-title">Submission Date: <span class="confirmation-summary-content">@DateOnly.FromDateTime(form.DateSubmitted)</span></p>
+                        <p class="confirmation-summary-title">Submission Date: <span class="confirmation-summary-content">@DateOnly.FromDateTime(form.DateSubmitted) @TimeOnly.FromDateTime(form.DateSubmitted)</span></p>
                         <p class="confirmation-summary-title">Submission Status: <span class="confirmation-summary-content">@form.RebateStatus</span></p>
                     </div>
                     <div class="confirmation-summary">
@@ -53,7 +53,7 @@
                                     <div class="rebate-details">
                                         <div class="details-header">
                                             <h3>Offer Code: @rebateOffer.OfferCode</h3>
-                                            <div/>
+                                            <p class="confirmation-summary-title">Qty: @form.AmountPurchased</p>
                                         </div>
                                         <div class="details-purchased">
                                             <p>Purchase between:</p>
@@ -104,9 +104,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="account-save">
-                        <button>Download</button>
-                    </div>
                 }
             }
             else
@@ -126,9 +123,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        form = await RebateData.GetSubmissionDetails(SubmissionId);
-        rebateOffer = await OfferData.GetOfferById(form.OfferId);
+        try
+        {
+            form = await RebateData.GetSubmissionDetails(SubmissionId);
+            rebateOffer = await OfferData.GetOfferById(form.OfferId);
 
-        await RebateData.UpdateUserAccess(form.Id);
+            await RebateData.UpdateUserAccess(form.Id);
+        }
+        catch (Exception)
+        {
+            // Error modal
+        }
     }
 }
