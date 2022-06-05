@@ -94,7 +94,7 @@ An account can have multiple addresses and multiple pets.
 **To-do**
 - [x] Create UI for rebate submitted
 - [x] Use local storage to save form data
-- [ ] Add functionality to analyse product image and match with a rebate
+- [x] Add functionality to analyse product image and match with a rebate
 - [ ] Add logging
 - [ ] Add unit testing and mocking
 - [ ] Switch over to using Azure blobs for account pets and invoices
