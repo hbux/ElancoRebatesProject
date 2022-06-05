@@ -1,9 +1,37 @@
 ﻿@page "/rebates"
+
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using ElancoUI.Components
 
 @inject ProtectedLocalStorage ProtectedLocalStore
 @inject NavigationManager Nav
 @inject IOfferData OfferData
+@inject IApiService ApiService
+@inject IWebHostEnvironment Env
+@inject IOfferHelper OfferHelper
+
+@if (isAnalysingUpload == true)
+{
+    <Modal Message="Analysing your upload...">
+        <Icon>
+            <div class="loader"></div>
+        </Icon>
+    </Modal>
+}
+@if (string.IsNullOrEmpty(errorMessage) != true)
+{
+    <Modal Message="@errorMessage">
+        <Icon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+              <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+            </svg>
+        </Icon>
+        <Action>
+            <a class="full-primary-btn" @onclick="(() => errorMessage = null)">Close</a>
+        </Action>
+    </Modal>
+}
 
 <section class="main-section">
     <div class="main-container">
@@ -28,10 +56,31 @@
                     <a>Take a picture of your purchased product and we'll attempt to match it with a rebate.</a>
                 </label>
             </div>
+            @if (hasFilteredOffers == true)
+            {
+                <div class="account-save">
+                    <a @onclick="ResetOffers">Reset offers</a>
+                </div>   
+            }
             <div class="available-rebates-container">
-                @if (offers.Count == 0)
+                @if (offers.Count == 0 && hasFilteredOffers == false)
                 {
                     <p>Loading offers...</p>
+                }
+
+                @if (offers.Count == 0 && hasFilteredOffers == true)
+                {
+                    <Modal Message="No matching offers found">
+                        <Icon>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </Icon>
+                        <Action>
+                            <a class="full-primary-btn" @onclick="ResetOffers">Reset Offers</a>
+                        </Action>
+                    </Modal>
                 }
 
                 @foreach (OfferModel offer in offers)
@@ -87,15 +136,41 @@
 @code {
     private List<OfferModel> offers = new List<OfferModel>();
     private FormInteractionModel formInteraction;
+    private bool isAnalysingUpload;
+    private string errorMessage;
+    private bool hasFilteredOffers;
 
     protected override async Task OnInitializedAsync()
     {
         offers = await OfferData.GetOffers();
     }
 
-    private void UploadFile(InputFileChangeEventArgs e)
+    private async Task UploadFile(InputFileChangeEventArgs e)
     {
+        isAnalysingUpload = true;
 
+        try
+        {
+            string trustedFileName = Path.GetRandomFileName();
+            string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
+
+            using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
+            {
+                await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
+            };
+
+            var analysedContent = await ApiService.AnalyseProductImage(localFilePath);
+
+            offers = OfferHelper.FilterOffers(analysedContent, offers);
+            hasFilteredOffers = true;
+
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+
+        isAnalysingUpload = false;
     }
 
     private async Task SelectRebate(OfferModel rebate)
@@ -103,5 +178,11 @@
         await ProtectedLocalStore.SetAsync("er-form-reb", rebate);
 
         Nav.NavigateTo("/");
+    }
+
+    private async Task ResetOffers()
+    {
+        offers = await OfferData.GetOffers();
+        hasFilteredOffers = false;
     }
 }

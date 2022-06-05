@@ -433,9 +433,9 @@
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Redirect user to unsuccessful page
+                errorMessage = ex.Message;
 
                 return false;
             }

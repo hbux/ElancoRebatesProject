@@ -38,6 +38,7 @@ builder.Services.AddScoped<IOfferData, OfferData>();
 builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IRebateData, RebateData>();
 builder.Services.AddScoped<IFormHelper, FormHelper>();
+builder.Services.AddScoped<IOfferHelper, OfferHelper>();
 
 var app = builder.Build();
 

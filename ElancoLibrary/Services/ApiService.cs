@@ -42,6 +42,19 @@ namespace ElancoLibrary.Services
             }
         }
 
+        public async Task<List<string>> AnalyseProductImage(string filePath)
+        {
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
+            {
+                var rawUpload = await _client.StartRecognizeContent(stream)
+                    .WaitForCompletionAsync();
+
+                FormPage uploadedImage = rawUpload.Value.FirstOrDefault();
+
+                return ParseProductImageContent(uploadedImage);
+            }
+        }
+
         /// <summary>
         ///     Places the key and value into a usable format.
         /// </summary>
@@ -69,6 +82,18 @@ namespace ElancoLibrary.Services
             }
 
             return fields;
+        }
+
+        private List<string> ParseProductImageContent(FormPage uploadedImage)
+        {
+            List<string> parsedContent = new List<string>();
+
+            foreach (FormLine text in uploadedImage.Lines)
+            {
+                parsedContent.Add(text.Text);
+            }
+
+            return parsedContent;
         }
     }
 }

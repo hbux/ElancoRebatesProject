@@ -635,7 +635,7 @@ body {
 .rebate-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 120px 1fr;
+    grid-template-rows: 60px 120px auto 1fr;
     gap: 10px;
     max-width: 780px;
 }
