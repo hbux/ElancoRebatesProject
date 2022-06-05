@@ -414,7 +414,8 @@
             }
             else
             {
-                // Nav.NavigateTo("Identity/Account/Login");
+                var localRedirect = "/" + Nav.ToBaseRelativePath(Nav.Uri);
+                Nav.NavigateTo($"/Identity/Account/Login?returnUrl={Uri.EscapeDataString(localRedirect)}", true);
 
                 return false;
             }

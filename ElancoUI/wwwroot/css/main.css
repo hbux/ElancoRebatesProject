@@ -843,7 +843,6 @@ table td {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    grid-auto-rows: 125px;
 }
 
 .form-field-pet {

@@ -160,15 +160,17 @@ namespace ElancoUI.Components
 
                         if (childValue == null && parentValue == null) continue;
 
+                        // Prioritise saved form values, unless saved form values are null
+
                         // Custom code added to ensure that the saved form values do not override values autofilled from
                         // user account details
-                        if (childValue != null && savedFormModelProperty.Name != "AmountPurchased")
+                        if (parentValue != null)
                         {
-                            currentFormModelProperty.SetValue(currentFormModel, childValue);
+                            currentFormModelProperty.SetValue(currentFormModel, parentValue);
                         }
                         else
                         {
-                            currentFormModelProperty.SetValue(currentFormModel, parentValue);
+                            currentFormModelProperty.SetValue(currentFormModel, childValue);
                         }
 
                         var fieldIdentifier = new FieldIdentifier(currentFormModel, currentFormModelProperty.Name);
