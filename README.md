@@ -113,6 +113,7 @@ An account can have multiple addresses and multiple pets.
 **Optimisation**
 - [ ] Use razor components in identity
 - [ ] Move sections into components
+- [ ] Test analyzing an invoice using Azure Blob Service & Azure Functions
 
 **Publishing**
 - [ ] Migrate from SQLServer to Azure
