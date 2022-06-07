@@ -143,6 +143,8 @@ Below are resources and documentation links to aid with the development.
 * [ASP.NET Core Blazor Image Streaming](https://docs.microsoft.com/en-us/aspnet/core/blazor/images?view=aspnetcore-6.0#streaming-examples)
 * [Razor Pages CRUD with EF Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/crud?view=aspnetcore-6.0)
 * [Migrating from SQL Server to Azure SQL](https://docs.microsoft.com/en-us/azure/dms/tutorial-sql-server-to-azure-sql)
+* [Using .NET Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet?tabs=environment-variable-windows)
+* [Upload and analyze a file with Azure Blob Storage and Azure Functions](https://docs.microsoft.com/en-us/azure/storage/blobs/blob-upload-function-trigger?tabs=azure-portal)
 
 ## Source Code Examples
 **SQL data access for retrieving and saving data.**
