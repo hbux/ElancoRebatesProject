@@ -65,7 +65,11 @@
             <div class="available-rebates-container">
                 @if (offers.Count == 0 && hasFilteredOffers == false)
                 {
-                    <p>Loading offers...</p>
+                    <Modal Message="Loading rebates...">
+                        <Icon>
+                            <div class="loader"></div>
+                        </Icon>
+                    </Modal>
                 }
 
                 @if (offers.Count == 0 && hasFilteredOffers == true)
