@@ -59,13 +59,13 @@
             @if (hasFilteredOffers == true)
             {
                 <div class="account-save">
-                    <a @onclick="ResetOffers">Reset offers</a>
+                    <a @onclick="ViewAllOffers">Reset offers</a>
                 </div>   
             }
             <div class="available-rebates-container">
                 @if (offers.Count == 0 && hasFilteredOffers == false)
                 {
-                    <Modal Message="Loading rebates...">
+                    <Modal Message="Loading offers...">
                         <Icon>
                             <div class="loader"></div>
                         </Icon>
@@ -82,7 +82,7 @@
                             </svg>
                         </Icon>
                         <Action>
-                            <a class="full-primary-btn" @onclick="ResetOffers">Reset Offers</a>
+                            <a class="full-primary-btn" @onclick="ViewAllOffers">View all Offers</a>
                         </Action>
                     </Modal>
                 }
@@ -146,7 +146,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        offers = await OfferData.GetOffers();
+        await ViewAllOffers();
     }
 
     private async Task UploadFile(InputFileChangeEventArgs e)
@@ -184,7 +184,7 @@
         Nav.NavigateTo("/");
     }
 
-    private async Task ResetOffers()
+    private async Task ViewAllOffers()
     {
         offers = await OfferData.GetOffers();
         hasFilteredOffers = false;
