@@ -101,6 +101,8 @@ An account can have multiple addresses and multiple pets.
 - [ ] Add unit testing and mocking
 - [ ] Switch over to using Azure blobs for account pets and invoices
 - [ ] Add download rebate as PDF functionality
+- [ ] Add My Rebates section to the user account page
+- [ ] Selecting a rebate under my account displays all the information used to submit.
 
 **Additional features**
 - [ ] Add UI to all scaffolded pages
