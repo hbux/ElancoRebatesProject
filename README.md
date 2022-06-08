@@ -3,6 +3,7 @@
 2. [Task](#task)
 3. [System design and flow](#system-design-and-flow)
     1. [Project folder structure](#project-structure)
+    2. [Invoice and Analysis Flow Diagram](#user-uploading-invoice-and-analysis-flow-diagram)
     2. [User interface showcase](#user-interface)
     3. [UML rebate offer database design](#uml-rebate-offer-database-design)
 3. [New requirements and requirement changes](#new-requirements-and-requirement-changes)
