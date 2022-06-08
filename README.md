@@ -33,10 +33,22 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 * **ElancoUI.Tests:** Holds the unit testing of the ElancoUI classes.
 * **ElancoLibrary:** Holds the business logic of the application. Acts as a layer between the UI and Data Access.
 * **ElancoLibrary.Tests:** Holds the unit testing and mocking of the ElancoLibrary classes.
+* **ElancoLibrary.Functions:** Holds the Azure Functions used throughout the project.
 * **ElancoData:** Holds the tables, stored procedures and data publisher for the products/offers. 
 * **Documentation:** Holds the example receipts, products logos, UML diagrams and user interface mockups.
 
 ---
+
+#### User Uploading Invoice and Analysis Flow Diagram
+Below is a flow diagram for three different ways of analysing invoices.
+
+<p float="left">
+    <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/AnalyzeImageFlowDiagram.png" width="50%" height="50%" />
+</p>
+
+1. The first iteration of design, the user uploads an image, this image is then stored within the Blazor Server app, which is then analyzed. This is the least secure method of invoice upload.
+2. The second iteration of design, the user uploads an image which is then stored using Azure Blob containers to ensure the upload is safe, it is then downloaded for analysis.
+3. The final iteration of design, this is using Azure Functions. The user uploads an image, this is then stored using Azure Blobs which triggers an Azure Function to analyse the new upload and store the analysed results within a table on Azure.
 
 #### UML Rebate Offer Database Design
 An offer has multiple details and multiple product logos.
