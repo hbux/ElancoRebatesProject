@@ -11,7 +11,9 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ElancoData", "ElancoData\El
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElancoLibrary.Tests", "ElancoLibrary.Tests\ElancoLibrary.Tests.csproj", "{D112AECC-424B-429E-9CA3-E12DA9522FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElancoUI.Tests", "ElancoUI.Tests\ElancoUI.Tests.csproj", "{83155FBA-C43B-44C9-93D2-21A3FB675FCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElancoUI.Tests", "ElancoUI.Tests\ElancoUI.Tests.csproj", "{83155FBA-C43B-44C9-93D2-21A3FB675FCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElancoLibrary.Functions", "ElancoLibrary.Functions\ElancoLibrary.Functions.csproj", "{BEC40FCB-368D-41B8-A5B5-718AE24D9845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{83155FBA-C43B-44C9-93D2-21A3FB675FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83155FBA-C43B-44C9-93D2-21A3FB675FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83155FBA-C43B-44C9-93D2-21A3FB675FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC40FCB-368D-41B8-A5B5-718AE24D9845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC40FCB-368D-41B8-A5B5-718AE24D9845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC40FCB-368D-41B8-A5B5-718AE24D9845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC40FCB-368D-41B8-A5B5-718AE24D9845}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

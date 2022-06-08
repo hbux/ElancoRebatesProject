@@ -99,10 +99,8 @@ An account can have multiple addresses and multiple pets.
 - [x] Add functionality to analyse product image and match with a rebate
 - [ ] Add logging
 - [ ] Add unit testing and mocking
-- [ ] Switch over to using Azure blobs for account pets and invoices
 - [ ] Add download rebate as PDF functionality
-- [ ] Add My Rebates section to the user account page
-- [ ] Selecting a rebate under my account displays all the information used to submit.
+- [ ] Add My Rebates section to the user account page (selecting a rebate displays submission details)
 
 **Additional features**
 - [ ] Add UI to all scaffolded pages
@@ -117,6 +115,7 @@ An account can have multiple addresses and multiple pets.
 **Optimisation**
 - [ ] Use razor components in identity
 - [ ] Move sections into components
+- [ ] Switch over to using Azure blobs for account pets and invoices
 - [ ] Test analyzing an invoice using Azure Blob Service & Azure Functions
 
 **Publishing**
@@ -165,10 +164,9 @@ Below are resources and documentation links to aid with the development.
 </p>
 
 ## Required for Locally Running
-Below is the appsettings.json code which is not included in the ElancoUI project files as this contains API key's and endpoints for the Form Recognizer API serivce. 
+Below is json code which is not included in the Elanco project files as this contains API key's and endpoints for API services. 
 
-**This json file should be included in the root of your ElancoUI project.**
-
+**appsettings.json:** This json file should be included in the root of your ElancoUI project.
 ````
 {
     "ConnectionStrings": {
@@ -191,5 +189,22 @@ Below is the appsettings.json code which is not included in the ElancoUI project
 
   // Model ID is the custom trained model for retrieving specific details from an uploaded image.
   "ModelId": "your-custom-trained-model-id"
+}
+````
+
+**local.appsettings.json:** This json file should be included in the root of your ElancoLibrary.Functions project.
+````
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "StorageConnection": "your-storage-account-connection-string",
+    "StorageAccountName": "your-storage-account-name",
+    "ComputerVisionKey": "your-computer-vision-key",
+    "ComputerVisionEndPoint": "your-computer-vision-endpoint",
+    "FormRecognizerApiKey": "your-form-recognizer-api-key",
+    "FormRecognizerEndpoint": "your-form-recognizer-endpoint"
+  }
 }
 ````
