@@ -30,6 +30,7 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 ## System Design and Flow
 ### Project Structure
 * **ElancoUI:** Holds the user interface pages, user interface models and classes.
+* **ElancoUI.Tests:** Holds the unit testing of the ElancoUI classes.
 * **ElancoLibrary:** Holds the business logic of the application. Acts as a layer between the UI and Data Access.
 * **ElancoLibrary.Tests:** Holds the unit testing and mocking of the ElancoLibrary classes.
 * **ElancoData:** Holds the tables, stored procedures and data publisher for the products/offers. 
