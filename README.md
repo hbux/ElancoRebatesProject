@@ -13,6 +13,7 @@
 7. [Resources and documentation links](#resources)
 8. [Source code examples](#source-code-examples)
 
+Click [here](#required-for-locally-running) to view the code **required** to locally run this project.
 
 ## Introduction
 Elanco wants to explore the use of cloud-based cognitive services to complete text analysis on receipts to improve our customer experiences.
@@ -159,3 +160,33 @@ Below are resources and documentation links to aid with the development.
 <p float="left">
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/api_code.png" width="50%" height="50%"/>
 </p>
+
+## Required for Locally Running
+Below is the appsettings.json code which is not included in the ElancoUI project files as this contains API key's and endpoints for the Form Recognizer API serivce. 
+
+**This json file should be included in the root of your ElancoUI project.**
+
+````
+{
+    "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=aspnet-ElancoUI-CDA36F0B-4463-4A16-9EDF-38D3BBF5DB5F;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "ElancoData": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ElancoData;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+
+  // Api Key is the key to access Azure Form Recognizer API.
+  "ApiKey": "your-api-key",
+
+  // Endpoint is the URL of the Form Recognizer.
+  "Endpoint": "your-form-recognizer-endpoint",
+
+  // Model ID is the custom trained model for retrieving specific details from an uploaded image.
+  "ModelId": "your-custom-trained-model-id"
+}
+````
