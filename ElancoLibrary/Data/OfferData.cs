@@ -25,6 +25,11 @@ namespace ElancoLibrary.Data
         {
             var offers = await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetAll", new { }, "ElancoData");
 
+            if (offers == null)
+            {
+                throw new NullReferenceException("Failed to load available offers.");
+            }
+
             foreach (OfferModel offer in offers)
             {
                 var p = new
@@ -34,6 +39,15 @@ namespace ElancoLibrary.Data
 
                 var offerDetails = await dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
                 var offerProducts = await dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+
+                if (offerDetails == null)
+                {
+                    throw new NullReferenceException($"Failed to load offer details by ID: { offer.Id }.");
+                }
+                if (offerProducts == null)
+                {
+                    throw new NullReferenceException($"Failed to load offer products by ID: { offer.Id }.");
+                }
 
                 offer.Details = offerDetails;
                 offer.Products = offerProducts;
@@ -50,10 +64,25 @@ namespace ElancoLibrary.Data
             };
 
             var rawOffer = await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetById", p, "ElancoData");
+
+            if (rawOffer == null)
+            {
+                throw new NullReferenceException($"Failed to load offer by ID: { offerId }.");
+            }
+
             OfferModel offer = rawOffer.FirstOrDefault();
 
             offer.Details = await dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
             offer.Products = await dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+
+            if (offer.Details == null)
+            {
+                throw new NullReferenceException($"Failed to load offer details by ID: { offerId }.");
+            }
+            if (offer.Products == null)
+            {
+                throw new NullReferenceException($"Failed to load offer products by ID: { offerId }.");
+            }
 
             return offer;
         }

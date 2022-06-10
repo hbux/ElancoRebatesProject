@@ -31,6 +31,11 @@ namespace ElancoLibrary.Data
 
             var rebateSubmission = await dataAccess.LoadData<FormModel, dynamic>("dbo.spRebate_GetById", p, "ElancoData");
 
+            if (rebateSubmission == null)
+            {
+                throw new NullReferenceException($"Failed to load rebate submission by ID: { submissionId }");
+            }
+
             return rebateSubmission.FirstOrDefault();
         }
 

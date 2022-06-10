@@ -12,14 +12,14 @@ namespace ElancoUI.Tests
     public class OfferHelperTests
     {
         [Theory]
-        [MemberData(nameof(GenerateContent))]
+        [MemberData(nameof(GenerateCorrectContent))]
         public void FilterOffers_ShouldReturnFilteredListWithOffers(List<string> content)
         {
             // Initialising the required classes
             IOfferHelper offerHelper = new OfferHelper();
 
             // List<string> content is the analysed text from the users upload of their purchased product
-            List<OfferModel> allOffers = GenerateOffers();
+            List<OfferModel> allOffers = GetSampleOffers();
             List<OfferModel> filteredOffers = offerHelper.FilterOffers(content, allOffers);
 
             // Testing that the filtered offers does contain values
@@ -27,13 +27,34 @@ namespace ElancoUI.Tests
             Assert.True(filteredOffers.Count > 0);
         }
 
-        private static IEnumerable<object[]> GenerateContent()
+        [Theory]
+        [MemberData(nameof(GenerateIncorrectContent))]
+        public void FilterOffers_ShouldReturnEmptyList(List<string> content)
+        {
+            // Initialising the required classes
+            IOfferHelper offerHelper = new OfferHelper();
+
+            // List<string> content is the analysed text from the users upload of their purchased product
+            List<OfferModel> allOffers = GetSampleOffers();
+            List<OfferModel> filteredOffers = offerHelper.FilterOffers(content, allOffers);
+
+            // Testing that the filtered offers does not contain values
+            Assert.True(filteredOffers.Count == 0);
+        }
+
+        private static IEnumerable<object[]> GenerateCorrectContent()
         {
             yield return new object[] { new List<string> { "Credelio" } };
             yield return new object[] { new List<string> { "Interceptor Plus", "Credelio" } };
         }
 
-        private List<OfferModel> GenerateOffers()
+        private static IEnumerable<object[]> GenerateIncorrectContent()
+        {
+            yield return new object[] { new List<string> { "Cre" } };
+            yield return new object[] { new List<string> { "Inteptor Pls", "lioCred" } };
+        }
+
+        private List<OfferModel> GetSampleOffers()
         {
             List<OfferModel> offers = new List<OfferModel>();
 
