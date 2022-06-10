@@ -11,7 +11,6 @@ namespace ElancoUI.Tests
 {
     public class OfferHelperTests
     {
-        [Fact]
         [Theory]
         [MemberData(nameof(GenerateContent))]
         public void FilterOffers_ShouldReturnFilteredListWithOffers(List<string> content)
