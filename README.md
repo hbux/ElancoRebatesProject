@@ -202,6 +202,12 @@ Below is json code which is not included in the Elanco project files as this con
 
   // Model ID is the custom trained model for retrieving specific details from an uploaded image.
   "ModelId": "your-custom-trained-model-id"
+  
+  // Blob Storage Key is the access key for the storage account, not an individual container
+  "BlobStorageKey": "your-storage-account-access-key",
+
+  // Blob Storage Name is the name of the storage account, not an individual container
+  "BlobStorageAccountName": "your-storage-account-name"
 }
 ````
 
@@ -212,12 +218,11 @@ Below is json code which is not included in the Elanco project files as this con
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "StorageConnection": "your-storage-account-connection-string",
+    "StorageConnection": "your-storage-connection",
     "StorageAccountName": "your-storage-account-name",
-    "ComputerVisionKey": "your-computer-vision-key",
-    "ComputerVisionEndPoint": "your-computer-vision-endpoint",
-    "FormRecognizerApiKey": "your-form-recognizer-api-key",
-    "FormRecognizerEndpoint": "your-form-recognizer-endpoint"
+    "FormRecognizerApiKey": "your-fr-api-key",
+    "FormRecognizerEndpoint": "your-fr-endpoint",
+    "FormRecognizerModelId": "your-fr-custom-trained-model-id"
   }
 }
 ````
