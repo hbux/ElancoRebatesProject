@@ -17,12 +17,12 @@ namespace ElancoLibrary.Services
             _serviceClient = serviceClient;
         }
 
-        public async Task UploadInvoice(string filePath)
+        public async Task UploadInvoice(string filePath, string fileName)
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
                 BlobContainerClient containerClient = _serviceClient.GetBlobContainerClient("erp-invoice-container");
-                BlobClient client = containerClient.GetBlobClient(filePath);
+                BlobClient client = containerClient.GetBlobClient(fileName);
 
                 await client.UploadAsync(stream);
             }
