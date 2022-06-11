@@ -12,6 +12,7 @@
 @inject NavigationManager Nav
 @inject IWebHostEnvironment Env
 @inject IApiService Api
+@inject IBlobService Blob
 @inject IFormHelper FormHelper
 
 @if (isAnalysingUpload == true)
@@ -367,6 +368,9 @@
             };
 
             await StreamInvoice(e.File);
+
+            // Here to see if it works and uploads correctly
+            await Blob.UploadInvoice(localFilePath);
 
             var fields = await Api.AnalyseInvoice(localFilePath);
             FormHelper.FormatFields(form, fields);

@@ -1,5 +1,7 @@
 using Azure;
 using Azure.AI.FormRecognizer;
+using Azure.Storage;
+using Azure.Storage.Blobs;
 using ElancoLibrary.Data;
 using ElancoLibrary.DataAccess;
 using ElancoLibrary.Services;
@@ -32,8 +34,14 @@ builder.Services.AddSingleton(new FormRecognizerClient(
     new Uri(builder.Configuration["Endpoint"]),
     new AzureKeyCredential(builder.Configuration["ApiKey"])));
 
+// Azure Blob Storage
+builder.Services.AddSingleton(new BlobServiceClient(
+    new Uri("https://" + builder.Configuration["BlobStorageAccountName"] + ".blob.core.windows.net"),
+    new StorageSharedKeyCredential(builder.Configuration["BlobStorageAccountName"], builder.Configuration["BlobStorageKey"])));
+
 builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<IApiService, ApiService>();
+builder.Services.AddScoped<IBlobService, BlobService>();
 builder.Services.AddScoped<IOfferData, OfferData>();
 builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IRebateData, RebateData>();
