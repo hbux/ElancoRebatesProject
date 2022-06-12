@@ -35,12 +35,13 @@ namespace ElancoUI.Tests
             Assert.False(string.IsNullOrEmpty(form.ClinicZipCode));
         }
 
-        [Fact]
-        public void FormatFields_FormAddressShouldParseCorrectly()
+        [Theory]
+        [InlineData("824 Fairmont Parkway Pasedena, TX 77504", "824 Fairmont Parkway", "Pasedena", "Texas", "77504")]
+        [InlineData("1124 Myrte Rd. P.O Box E Walnutport, PA 18088", "1124 Myrte Rd. P.O Box E", "Walnutport", "Pennsylvania", "18088")]
+        [InlineData("4006 Chippewa Manistee, MI 49660", "4006 Chippewa", "Manistee", "Michigan", "49660")]
+        public void FormatFields_FormAddressShouldParseCorrectly(string address, string expectedAddressLine1, 
+            string expectedCity, string expectedState, string expectedZipCode)
         {
-            // Address to test
-            string address = "824 Fairmont Parkway Pasedena, TX 77504";
-
             // Initialising the required classes
             IFormHelper formHelper = new FormHelper();
             FormModel form = new FormModel();
@@ -53,14 +54,9 @@ namespace ElancoUI.Tests
             // Running the method to parse the string address into AddressLine1, City, State and ZipCode
             formHelper.FormatFields(form, fields);
 
-            // Expected results
-            string expectedAddress = "824 Fairmont Parkway";
-            string expectedCity = "Pasedena";
-            string expectedState = "Texas";
-            string expectedZipCode = "77504";
-
+            // Expected results -> see test parameters
             // Actual results
-            Assert.Equal(expectedAddress, form.ClinicAddress);
+            Assert.Equal(expectedAddressLine1, form.ClinicAddress);
             Assert.Equal(expectedCity, form.ClinicCity);
             Assert.Equal(expectedState, form.ClinicState);
             Assert.Equal(expectedZipCode, form.ClinicZipCode);
