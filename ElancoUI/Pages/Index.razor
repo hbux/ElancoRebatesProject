@@ -195,6 +195,7 @@
                         <div class="form-field">
                             <label for="clinic-name">Pet Name <span>*</span></label>
                             <InputText id="clinic-name" type="text" @bind-Value="form.PetName" />
+                            <ValidationMessage For="() => form.PetName" />
                         </div>
                     }
                     else
@@ -249,6 +250,10 @@
                         <div class="form-other-errors">
                             <ValidationMessage For="() => form.UploadedInvoiceFileName" />
                             <ValidationMessage For="() => form.SelectedRebateId" />
+                            @if (formInteraction.Pets.Count > 0)
+                            {
+                                <ValidationMessage For="() => form.PetName" />
+                            }
                         </div>
                         <div class="form-submit-btn-container">
                             <button type="submit">Submit</button>
