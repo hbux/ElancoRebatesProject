@@ -124,6 +124,7 @@ An account can have multiple addresses and multiple pets.
 - [ ] Add SendGrid API for emails
 - [ ] Add validation for account, pet and address
 - [ ] Add sticky navigation menu for the account page
+- [ ] Add button to enter pet name instead of choosing pet from authenticated user's account
 
 **Optimisation**
 - [ ] Use razor components in identity
