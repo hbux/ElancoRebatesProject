@@ -211,7 +211,7 @@ Below is json code which is not included in the Elanco project files as this con
 }
 ````
 
-**local.appsettings.json:** This json file should be included in the root of your ElancoLibrary.Functions project.
+**local.settings.json:** This json file should be included in the root of your ElancoLibrary.Functions project.
 ````
 {
   "IsEncrypted": false,
