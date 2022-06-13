@@ -125,6 +125,7 @@ An account can have multiple addresses and multiple pets.
 - [ ] Add validation for account, pet and address
 - [ ] Add sticky navigation menu for the account page
 - [ ] Add button to enter pet name instead of choosing pet from authenticated user's account
+- [ ] Add search functionality to the rebate selection page
 
 **Optimisation**
 - [ ] Use razor components in identity
