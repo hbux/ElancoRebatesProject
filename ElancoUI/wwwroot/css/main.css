@@ -115,6 +115,10 @@ body {
     text-decoration: none;
 }
 
+.header-logo img {
+    vertical-align: middle;
+}
+
 .header-cta-container {
     display: flex;
     gap: 10px;
@@ -130,6 +134,7 @@ body {
     cursor: pointer;
     color: var(--seconary-white);
     text-decoration: none;
+    font-weight: bold;
 }
 
 .header-cta a {
@@ -1043,6 +1048,11 @@ table td {
 
     .header-container, .rebate-container, .confirmation-container {
         margin: 0 auto;
+    }
+
+    .header-cta:first-child {
+        color: var(--primary-dark-blue);
+        background-color: var(--seconary-white);
     }
 
     .header-cta:last-child {
