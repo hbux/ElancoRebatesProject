@@ -1050,7 +1050,7 @@ table td {
         margin: 0 auto;
     }
 
-    .header-cta:first-child {
+    .header-cta-container > .header-cta:first-child {
         color: var(--primary-dark-blue);
         background-color: var(--seconary-white);
     }
