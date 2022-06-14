@@ -111,7 +111,7 @@ An account can have multiple addresses and multiple pets.
 - [x] Use local storage to save form data
 - [x] Add functionality to analyse product image and match with a rebate
 - [ ] Add logging
-- [ ] Add unit testing and mocking
+- [x] Add unit testing and mocking
 - [ ] Add download rebate as PDF functionality
 - [ ] Add My Rebates section to the user account page (selecting a rebate displays submission details)
 
@@ -131,7 +131,7 @@ An account can have multiple addresses and multiple pets.
 - [ ] Use razor components in identity
 - [ ] Move sections into components
 - [ ] Switch over to using Azure blobs for account pets and invoices
-- [ ] Test analyzing an invoice using Azure Blob Service & Azure Functions
+- [x] Test analyzing an invoice using Azure Blob Service & Azure Functions
 
 **Publishing**
 - [ ] Migrate from SQLServer to Azure
