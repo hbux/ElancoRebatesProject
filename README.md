@@ -126,6 +126,8 @@ An account can have multiple addresses and multiple pets.
 - [ ] Add sticky navigation menu for the account page
 - [ ] Add button to enter pet name instead of choosing pet from authenticated user's account
 - [ ] Add search functionality to the rebate selection page
+- [ ] Add more rebate offers Click [here](https://yourpetandyou.elanco.com/elanco-rebates) to see the Elanco offers
+- [ ] Add 'load more' button on rebates page
 
 **Optimisation**
 - [ ] Use razor components in identity
