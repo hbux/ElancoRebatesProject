@@ -1031,6 +1031,37 @@ table td {
     font-size: 14px;
 }
 
+.rebate-container-search {
+    border: 2px solid var(--info-card-text);
+    background-color: var(--tetiary-white);
+    font-size: 18px;
+    transition: 0.2s;
+    padding: 5px 20px;
+    font-family: sans-serif;
+}
+
+.rebate-container-search:focus {
+    border: 2px solid var(--primary-dark-blue);
+    background-color: var(--info-card);
+}
+
+.rebate-container-additional-help {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    color: var(--info-card-text);
+}
+
+.rebate-container-additional-help hr {
+    background-color: var(--info-card);
+    border: none;
+    height: 2px;
+    width: 100%;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
