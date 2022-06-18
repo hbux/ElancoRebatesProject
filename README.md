@@ -1,6 +1,6 @@
 ## Elanco Rebates - Table of contents
 
-Looking for [Source code examples](#source-code-examples)? No problem!
+Looking for [source code examples](#source-code-examples)? No problem!
 
 1. [Introduction](#introduction)
 2. [Task](#task)
