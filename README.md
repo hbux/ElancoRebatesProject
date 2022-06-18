@@ -1,4 +1,7 @@
 ## Elanco Rebates - Table of contents
+
+Looking for [Source code examples](#source-code-examples)? No problem!
+
 1. [Introduction](#introduction)
 2. [Task](#task)
 3. [System design and flow](#system-design-and-flow)
@@ -12,7 +15,6 @@
 5. [Progress tracking](#progress)
 6. [Tools and frameworks used](#tools-and-frameworks)
 7. [Resources and documentation links](#resources)
-8. [Source code examples](#source-code-examples)
 
 Click [here](#required-for-locally-running) to view the code **required** to locally run this project.
 
