@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace ElancoLibrary.Services
     public class BlobService : IBlobService
     {
         private BlobServiceClient _serviceClient;
+        private ILogger<BlobService> _logger;
 
-        public BlobService(BlobServiceClient serviceClient)
+        public BlobService(BlobServiceClient serviceClient, ILogger<BlobService> logger)
         {
             _serviceClient = serviceClient;
+            _logger = logger;
         }
 
         public async Task UploadInvoice(string filePath, string fileName)
@@ -25,6 +28,8 @@ namespace ElancoLibrary.Services
                 BlobClient client = containerClient.GetBlobClient(fileName);
 
                 await client.UploadAsync(stream);
+
+                _logger.LogInformation("Image uploaded to blob storage at {Time}", DateTime.UtcNow);
             }
         }
     }

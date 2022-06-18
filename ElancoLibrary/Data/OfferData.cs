@@ -1,5 +1,6 @@
 ﻿using ElancoLibrary.DataAccess;
 using ElancoLibrary.Models.Offers;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace ElancoLibrary.Data
 {
     public class OfferData : IOfferData
     {
-        private ISqlDataAccess dataAccess;
+        private ISqlDataAccess _dataAccess;
+        private ILogger<OfferData> _logger;
 
-        public OfferData(ISqlDataAccess dataAccess)
+        public OfferData(ISqlDataAccess dataAccess, ILogger<OfferData> logger)
         {
-            this.dataAccess = dataAccess;
+            _dataAccess = dataAccess;
+            _logger = logger;
         }
 
         /// <summary>
@@ -23,10 +26,11 @@ namespace ElancoLibrary.Data
         /// <returns>A complete list of all offers.</returns>
         public async Task<List<OfferModel>> GetOffers()
         {
-            var offers = await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetAll", new { }, "ElancoData");
+            var offers = await _dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetAll", new { }, "ElancoData");
 
             if (offers == null)
             {
+                _logger.LogWarning("Failed to retrieve all offers from database at {Time}", DateTime.UtcNow);
                 throw new NullReferenceException("Failed to load available offers.");
             }
 
@@ -37,21 +41,25 @@ namespace ElancoLibrary.Data
                     offerId = offer.Id
                 };
 
-                var offerDetails = await dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
-                var offerProducts = await dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+                var offerDetails = await _dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
+                var offerProducts = await _dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
 
                 if (offerDetails == null)
                 {
+                    _logger.LogWarning("Failed to retrieve offer details of ID: {Id} from database at {Time}", offer.Id ,DateTime.UtcNow);
                     throw new NullReferenceException($"Failed to load offer details by ID: { offer.Id }.");
                 }
                 if (offerProducts == null)
                 {
+                    _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                     throw new NullReferenceException($"Failed to load offer products by ID: { offer.Id }.");
                 }
 
                 offer.Details = offerDetails;
                 offer.Products = offerProducts;
             }
+
+            _logger.LogInformation("Retrieved all offers from database at {Time}", DateTime.UtcNow);
 
             return offers;
         }
@@ -63,24 +71,27 @@ namespace ElancoLibrary.Data
                 OfferId = offerId
             };
 
-            var rawOffer = await dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetById", p, "ElancoData");
+            var rawOffer = await _dataAccess.LoadData<OfferModel, dynamic>("dbo.spOffer_GetById", p, "ElancoData");
 
             if (rawOffer == null)
             {
+                _logger.LogWarning("Failed to retrieve offer by ID: {Id} from database at {Time}", offerId, DateTime.UtcNow);
                 throw new NullReferenceException($"Failed to load offer by ID: { offerId }.");
             }
 
             OfferModel offer = rawOffer.FirstOrDefault();
 
-            offer.Details = await dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
-            offer.Products = await dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+            offer.Details = await _dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
+            offer.Products = await _dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
 
             if (offer.Details == null)
             {
+                _logger.LogWarning("Failed to retrieve offer details of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                 throw new NullReferenceException($"Failed to load offer details by ID: { offerId }.");
             }
             if (offer.Products == null)
             {
+                _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                 throw new NullReferenceException($"Failed to load offer products by ID: { offerId }.");
             }
 

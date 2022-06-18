@@ -1,6 +1,7 @@
 ﻿using Azure.AI.FormRecognizer;
 using Azure.AI.FormRecognizer.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ namespace ElancoLibrary.Services
     {
         private IConfiguration _config;
         private FormRecognizerClient _client;
+        private ILogger<ApiService> _logger;
 
-        public ApiService(IConfiguration config, FormRecognizerClient client)
+        public ApiService(IConfiguration config, FormRecognizerClient client, ILogger<ApiService> logger)
         {
             _config = config;
             _client = client;
+            _logger = logger;
         }
 
         /// <summary>
@@ -31,12 +34,16 @@ namespace ElancoLibrary.Services
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
+                _logger.LogInformation("Analyse invoice started at {Time}", DateTime.UtcNow);
+
                 RecognizedFormCollection invoices = await _client.StartRecognizeCustomForms(
                     _config["ModelId"],
                     stream)
                     .WaitForCompletionAsync();
 
                 RecognizedForm invoice = invoices.Single();
+
+                _logger.LogInformation("Analyse invoice complete at {Time}", DateTime.UtcNow);
 
                 return ParseInvoice(invoice);
             }
@@ -46,10 +53,14 @@ namespace ElancoLibrary.Services
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
+                _logger.LogInformation("Analyse product image started at {Time}", DateTime.UtcNow);
+
                 var rawUpload = await _client.StartRecognizeContent(stream)
                     .WaitForCompletionAsync();
 
                 FormPage uploadedImage = rawUpload.Value.FirstOrDefault();
+
+                _logger.LogInformation("Analyse product image complete at {Time}", DateTime.UtcNow);
 
                 return ParseProductImageContent(uploadedImage);
             }
