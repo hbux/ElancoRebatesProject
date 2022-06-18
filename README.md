@@ -183,6 +183,13 @@ Below are resources and documentation links to aid with the development.
   <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/api_code.png" width="50%" height="50%"/>
 </p>
 
+---
+
+**Form Helper for formatting data into form input fields.**
+<p float="left">
+  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/formHelper_code.png" width="50%" height="50%"/>
+</p>
+
 ## Required for Locally Running
 Below is json code which is not included in the Elanco project files as this contains API key's and endpoints for API services. 
 
