@@ -152,7 +152,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await ViewAllOffers();
+        offers = await OfferData.GetOffers();
+
+        Logger.LogInformation("Navigated to select a rebate at {Time}", DateTime.UtcNow);
     }
 
     private async Task UploadFile(InputFileChangeEventArgs e)
@@ -161,7 +163,6 @@
 
         try
         {
-            Logger.LogInformation("Uploading product image");
             string trustedFileName = Path.GetRandomFileName();
             string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
 
@@ -172,24 +173,25 @@
 
             var analysedContent = await ApiService.AnalyseProductImage(localFilePath);
 
-            Logger.LogDebug("Filtering offers using analysed content");
             offers = OfferHelper.FilterOffers(analysedContent, offers);
             hasFilteredOffers = true;
 
         }
         catch (Exception ex)
         {
-            Logger.LogWarning(ex, "An error occured uploading file, analysing product image or filtering offers");
             errorMessage = ex.Message;
         }
 
         isAnalysingUpload = false;
+
+        Logger.LogInformation("Product image uploaded at {Time}", DateTime.UtcNow);
     }
 
     private async Task SelectRebate(OfferModel rebate)
     {
         await ProtectedLocalStore.SetAsync("er-form-reb", rebate);
-        Logger.LogDebug("Saved rebate to local storage");
+
+        Logger.LogInformation("Rebate ID: {Id} selected at {Time}", rebate.Id, DateTime.UtcNow);
 
         Nav.NavigateTo("/");
     }
@@ -198,5 +200,7 @@
     {
         offers = await OfferData.GetOffers();
         hasFilteredOffers = false;
+
+        Logger.LogInformation("Retrieving all offers at {Time}", DateTime.UtcNow);
     }
 }

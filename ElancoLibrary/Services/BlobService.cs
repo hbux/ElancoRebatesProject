@@ -28,9 +28,9 @@ namespace ElancoLibrary.Services
                 BlobClient client = containerClient.GetBlobClient(fileName);
 
                 await client.UploadAsync(stream);
-
-                _logger.LogInformation("Image uploaded to blob storage at {Time}", DateTime.UtcNow);
             }
+
+            _logger.LogDebug("Image uploaded to blob storage at {Time}", DateTime.UtcNow);
         }
     }
 }

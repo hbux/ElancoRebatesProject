@@ -13,6 +13,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IWebHostEnvironment _env;
+        private ILogger<AddPetModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]
@@ -22,12 +23,13 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
         public IFormFile PetUpload { get; set; }
 
         public AddPetModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IWebHostEnvironment env, IAccountData accountData)
+            IWebHostEnvironment env, IAccountData accountData, ILogger<AddPetModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _env = env;
             _accountData = accountData;
+            _logger = logger;
         }
 
         public void OnGet()
@@ -56,6 +58,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             ElancoUI.Models.DbContextModels.Account account = _accountData.GetAccountDetails(user);
             account.Pets.Add(NewPet);
             _accountData.SaveAccountDetails();
+
+            _logger.LogInformation("User ID: {Id} created new pet at {Time}", user.Id, DateTime.UtcNow);
 
             await _signInManager.RefreshSignInAsync(user);
             return RedirectToPage("Index");

@@ -10,16 +10,19 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     public class DeletePetModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private ILogger<DeletePetModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]
         public Pet Pet { get; set; }
         public string ErrorMessage { get; set; }
 
-        public DeletePetModel(UserManager<IdentityUser> userManager, IAccountData accountData)
+        public DeletePetModel(UserManager<IdentityUser> userManager, IAccountData accountData, 
+            ILogger<DeletePetModel> logger)
         {
             _userManager = userManager;
             _accountData = accountData;
+            _logger = logger;
         }
 
         public void OnGet(int? id, bool? saveChangesError = false)
@@ -46,6 +49,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             {
                 _accountData.RemovePet(pet);
                 _accountData.SaveAccountDetails();
+
+                _logger.LogInformation("User ID: {Id} deleted pet at {Time}", user.Id, DateTime.UtcNow);
 
                 return RedirectToPage("Index");
             }

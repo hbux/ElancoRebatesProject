@@ -10,17 +10,19 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private ILogger<AddAddressModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]
         public Address NewAddress { get; set; }
 
         public AddAddressModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IAccountData accountData)
+            IAccountData accountData, ILogger<AddAddressModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _accountData = accountData;
+            _logger = logger;
         }
 
         public void OnGet()
@@ -45,6 +47,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
 
             account.Addresses.Add(NewAddress);
             _accountData.SaveAccountDetails();
+
+            _logger.LogInformation("User ID: {Id} created new address at {Time}", user.Id, DateTime.UtcNow);
 
             await _signInManager.RefreshSignInAsync(user);
             return RedirectToPage("Index");

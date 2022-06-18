@@ -8,10 +8,12 @@ namespace ElancoUI.Helpers
     /// </summary>
     public class FormHelper : IFormHelper
     {
+        private ILogger<FormHelper> _logger;
         private Dictionary<string, string> states;
 
-        public FormHelper()
+        public FormHelper(ILogger<FormHelper> logger)
         {
+            _logger = logger;
             states = GenerateAllStates();
         }
 
@@ -26,6 +28,8 @@ namespace ElancoUI.Helpers
             {
                 form.ClinicName = fields["Name"];
                 FormatAddress(form, fields["Address"]);
+
+                _logger.LogDebug("Fields mapped into form model instance at {Time}", DateTime.UtcNow);
             }
             catch (Exception)
             {
@@ -98,6 +102,8 @@ namespace ElancoUI.Helpers
             form.CustomerZipCode = defaultAddress.ZipCode;
 
             formInteraction.Pets = account.Pets;
+
+            _logger.LogDebug("Account details mapped into form model instance for user ID: {Id} at {Time}", account.User.Id, DateTime.UtcNow);
         }
 
         /// <summary>
@@ -156,6 +162,8 @@ namespace ElancoUI.Helpers
                 ClinicZipCode = form.ClinicZipCode,
                 AmountPurchased = form.AmountPurchased
             };
+
+            _logger.LogDebug("UI form model instance mapped into database form model for user ID: {Id} at {Time}", userId, DateTime.UtcNow);
 
             return dbForm;
         }

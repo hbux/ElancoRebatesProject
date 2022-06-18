@@ -10,16 +10,19 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     public class DeleteAddressModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private ILogger<DeleteAddressModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]
         public Address Address { get; set; }
         public string ErrorMessage { get; set; }
 
-        public DeleteAddressModel(UserManager<IdentityUser> userManager, IAccountData accountData)
+        public DeleteAddressModel(UserManager<IdentityUser> userManager, IAccountData accountData, 
+            ILogger<DeleteAddressModel> logger)
         {
             _userManager = userManager;
             _accountData = accountData;
+            _logger = logger;
         }
 
         public void OnGet(int? id, bool? saveChangesError = false)
@@ -46,6 +49,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             {
                 _accountData.RemoveAddress(address);
                 _accountData.SaveAccountDetails();
+
+                _logger.LogInformation("User ID: {Id} deleted address at {Time}", user.Id, DateTime.UtcNow);
 
                 return RedirectToPage("Index");
             }

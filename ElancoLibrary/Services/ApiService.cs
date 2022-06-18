@@ -34,8 +34,6 @@ namespace ElancoLibrary.Services
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
-                _logger.LogInformation("Analyse invoice started at {Time}", DateTime.UtcNow);
-
                 RecognizedFormCollection invoices = await _client.StartRecognizeCustomForms(
                     _config["ModelId"],
                     stream)
@@ -43,7 +41,7 @@ namespace ElancoLibrary.Services
 
                 RecognizedForm invoice = invoices.Single();
 
-                _logger.LogInformation("Analyse invoice complete at {Time}", DateTime.UtcNow);
+                _logger.LogDebug("Analysed invoice at {Time}", DateTime.UtcNow);
 
                 return ParseInvoice(invoice);
             }
@@ -53,14 +51,12 @@ namespace ElancoLibrary.Services
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
-                _logger.LogInformation("Analyse product image started at {Time}", DateTime.UtcNow);
-
                 var rawUpload = await _client.StartRecognizeContent(stream)
                     .WaitForCompletionAsync();
 
                 FormPage uploadedImage = rawUpload.Value.FirstOrDefault();
 
-                _logger.LogInformation("Analyse product image complete at {Time}", DateTime.UtcNow);
+                _logger.LogDebug("Analysed product image at {Time}", DateTime.UtcNow);
 
                 return ParseProductImageContent(uploadedImage);
             }

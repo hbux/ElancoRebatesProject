@@ -46,7 +46,7 @@ namespace ElancoLibrary.Data
 
                 if (offerDetails == null)
                 {
-                    _logger.LogWarning("Failed to retrieve offer details of ID: {Id} from database at {Time}", offer.Id ,DateTime.UtcNow);
+                    _logger.LogWarning("Failed to retrieve offer details of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                     throw new NullReferenceException($"Failed to load offer details by ID: { offer.Id }.");
                 }
                 if (offerProducts == null)
@@ -59,7 +59,7 @@ namespace ElancoLibrary.Data
                 offer.Products = offerProducts;
             }
 
-            _logger.LogInformation("Retrieved all offers from database at {Time}", DateTime.UtcNow);
+            _logger.LogDebug("Retrieved all offers from database at {Time}", DateTime.UtcNow);
 
             return offers;
         }
@@ -94,6 +94,8 @@ namespace ElancoLibrary.Data
                 _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                 throw new NullReferenceException($"Failed to load offer products by ID: { offerId }.");
             }
+
+            _logger.LogDebug("Retrieved offer by ID: {Id} from database at {Time}", offerId ,DateTime.UtcNow);
 
             return offer;
         }

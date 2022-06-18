@@ -24,7 +24,7 @@ namespace ElancoLibrary.Data
         {
             await _dataAccess.SaveData<FormModel>("dbo.spRebate_Insert", form, "ElancoData");
 
-            _logger.LogInformation("Rebate with ID: {Id} inserted into database at {Time}", form.Id ,DateTime.UtcNow);
+            _logger.LogDebug("Rebate with ID: {Id} inserted into database at {Time}", form.Id, DateTime.UtcNow);
         }
 
         public async Task<FormModel> GetSubmissionDetails(string submissionId)
@@ -42,8 +42,6 @@ namespace ElancoLibrary.Data
                 throw new NullReferenceException($"Failed to load rebate submission by ID: { submissionId }");
             }
 
-            _logger.LogInformation("Retrieved submission details of ID: {Id} at {Time}", submissionId, DateTime.UtcNow);
-
             return rebateSubmission.FirstOrDefault();
         }
 
@@ -56,7 +54,7 @@ namespace ElancoLibrary.Data
 
             await _dataAccess.SaveData<dynamic>("dbo.spRebate_UpdateById", p, "ElancoData");
 
-            _logger.LogInformation("Updated database for user access of submission ID: {Id} at {Time}", submissionId, DateTime.UtcNow);
+            _logger.LogDebug("Updated database for user access of submission ID: {Id} at {Time}", submissionId, DateTime.UtcNow);
         }
     }
 }

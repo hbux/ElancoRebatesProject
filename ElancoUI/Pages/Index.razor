@@ -357,8 +357,6 @@
         form.SelectedRebateId = null;
 
         await ProtectedLocalStore.DeleteAsync("er-form-reb");
-
-        Logger.LogDebug("Removed selected rebate");
     }
 
     private async Task SetSelectedPet(Pet pet)
@@ -375,7 +373,6 @@
 
         try
         {
-            Logger.LogInformation("Uploading invoice");
             string trustedFileName = Path.GetRandomFileName();
             string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
 
@@ -394,11 +391,12 @@
         }
         catch (Exception ex)
         {
-            Logger.LogWarning(ex, "An error occured uploading file, uploading to blob storage, analying invoice or formatting fields");
             errorMessage = ex.Message;
         }
 
         isAnalysingUpload = false;
+
+        Logger.LogInformation("Invoice uploaded at {Time}", DateTime.UtcNow);
     }
 
     private async Task StreamInvoice(IBrowserFile fileUploaded)
@@ -415,13 +413,13 @@
         await JSRuntime.InvokeVoidAsync("toggleInvoiceModal");
 
         form.UploadedInvoiceFileName = null;
+
+        Logger.LogInformation("Invoice removed at {Time}", DateTime.UtcNow);
     }
 
     private async Task<bool> HandleSubmit(EditContext editContext)
     {
         var isValid = editContext.Validate();
-
-        Logger.LogInformation("Attempting to submit rebate");
 
         if (isValid)
         {
@@ -431,11 +429,15 @@
 
             if (user.Identity.IsAuthenticated)
             {
+                Logger.LogInformation("Valid and authorized attempt at submitting form at {Time}", DateTime.UtcNow);
+
                 Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
                 userId = account.User.Id;
             }
             else
             {
+                Logger.LogInformation("Valid and unauthorized attempt at submitting form at {Time}", DateTime.UtcNow);
+
                 var localRedirect = "/" + Nav.ToBaseRelativePath(Nav.Uri);
                 Nav.NavigateTo($"/Identity/Account/Login?returnUrl={Uri.EscapeDataString(localRedirect)}", true);
 
@@ -458,7 +460,6 @@
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "An error occured attempting to submit rebate");
                 errorMessage = ex.Message;
 
                 return false;
@@ -467,7 +468,9 @@
         else 
         {
             StateHasChanged();
-            
+
+            Logger.LogInformation("Invalid attempt at submitting form at {Time}", DateTime.UtcNow);
+
             return false;
         }
     }

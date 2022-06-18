@@ -149,18 +149,16 @@
     {
         try
         {
-            Logger.LogDebug("Fetching submission details");
             form = await RebateData.GetSubmissionDetails(SubmissionId);
 
-            Logger.LogDebug("Fetching submission offer");
             rebateOffer = await OfferData.GetOfferById(form.OfferId);
 
-            Logger.LogDebug("Updating user accesss");
             await RebateData.UpdateUserAccess(form.Id);
+
+            Logger.LogInformation("Displaying rebate submission details for User ID: {Id} at {Time}", form.UserId, DateTime.UtcNow);
         }
         catch (Exception ex)
         {
-            Logger.LogWarning(ex, "Exception caught fetching submission details, retrieving submission offer or updating user access");
             errorMessage = ex.Message;
         }
     }

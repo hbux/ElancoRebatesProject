@@ -10,17 +10,19 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private ILogger<EditAddressModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]
         public Address Address { get; set; }
 
         public EditAddressModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IAccountData accountData)
+            IAccountData accountData, ILogger<EditAddressModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _accountData = accountData;
+            _logger = logger;
         }
 
         public void OnGet(int? id)
@@ -48,6 +50,8 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             {
                 _accountData.SaveAccountDetails();
             }
+
+            _logger.LogInformation("User ID: {Id} edited address at {Time}", user.Id, DateTime.UtcNow);
 
             await _signInManager.RefreshSignInAsync(user);
             return RedirectToPage("Index");

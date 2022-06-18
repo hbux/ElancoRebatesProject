@@ -28,7 +28,7 @@ namespace ElancoUI.Data
                 throw new Exception("Could not find account.");
             }
 
-            _logger.LogInformation("Retrieved account details of user ID: {Id} at {Time}", user.Id, DateTime.UtcNow);
+            _logger.LogDebug("Retrieved account details of user ID: {Id} at {Time}", user.Id, DateTime.UtcNow);
 
             return account;
         }
@@ -47,7 +47,7 @@ namespace ElancoUI.Data
                 throw new Exception("Could not find account.");
             }
 
-            _logger.LogInformation("Retrieved account details of user by email at {Time}", DateTime.UtcNow);
+            _logger.LogDebug("Retrieved account details of user by email at {Time}", DateTime.UtcNow);
 
             return account;
         }
@@ -58,11 +58,11 @@ namespace ElancoUI.Data
 
             if (pet == null)
             {
-                _logger.LogWarning("Failed to retrieve pet details by pet ID: {Id} at {Time}", id ,DateTime.UtcNow);
+                _logger.LogWarning("Failed to retrieve pet details by pet ID: {Id} at {Time}", id, DateTime.UtcNow);
                 throw new Exception($"Could not find pet with ID: { id }.");
             }
 
-            _logger.LogInformation("Retrieved pet details by pet ID: {Id} at {Time}", id ,DateTime.UtcNow);
+            _logger.LogDebug("Retrieved pet details by pet ID: {Id} at {Time}", id, DateTime.UtcNow);
 
             return pet;
         }
@@ -77,7 +77,7 @@ namespace ElancoUI.Data
                 throw new Exception($"Could not find pet with ID: { id }.");
             }
 
-            _logger.LogInformation("Retrieved pet details (no tracking) by pet ID: {Id} at {Time}", id, DateTime.UtcNow);
+            _logger.LogDebug("Retrieved pet details (no tracking) by pet ID: {Id} at {Time}", id, DateTime.UtcNow);
 
             return pet;
         }
@@ -92,7 +92,7 @@ namespace ElancoUI.Data
                 throw new Exception($"Could not find address with ID: { id }.");
             }
 
-            _logger.LogInformation("Retrieved address details by address ID: {Id} at {Time}", id, DateTime.UtcNow);
+            _logger.LogDebug("Retrieved address details by address ID: {Id} at {Time}", id, DateTime.UtcNow);
 
             return address;
         }
@@ -107,7 +107,7 @@ namespace ElancoUI.Data
                 throw new Exception($"Could not find address with ID: { id }.");
             }
 
-            _logger.LogInformation("Retrieved address details (no tracking) by address ID: {Id} at {Time}", id, DateTime.UtcNow);
+            _logger.LogDebug("Retrieved address details (no tracking) by address ID: {Id} at {Time}", id, DateTime.UtcNow);
 
             return address;
         }
@@ -116,21 +116,21 @@ namespace ElancoUI.Data
         {
             _context.Pets.Remove(pet);
 
-            _logger.LogInformation("Removed pet from database by pet ID: {Id} at {Time}", pet.Id, DateTime.UtcNow);
+            _logger.LogDebug("Removed pet from database by pet ID: {Id} at {Time}", pet.Id, DateTime.UtcNow);
         }
 
         public void RemoveAddress(Address address)
         {
             _context.Addresses.Remove(address);
 
-            _logger.LogInformation("Removed address from database by address ID: {Id} at {Time}", address.Id, DateTime.UtcNow);
+            _logger.LogDebug("Removed address from database by address ID: {Id} at {Time}", address.Id, DateTime.UtcNow);
         }
 
         public void SaveAccountDetails()
         {
             _context.SaveChanges();
 
-            _logger.LogInformation("Account details saved at {Time}", DateTime.UtcNow);
+            _logger.LogDebug("Account details saved at {Time}", DateTime.UtcNow);
         }
     }
 }
