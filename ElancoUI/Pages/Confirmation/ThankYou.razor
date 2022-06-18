@@ -1,7 +1,13 @@
 ﻿@page "/Confirmation/ThankYou/{submissionId}"
 
+@using ElancoLibrary.Models
+
 @using ElancoUI.Components
 
+<!-- Microsoft -->
+@inject ILogger<ThankYou> Logger
+
+<!-- ElancoLibrary -->
 @inject IRebateData RebateData
 @inject IOfferData OfferData
 
@@ -132,9 +138,9 @@
 </section>
 
 @code {
-    private ElancoLibrary.Models.FormModel form;
-    private OfferModel rebateOffer;
     private string errorMessage;
+    private OfferModel rebateOffer;
+    private FormModel form;
 
     [Parameter]
     public string SubmissionId { get; set; }
@@ -143,13 +149,18 @@
     {
         try
         {
+            Logger.LogDebug("Fetching submission details");
             form = await RebateData.GetSubmissionDetails(SubmissionId);
+
+            Logger.LogDebug("Fetching submission offer");
             rebateOffer = await OfferData.GetOfferById(form.OfferId);
 
+            Logger.LogDebug("Updating user accesss");
             await RebateData.UpdateUserAccess(form.Id);
         }
         catch (Exception ex)
         {
+            Logger.LogWarning(ex, "Exception caught fetching submission details, retrieving submission offer or updating user access");
             errorMessage = ex.Message;
         }
     }

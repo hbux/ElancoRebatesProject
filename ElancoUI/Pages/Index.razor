@@ -1,18 +1,26 @@
 ﻿@page "/"
 
-@using ElancoUI.Models.DbContextModels
-@using ElancoUI.Data
-@using ElancoUI.Components
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
-@inject ProtectedLocalStorage ProtectedLocalStore
-@inject IAccountData AccountData
-@inject IRebateData RebateData
-@inject IJSRuntime JSRuntime
+@using ElancoUI.Models.DbContextModels
+@using ElancoUI.Data
+@using ElancoUI.Models
+@using ElancoUI.Components
+
+<!-- Microsoft -->
 @inject NavigationManager Nav
+@inject ProtectedLocalStorage ProtectedLocalStore
 @inject IWebHostEnvironment Env
+@inject IJSRuntime JSRuntime
+@inject ILogger<Index> Logger
+
+<!-- ElancoLibrary -->
 @inject IApiService Api
 @inject IBlobService Blob
+@inject IRebateData RebateData
+@inject IAccountData AccountData
+
+<!-- ElancoUI -->
 @inject IFormHelper FormHelper
 
 @if (isAnalysingUpload == true)
@@ -284,11 +292,12 @@
 </div>
 
 @code {
+    private string errorMessage;
+    private bool isAnalysingUpload;
+    private OfferModel selectedRebate;
+
     private FormModel form = new FormModel();
     private FormInteractionModel formInteraction = new FormInteractionModel();
-    private OfferModel selectedRebate;
-    private bool isAnalysingUpload;
-    private string errorMessage;
 
     [CascadingParameter]
     public Task<AuthenticationState> AuthenticationStateTask { get; set; }
@@ -348,6 +357,8 @@
         form.SelectedRebateId = null;
 
         await ProtectedLocalStore.DeleteAsync("er-form-reb");
+
+        Logger.LogDebug("Removed selected rebate");
     }
 
     private async Task SetSelectedPet(Pet pet)
@@ -364,6 +375,7 @@
 
         try
         {
+            Logger.LogInformation("Uploading invoice");
             string trustedFileName = Path.GetRandomFileName();
             string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
 
@@ -382,6 +394,7 @@
         }
         catch (Exception ex)
         {
+            Logger.LogWarning(ex, "An error occured uploading file, uploading to blob storage, analying invoice or formatting fields");
             errorMessage = ex.Message;
         }
 
@@ -407,6 +420,8 @@
     private async Task<bool> HandleSubmit(EditContext editContext)
     {
         var isValid = editContext.Validate();
+
+        Logger.LogInformation("Attempting to submit rebate");
 
         if (isValid)
         {
@@ -443,6 +458,7 @@
             }
             catch (Exception ex)
             {
+                Logger.LogWarning(ex, "An error occured attempting to submit rebate");
                 errorMessage = ex.Message;
 
                 return false;

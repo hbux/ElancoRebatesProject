@@ -1,13 +1,21 @@
 ﻿@page "/rebates"
 
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+
+@using ElancoUI.Models
 @using ElancoUI.Components
 
-@inject ProtectedLocalStorage ProtectedLocalStore
+<!-- Microsoft -->
 @inject NavigationManager Nav
-@inject IOfferData OfferData
-@inject IApiService ApiService
+@inject ProtectedLocalStorage ProtectedLocalStore
 @inject IWebHostEnvironment Env
+@inject ILogger<Rebates> Logger
+
+<!-- ElancoLibrary -->
+@inject IApiService ApiService
+@inject IOfferData OfferData
+
+<!-- ElancoUI -->
 @inject IOfferHelper OfferHelper
 
 @if (isAnalysingUpload == true)
@@ -135,11 +143,12 @@
 </section>
 
 @code {
-    private List<OfferModel> offers = new List<OfferModel>();
-    private FormInteractionModel formInteraction;
-    private bool isAnalysingUpload;
     private string errorMessage;
+    private bool isAnalysingUpload;
     private bool hasFilteredOffers;
+    private FormInteractionModel formInteraction;
+
+    private List<OfferModel> offers = new List<OfferModel>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -152,6 +161,7 @@
 
         try
         {
+            Logger.LogInformation("Uploading product image");
             string trustedFileName = Path.GetRandomFileName();
             string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
 
@@ -162,12 +172,14 @@
 
             var analysedContent = await ApiService.AnalyseProductImage(localFilePath);
 
+            Logger.LogDebug("Filtering offers using analysed content");
             offers = OfferHelper.FilterOffers(analysedContent, offers);
             hasFilteredOffers = true;
 
         }
         catch (Exception ex)
         {
+            Logger.LogWarning(ex, "An error occured uploading file, analysing product image or filtering offers");
             errorMessage = ex.Message;
         }
 
@@ -177,6 +189,7 @@
     private async Task SelectRebate(OfferModel rebate)
     {
         await ProtectedLocalStore.SetAsync("er-form-reb", rebate);
+        Logger.LogDebug("Saved rebate to local storage");
 
         Nav.NavigateTo("/");
     }

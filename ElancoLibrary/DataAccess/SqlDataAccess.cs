@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ElancoLibrary.Models.Offers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,10 +15,12 @@ namespace ElancoLibrary.DataAccess
     public class SqlDataAccess : ISqlDataAccess
     {
         private IConfiguration _config;
+        private ILogger<SqlDataAccess> _logger;
 
-        public SqlDataAccess(IConfiguration config)
+        public SqlDataAccess(IConfiguration config, ILogger<SqlDataAccess> logger)
         {
             _config = config;
+            _logger = logger;
         } 
 
         /// <summary>
@@ -44,10 +47,23 @@ namespace ElancoLibrary.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(GetConnectionString(connectionStringName)))
             {
-                var data = await connection.QueryAsync<T>(storedProcedure, parameters,
+                try
+                {
+                    var data = await connection.QueryAsync<T>(storedProcedure, parameters,
                     commandType: CommandType.StoredProcedure);
 
-                return data.ToList();
+                    return data.ToList();
+                }
+                catch (DataException ex)
+                {
+                    _logger.LogError(ex, "Could not establish connection with database");
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "An error occured while querying database");
+                    throw;
+                }
             }
         }
 
@@ -63,7 +79,20 @@ namespace ElancoLibrary.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(GetConnectionString(connectionStringName)))
             {
-                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                try
+                {
+                    await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                }
+                catch (DataException ex)
+                {
+                    _logger.LogError(ex, "Could not establish connection with database");
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "An error occured while executing to the database");
+                    throw;
+                }
             }
         }
     }
