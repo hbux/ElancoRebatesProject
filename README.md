@@ -110,7 +110,7 @@ An account can have multiple addresses and multiple pets.
 - [x] Create UI for rebate submitted
 - [x] Use local storage to save form data
 - [x] Add functionality to analyse product image and match with a rebate
-- [ ] Add logging
+- [x] Add logging
 - [x] Add unit testing and mocking
 - [ ] Add download rebate as PDF functionality
 - [ ] Add My Rebates section to the user account page (selecting a rebate displays submission details)
