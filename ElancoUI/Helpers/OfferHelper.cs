@@ -13,17 +13,20 @@ namespace ElancoUI.Helpers
 
         public List<OfferModel> FilterOffers(List<string> content, List<OfferModel> offers)
         {
-            List<OfferModel> filteredOffers = new List<OfferModel>();
+            HashSet<OfferModel> filteredOffers = new HashSet<OfferModel>();
 
-            foreach (OfferModel offer in offers)
+            foreach (string analysedText in content)
             {
-                foreach (ProductModel offerProduct in offer.Products)
+                foreach (OfferModel offer in offers)
                 {
-                    foreach (string text in content)
+                    foreach (ProductModel product in offer.Products)
                     {
-                        if (text == offerProduct.Name)
+                        foreach (TagModel tag in product.Tags)
                         {
-                            filteredOffers.Add(offer);
+                            if (analysedText.ToLower() == tag.Value.ToLower())
+                            {
+                                filteredOffers.Add(offer);
+                            }
                         }
                     }
                 }
@@ -38,7 +41,7 @@ namespace ElancoUI.Helpers
                 _logger.LogDebug("Matched {Count} offers with the analysed product image at {Time}", filteredOffers.Count, DateTime.UtcNow);
             }
 
-            return filteredOffers;
+            return filteredOffers.ToList();
         }
     }
 }

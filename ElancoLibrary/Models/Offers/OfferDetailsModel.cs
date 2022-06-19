@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElancoLibrary.Models.Offers
 {
-    public class OfferDetails
+    public class OfferDetailsModel
     {
         /// <summary>
         ///     The ID number of an offer's detail.

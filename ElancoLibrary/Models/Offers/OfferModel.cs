@@ -36,7 +36,7 @@ namespace ElancoLibrary.Models.Offers
         /// <summary>
         ///     A list of details regarding the offer. 
         /// </summary>
-        public List<OfferDetails> Details { get; set; } = new List<OfferDetails>();
+        public List<OfferDetailsModel> Details { get; set; } = new List<OfferDetailsModel>();
 
         /// <summary>
         ///     A string of extra information regarding the offer.

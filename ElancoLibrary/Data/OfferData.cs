@@ -41,7 +41,7 @@ namespace ElancoLibrary.Data
                     offerId = offer.Id
                 };
 
-                var offerDetails = await _dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
+                var offerDetails = await _dataAccess.LoadData<OfferDetailsModel, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
                 var offerProducts = await _dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
 
                 if (offerDetails == null)
@@ -53,6 +53,24 @@ namespace ElancoLibrary.Data
                 {
                     _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                     throw new NullReferenceException($"Failed to load offer products by ID: { offer.Id }.");
+                }
+
+                foreach (ProductModel product in offerProducts)
+                {
+                    var i = new
+                    {
+                        productId = product.Id
+                    };
+
+                    var associatedTags = await _dataAccess.LoadData<TagModel, dynamic>("dbo.spTag_GetById", i, "ElancoData");
+
+                    if (associatedTags == null)
+                    {
+                        _logger.LogWarning("Failed to retrieve product tags of product ID: {Id} from database at {Time}", product.Id, DateTime.UtcNow);
+                        associatedTags = new List<TagModel>();
+                    }
+
+                    product.Tags = associatedTags;
                 }
 
                 offer.Details = offerDetails;
@@ -81,7 +99,7 @@ namespace ElancoLibrary.Data
 
             OfferModel offer = rawOffer.FirstOrDefault();
 
-            offer.Details = await _dataAccess.LoadData<OfferDetails, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
+            offer.Details = await _dataAccess.LoadData<OfferDetailsModel, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
             offer.Products = await _dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
 
             if (offer.Details == null)
@@ -93,6 +111,24 @@ namespace ElancoLibrary.Data
             {
                 _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                 throw new NullReferenceException($"Failed to load offer products by ID: { offerId }.");
+            }
+
+            foreach (ProductModel product in offer.Products)
+            {
+                var i = new
+                {
+                    productId = product.Id
+                };
+
+                var associatedTags = await _dataAccess.LoadData<TagModel, dynamic>("dbo.spTag_GetById", i, "ElancoData");
+
+                if (associatedTags == null)
+                {
+                    _logger.LogWarning("Failed to retrieve product tags of product ID: {Id} from database at {Time}", product.Id, DateTime.UtcNow);
+                    associatedTags = new List<TagModel>();
+                }
+
+                product.Tags = associatedTags;
             }
 
             _logger.LogDebug("Retrieved offer by ID: {Id} from database at {Time}", offerId ,DateTime.UtcNow);

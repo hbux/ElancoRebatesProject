@@ -27,5 +27,10 @@ namespace ElancoLibrary.Models.Offers
         ///     The extension type of the image. E.g. .png, .jpg, .jpeg
         /// </summary>
         public string ImageType { get; set; }
+
+        /// <summary>
+        ///     A list of tags associated with the product to allow for easier filtering/searching.
+        /// </summary>
+        public List<TagModel> Tags { get; set; } = new List<TagModel>();
     }
 }
