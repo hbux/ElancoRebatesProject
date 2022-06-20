@@ -29,6 +29,14 @@
         </Icon>
     </Modal>
 }
+@if (offers.Count == 0 && string.IsNullOrEmpty(errorMessage) == true)
+{
+    <Modal Message="Loading offers...">
+        <Icon>
+            <div class="loader"></div>
+        </Icon>
+    </Modal>
+}
 @if (string.IsNullOrEmpty(errorMessage) == false)
 {
     <Modal Message="@errorMessage">
@@ -73,15 +81,6 @@
                 <p>Find a rebate below</p>
             </div>
             <div class="available-rebates-container">
-                @if (offers.Count == 0 && string.IsNullOrEmpty(errorMessage) == true)
-                {
-                    <Modal Message="Loading offers...">
-                        <Icon>
-                            <div class="loader"></div>
-                        </Icon>
-                    </Modal>
-                }
-
                 @foreach (OfferModel offer in offers)
                 {
                     <div class="card" id="rebate-selected">

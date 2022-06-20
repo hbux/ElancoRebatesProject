@@ -37,6 +37,14 @@ namespace ElancoLibrary.Helpers
             Dictionary<OfferModel, CriteriaModel> offerCriteriaAccuracy = new Dictionary<OfferModel, CriteriaModel>();
 
             _logger.LogDebug("AutoMatchOffer started at {Time}", DateTime.UtcNow);
+            _logger.LogDebug("Amount of Text detected from product image analysis: {Count}", analysedContent.Count);
+
+            // TODO?
+            // - Create a list of keywords to validate e.g. dogs, cats, product names, number (450) followed by mg or ml
+            // - Add pet type column into database table. OfferDetails? Product? New table?
+            //   Credelio is the name of the product type, but a product should be for dogs, amount of tablets/ml/mg, productTypeId 
+            // - Only 1 product name detected on image? Don't display any offers for two products
+            // - Look at the '3 tablets' compare with offer details 3 tablets = 3 doses
 
             foreach (OfferModel offer in _allOffers)
             {
@@ -105,6 +113,8 @@ namespace ElancoLibrary.Helpers
                     }
                 }
             }
+
+            _logger.LogDebug("Potential offers detected: {Count}", offerCriteriaAccuracy.Count);
 
             // If no matches could be found, throw exception to notify the user
             if (offerCriteriaAccuracy.Where(x => x.Value.HasMetMinimumCriteria == true).Count() == 0)

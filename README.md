@@ -56,7 +56,7 @@ Below is a flow diagram for three different ways of analysing invoices.
 #### UML Rebate Offer Database Design
 An offer has multiple details and multiple product logos.
 
-<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignInitial.png" />
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignV2.png" />
 
 ### User Interface
 
