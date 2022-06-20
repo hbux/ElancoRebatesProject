@@ -4,6 +4,7 @@ using Azure.Storage;
 using Azure.Storage.Blobs;
 using ElancoLibrary.Data;
 using ElancoLibrary.DataAccess;
+using ElancoLibrary.Helpers;
 using ElancoLibrary.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
@@ -39,14 +40,21 @@ builder.Services.AddSingleton(new BlobServiceClient(
     new Uri("https://" + builder.Configuration["BlobStorageAccountName"] + ".blob.core.windows.net"),
     new StorageSharedKeyCredential(builder.Configuration["BlobStorageAccountName"], builder.Configuration["BlobStorageKey"])));
 
+// ElancoLibrary - Database and API related
 builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddScoped<IBlobService, BlobService>();
+
+// ElancoLibrary - Data related
 builder.Services.AddScoped<IOfferData, OfferData>();
 builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IRebateData, RebateData>();
-builder.Services.AddScoped<IFormHelper, FormHelper>();
+
+// ElancoLibrary - Other
 builder.Services.AddScoped<IOfferHelper, OfferHelper>();
+
+// ElancoUI
+builder.Services.AddScoped<FormHelper>();
 
 var app = builder.Build();
 

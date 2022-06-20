@@ -6,6 +6,10 @@
 @using ElancoUI.Data
 @using ElancoUI.Models
 @using ElancoUI.Components
+@using ElancoUI.Helpers
+@using ElancoLibrary.Services
+@using ElancoLibrary.Data
+@using ElancoLibrary.Models.Offers
 
 <!-- Microsoft -->
 @inject NavigationManager Nav
@@ -21,7 +25,7 @@
 @inject IAccountData AccountData
 
 <!-- ElancoUI -->
-@inject IFormHelper FormHelper
+@inject FormHelper FormHelper
 
 @if (isAnalysingUpload == true)
 {
@@ -307,7 +311,7 @@
         var authState = await AuthenticationStateTask;
         var user = authState.User;
 
-        var result = await ProtectedLocalStore.GetAsync<OfferModel>("er-form-reb");
+        var result = await ProtectedLocalStore.GetAsync<OfferModel>("er-form-off");
         selectedRebate = result.Success ? result.Value : null;
         formInteraction.RebateSelected = selectedRebate;
         form.SelectedRebateId = selectedRebate?.Id.ToString();
@@ -356,7 +360,7 @@
         formInteraction.RebateSelected = null;
         form.SelectedRebateId = null;
 
-        await ProtectedLocalStore.DeleteAsync("er-form-reb");
+        await ProtectedLocalStore.DeleteAsync("er-form-off");
     }
 
     private async Task SetSelectedPet(Pet pet)
@@ -449,7 +453,7 @@
             try
             {
                 await RebateData.SubmitRebate(dbForm);
-                await ProtectedLocalStore.DeleteAsync("er-form-reb");
+                await ProtectedLocalStore.DeleteAsync("er-form-off");
                 await ProtectedLocalStore.DeleteAsync("er-form-selPet");
                 form = new FormModel();
                 formInteraction = new FormInteractionModel();

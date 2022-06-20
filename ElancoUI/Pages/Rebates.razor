@@ -5,6 +5,11 @@
 @using ElancoUI.Models
 @using ElancoUI.Components
 
+@using ElancoLibrary.Services
+@using ElancoLibrary.Helpers
+@using ElancoLibrary.Data
+@using ElancoLibrary.Models.Offers
+
 <!-- Microsoft -->
 @inject NavigationManager Nav
 @inject ProtectedLocalStorage ProtectedLocalStore
@@ -14,8 +19,6 @@
 <!-- ElancoLibrary -->
 @inject IApiService ApiService
 @inject IOfferData OfferData
-
-<!-- ElancoUI -->
 @inject IOfferHelper OfferHelper
 
 @if (isAnalysingUpload == true)
@@ -26,7 +29,7 @@
         </Icon>
     </Modal>
 }
-@if (string.IsNullOrEmpty(errorMessage) != true)
+@if (string.IsNullOrEmpty(errorMessage) == false)
 {
     <Modal Message="@errorMessage">
         <Icon>
@@ -44,7 +47,15 @@
 <section class="main-section">
     <div class="main-container">
         <div class="rebate-container">
-            <input class="rebate-container-search" type="text" placeholder="Search for... Offer code or product" />
+            <div class="info-card">
+                <div class="info-card-details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <a>How does our rebate process work?</a>
+                </div>
+            </div>
             <div class="card" id="upload-required">
                 <label class="card-details">
                     <InputFile OnChange="@UploadFile" type="file" />
@@ -61,34 +72,13 @@
                 <hr />
                 <p>Find a rebate below</p>
             </div>
-            @if (hasFilteredOffers == true)
-            {
-                <div class="account-save">
-                    <a @onclick="ViewAllOffers">Reset offers</a>
-                </div>   
-            }
             <div class="available-rebates-container">
-                @if (offers.Count == 0 && hasFilteredOffers == false)
+                @if (offers.Count == 0 && string.IsNullOrEmpty(errorMessage) == true)
                 {
                     <Modal Message="Loading offers...">
                         <Icon>
                             <div class="loader"></div>
                         </Icon>
-                    </Modal>
-                }
-
-                @if (offers.Count == 0 && hasFilteredOffers == true)
-                {
-                    <Modal Message="No matching offers found">
-                        <Icon>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                            </svg>
-                        </Icon>
-                        <Action>
-                            <a class="full-primary-btn" @onclick="ViewAllOffers">View all Offers</a>
-                        </Action>
                     </Modal>
                 }
 
@@ -131,7 +121,7 @@
                             </div>
                             <div class="rebate-select-container">
                                 <div class="form-submit">
-                                    <button @onclick="(() => SelectRebate(offer))">Select rebate</button>
+                                    <button @onclick="(() => SelectOffer(offer))">Select rebate</button>
                                 </div>
                             </div>
                         </div>
@@ -145,62 +135,72 @@
 @code {
     private string errorMessage;
     private bool isAnalysingUpload;
-    private bool hasFilteredOffers;
     private FormInteractionModel formInteraction;
 
     private List<OfferModel> offers = new List<OfferModel>();
 
     protected override async Task OnInitializedAsync()
     {
+        // Loading all the offers from the database
         offers = await OfferData.GetOffers();
 
         Logger.LogInformation("Navigated to select a rebate at {Time}", DateTime.UtcNow);
     }
 
+    /// <summary>
+    ///     This method is triggered when the user selects a file in the user's file explorer. After triggering this method
+    ///     The file selected is copied to the server's directory, then is analysed using an API and attempts to auto match an
+    ///     offer based on the return API analysis content.
+    /// </summary>
+    /// <param name="e">When a file is selected within the user's file explorer.</param>
+    /// <returns>An awaitable task.</returns>
     private async Task UploadFile(InputFileChangeEventArgs e)
     {
+        // Triggers the analysing modal to be displayed
         isAnalysingUpload = true;
 
         try
         {
+            // Followed Microsoft documentation regarding file uploads. Copies the user's file into the server's directory
             string trustedFileName = Path.GetRandomFileName();
             string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
-
             using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
             {
                 await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
             };
 
+            Logger.LogInformation("Product image uploaded at {Time}", DateTime.UtcNow);
+
+            // Triggers the API analysis of the copied file 
             var analysedContent = await ApiService.AnalyseProductImage(localFilePath);
 
-            offers = OfferHelper.FilterOffers(analysedContent, offers);
-            hasFilteredOffers = true;
-
+            // Uses the analysed content to attempt to auto match an offer
+            OfferHelper.AutoMatchOffer(analysedContent, SelectOffer);
         }
         catch (Exception ex)
         {
+            // Trigger the error modal to be displayed
             errorMessage = ex.Message;
+
+            isAnalysingUpload = false;
         }
 
+        // Closing the analysing modal
         isAnalysingUpload = false;
-
-        Logger.LogInformation("Product image uploaded at {Time}", DateTime.UtcNow);
     }
 
-    private async Task SelectRebate(OfferModel rebate)
+    /// <summary>
+    ///     Saves the selected offer via local storage and automatically redirects to the homepage.
+    /// </summary>
+    /// <param name="offer">The offer which will be selected.</param>
+    private async void SelectOffer(OfferModel offer)
     {
-        await ProtectedLocalStore.SetAsync("er-form-reb", rebate);
+        // Stores the offer in local storage
+        await ProtectedLocalStore.SetAsync("er-form-off", offer);
 
-        Logger.LogInformation("Rebate ID: {Id} selected at {Time}", rebate.Id, DateTime.UtcNow);
+        Logger.LogInformation("Rebate ID: {Id} selected at {Time}", offer.Id, DateTime.UtcNow);
 
+        // Redirect the user to the homepage
         Nav.NavigateTo("/");
-    }
-
-    private async Task ViewAllOffers()
-    {
-        offers = await OfferData.GetOffers();
-        hasFilteredOffers = false;
-
-        Logger.LogInformation("Retrieving all offers at {Time}", DateTime.UtcNow);
     }
 }
