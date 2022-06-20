@@ -1,12 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[spProduct_GetById]
-	@offerId int = 0
+	@brandId int = 0
 AS
 BEGIN
-    SET NOCOUNT ON;
+	SET NOCOUNT ON
 
-    SELECT Product.Id, Product.[Name], Product.ImageName, Product.ImageType
-    FROM dbo.Product
-    INNER JOIN OfferProducts
-    ON OfferProducts.ProductId = Product.Id
-    WHERE OfferProducts.OfferId = @offerId
+	SELECT Product.Id, Product.[Name], Product.Amount, Product.AmountType, Product.SizeOfAmount, Product.SizeOfAmountType,
+		   Product.PetType, Product.PetTypeSizeMinimum, Product.PetTypeSizeMaximum, Product.SizeType
+	FROM dbo.Product
+	WHERE Product.BrandId = @brandId
 END

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="1e18e112-779e-48ed-8559-5b60c090899c" ChangeDateTime="06/20/2022 13:08:56">
+    <Property Name="ElementName" Value="[dbo].[Product]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[ProductType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4b4fe202-f201-4aed-9a3a-e85d5cb9f36b" ChangeDateTime="06/20/2022 13:09:35">
+    <Property Name="ElementName" Value="[dbo].[spProduct_GetById]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[spProductType_GetById]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0698f4b1-779d-45fd-a2a8-481824c71834" ChangeDateTime="06/20/2022 20:32:48">
+    <Property Name="ElementName" Value="[dbo].[Product].[PetTypeSize]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PetTypeSizeMinimum" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e09892bc-722b-4719-b6da-f9cabe48d448" ChangeDateTime="06/20/2022 21:50:15">
+    <Property Name="ElementName" Value="[dbo].[ProductType]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="Brand" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="03675a8a-edcc-485a-bf0f-1e7aaa4ad53a" ChangeDateTime="06/20/2022 21:51:28">
+    <Property Name="ElementName" Value="[dbo].[Product].[ProductTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[BrandId]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="957abac0-6aaf-4d32-b6b9-32b9dac99851" ChangeDateTime="06/20/2022 22:21:23">
+    <Property Name="ElementName" Value="[dbo].[Brand].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Brand]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[BrandName]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="889b6dfe-1f40-42d3-8c52-d4b76ee51210" ChangeDateTime="06/20/2022 22:29:43">
+    <Property Name="ElementName" Value="[dbo].[spBrand_GetById]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[spBrand_GetByOfferId]" />
+  </Operation>
+</Operations>

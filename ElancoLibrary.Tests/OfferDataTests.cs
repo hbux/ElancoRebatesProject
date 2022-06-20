@@ -40,13 +40,13 @@ namespace ElancoLibrary.Tests
             offers.Add(new OfferModel
             {
                 OfferCode = "INCR22",
-                Products = new List<ProductModel>
+                Brands = new List<ProductTypeModel>
                 {
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Interceptor Plus"
                     },
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Credelio"
                     }
@@ -55,13 +55,13 @@ namespace ElancoLibrary.Tests
             offers.Add(new OfferModel
             {
                 OfferCode = "INAT22",
-                Products = new List<ProductModel>
+                Brands = new List<ProductTypeModel>
                 {
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Interceptor Plus"
                     },
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Atopica"
                     }
@@ -70,9 +70,9 @@ namespace ElancoLibrary.Tests
             offers.Add(new OfferModel
             {
                 OfferCode = "INT2022",
-                Products = new List<ProductModel>
+                Brands = new List<ProductTypeModel>
                 {
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Interceptor Plus"
                     }
@@ -81,9 +81,9 @@ namespace ElancoLibrary.Tests
             offers.Add(new OfferModel
             {
                 OfferCode = "AT2022",
-                Products = new List<ProductModel>
+                Brands = new List<ProductTypeModel>
                 {
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Atopica"
                     }
@@ -92,9 +92,9 @@ namespace ElancoLibrary.Tests
             offers.Add(new OfferModel
             {
                 OfferCode = "GPT2022",
-                Products = new List<ProductModel>
+                Brands = new List<ProductTypeModel>
                 {
-                    new ProductModel
+                    new ProductTypeModel
                     {
                         Name = "Galliprant"
                     }

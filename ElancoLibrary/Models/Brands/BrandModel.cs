@@ -1,25 +1,26 @@
-﻿using System;
+﻿using ElancoLibrary.Models.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoLibrary.Models.Offers
+namespace ElancoLibrary.Models.Brands
 {
-    public class ProductModel
+    public class BrandModel
     {
         /// <summary>
-        ///     The ID number of an individual product.
+        ///     The ID number of an individual brand.
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        ///     The name of the product. E.g. Credelio
+        ///     The name of the brand. E.g. Credelio
         /// </summary>
-        public string Name { get; set; }
+        public string BrandName { get; set; }
 
         /// <summary>
-        ///     The absolute name of the image file found in wwwroot/storage/products
+        ///     The absolute name of the image file found in wwwroot/storage/brands
         /// </summary>
         public string ImageName { get; set; }
 
@@ -29,8 +30,8 @@ namespace ElancoLibrary.Models.Offers
         public string ImageType { get; set; }
 
         /// <summary>
-        ///     A list of tags associated with the product to allow for easier filtering/searching.
+        ///     A list of products the brand owns.
         /// </summary>
-        public List<TagModel> Tags { get; set; } = new List<TagModel>();
+        public List<ProductModel> Products { get; set; } = new List<ProductModel>();
     }
 }

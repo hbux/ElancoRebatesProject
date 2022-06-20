@@ -1,6 +1,8 @@
 ﻿using ElancoLibrary.Data;
 using ElancoLibrary.Models;
+using ElancoLibrary.Models.Brands;
 using ElancoLibrary.Models.Offers;
+using ElancoLibrary.Models.Products;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,14 +16,17 @@ namespace ElancoLibrary.Helpers
     {
         private ILogger<OfferHelper> _logger;
         private IOfferData _offerData;
+        private IBrandData _brandData;
         private List<OfferModel> _allOffers;
+        private List<BrandModel> _allBrands;
 
-        public OfferHelper(ILogger<OfferHelper> logger, IOfferData offerData)
+        public OfferHelper(ILogger<OfferHelper> logger, IOfferData offerData, IBrandData productData)
         {
             _logger = logger;
             _offerData = offerData;
+            _brandData = productData;
 
-            GetAllOffers();
+            GetAllOffersAndBrands();
         }
 
         /// <summary>
@@ -48,10 +53,10 @@ namespace ElancoLibrary.Helpers
 
             foreach (OfferModel offer in _allOffers)
             {
-                foreach (ProductModel product in offer.Products)
+                foreach (BrandModel product in offer.Brands)
                 {
                     // Splits each product name by spaces into its own string to more accurately match an offer
-                    List<string> productNameWords = product.Name.Split().ToList();
+                    List<string> productNameWords = product.BrandName.Split().ToList();
 
                     foreach (string productWord in productNameWords)
                     {
@@ -71,22 +76,6 @@ namespace ElancoLibrary.Helpers
                                 // Increase the accuracy rating if offer is not inside dictionary
                                 // and sets minimum criteria to true via constructor
                                 offerCriteriaAccuracy.Add(offer, new CriteriaModel(true));
-                            }
-                        }
-                    }
-
-                    // More validation via the product tags to further increase accuracy
-                    foreach (TagModel tag in product.Tags)
-                    {
-                        if (analysedContent.Any(x => x.Contains(tag.Value)) == true)
-                        {
-                            if (offerCriteriaAccuracy.ContainsKey(offer) == true)
-                            {
-                                offerCriteriaAccuracy[offer].Accuracy++;
-                            }
-                            else
-                            {
-                                offerCriteriaAccuracy.Add(offer, new CriteriaModel(false));
                             }
                         }
                     }
@@ -143,17 +132,18 @@ namespace ElancoLibrary.Helpers
         }
 
         /// <summary>
-        ///     Retrieves all offers from database.
+        ///     Retrieves all offers and products from database.
         /// </summary>
-        private async void GetAllOffers()
+        private async void GetAllOffersAndBrands()
         {
             try
             {
                 _allOffers = await _offerData.GetOffers();
+                _allBrands = await _brandData.GetBrands();
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error occured retrieving all offers.");
+                _logger.LogWarning(ex, "Error occured retrieving all offers and products.");
                 throw;
             }
         }

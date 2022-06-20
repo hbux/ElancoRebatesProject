@@ -9,6 +9,8 @@
 @using ElancoLibrary.Helpers
 @using ElancoLibrary.Data
 @using ElancoLibrary.Models.Offers
+@using ElancoLibrary.Models.Products
+@using ElancoLibrary.Models.Brands
 
 <!-- Microsoft -->
 @inject NavigationManager Nav
@@ -87,9 +89,9 @@
                         <div class="card-details-rebate">
                             <div class="rebate-info">
                                 <div class="rebate-images">
-                                    @foreach (ProductModel product in offer.Products)
+                                    @foreach (BrandModel brand in offer.Brands)
                                     {
-                                        <img src="storage/products/@(product.ImageName).@(product.ImageType)" alt="@product.Name" />
+                                        <img src="storage/brands/@(brand.ImageName).@(brand.ImageType)" alt="@brand.BrandName" />
                                     }
                                 </div>
                                 <div class="rebate-details">

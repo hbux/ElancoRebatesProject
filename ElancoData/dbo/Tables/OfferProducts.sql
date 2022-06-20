@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[OfferProducts]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
-	[ProductId] INT FOREIGN KEY REFERENCES Product(Id),
+	[BrandId] INT FOREIGN KEY REFERENCES Brand(Id),
 	[OfferId] INT FOREIGN KEY REFERENCES Offer(Id)
 )

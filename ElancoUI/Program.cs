@@ -47,13 +47,14 @@ builder.Services.AddScoped<IBlobService, BlobService>();
 
 // ElancoLibrary - Data related
 builder.Services.AddScoped<IOfferData, OfferData>();
-builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<IRebateData, RebateData>();
+builder.Services.AddScoped<IBrandData, BrandData>();
 
 // ElancoLibrary - Other
 builder.Services.AddScoped<IOfferHelper, OfferHelper>();
 
 // ElancoUI
+builder.Services.AddScoped<IAccountData, AccountData>();
 builder.Services.AddScoped<FormHelper>();
 
 var app = builder.Build();

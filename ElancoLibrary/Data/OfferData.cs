@@ -1,5 +1,7 @@
 ﻿using ElancoLibrary.DataAccess;
+using ElancoLibrary.Models.Brands;
 using ElancoLibrary.Models.Offers;
+using ElancoLibrary.Models.Products;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -42,39 +44,21 @@ namespace ElancoLibrary.Data
                 };
 
                 var offerDetails = await _dataAccess.LoadData<OfferDetailsModel, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
-                var offerProducts = await _dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+                var offerBrands = await _dataAccess.LoadData<BrandModel, dynamic>("dbo.spBrand_GetById", p, "ElancoData");
 
                 if (offerDetails == null)
                 {
                     _logger.LogWarning("Failed to retrieve offer details of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                     throw new NullReferenceException($"Failed to load offer details by ID: { offer.Id }.");
                 }
-                if (offerProducts == null)
+                if (offerBrands == null)
                 {
-                    _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
-                    throw new NullReferenceException($"Failed to load offer products by ID: { offer.Id }.");
-                }
-
-                foreach (ProductModel product in offerProducts)
-                {
-                    var i = new
-                    {
-                        productId = product.Id
-                    };
-
-                    var associatedTags = await _dataAccess.LoadData<TagModel, dynamic>("dbo.spTag_GetById", i, "ElancoData");
-
-                    if (associatedTags == null)
-                    {
-                        _logger.LogWarning("Failed to retrieve product tags of product ID: {Id} from database at {Time}", product.Id, DateTime.UtcNow);
-                        associatedTags = new List<TagModel>();
-                    }
-
-                    product.Tags = associatedTags;
+                    _logger.LogWarning("Failed to retrieve offer brands of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
+                    throw new NullReferenceException($"Failed to load offer product types by ID: { offer.Id }.");
                 }
 
                 offer.Details = offerDetails;
-                offer.Products = offerProducts;
+                offer.Brands = offerBrands;
             }
 
             _logger.LogDebug("Retrieved all offers from database at {Time}", DateTime.UtcNow);
@@ -100,35 +84,17 @@ namespace ElancoLibrary.Data
             OfferModel offer = rawOffer.FirstOrDefault();
 
             offer.Details = await _dataAccess.LoadData<OfferDetailsModel, dynamic>("dbo.spOfferDetails_GetById", p, "ElancoData");
-            offer.Products = await _dataAccess.LoadData<ProductModel, dynamic>("dbo.spProduct_GetById", p, "ElancoData");
+            offer.Brands = await _dataAccess.LoadData<BrandModel, dynamic>("dbo.spBrand_GetById", p, "ElancoData");
 
             if (offer.Details == null)
             {
                 _logger.LogWarning("Failed to retrieve offer details of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
                 throw new NullReferenceException($"Failed to load offer details by ID: { offerId }.");
             }
-            if (offer.Products == null)
+            if (offer.Brands == null)
             {
-                _logger.LogWarning("Failed to retrieve offer products of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
-                throw new NullReferenceException($"Failed to load offer products by ID: { offerId }.");
-            }
-
-            foreach (ProductModel product in offer.Products)
-            {
-                var i = new
-                {
-                    productId = product.Id
-                };
-
-                var associatedTags = await _dataAccess.LoadData<TagModel, dynamic>("dbo.spTag_GetById", i, "ElancoData");
-
-                if (associatedTags == null)
-                {
-                    _logger.LogWarning("Failed to retrieve product tags of product ID: {Id} from database at {Time}", product.Id, DateTime.UtcNow);
-                    associatedTags = new List<TagModel>();
-                }
-
-                product.Tags = associatedTags;
+                _logger.LogWarning("Failed to retrieve offer brands of ID: {Id} from database at {Time}", offer.Id, DateTime.UtcNow);
+                throw new NullReferenceException($"Failed to load offer product types by ID: { offerId }.");
             }
 
             _logger.LogDebug("Retrieved offer by ID: {Id} from database at {Time}", offerId ,DateTime.UtcNow);

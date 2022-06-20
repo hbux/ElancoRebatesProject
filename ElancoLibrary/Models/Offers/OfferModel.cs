@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ElancoLibrary.Models.Brands;
+using ElancoLibrary.Models.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,9 +31,9 @@ namespace ElancoLibrary.Models.Offers
         public DateTime ValidPurchaseEnd { get; set; }
 
         /// <summary>
-        ///     A list of products that the offer applies to.
+        ///     A list of brands that the offer applies to.
         /// </summary>
-        public List<ProductModel> Products { get; set; } = new List<ProductModel>();
+        public List<BrandModel> Brands { get; set; } = new List<BrandModel>();
 
         /// <summary>
         ///     A list of details regarding the offer. 
