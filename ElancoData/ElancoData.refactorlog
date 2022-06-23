@@ -49,4 +49,74 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[spBrand_GetByOfferId]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="da0715e6-15e4-4875-a3ed-55a90ee076cd" ChangeDateTime="06/21/2022 12:01:53">
+    <Property Name="ElementName" Value="[dbo].[Product].[SizeOfAmount]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[DosageAmount]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cc3716b6-1b70-4644-b496-84ac480c3a62" ChangeDateTime="06/21/2022 12:02:16">
+    <Property Name="ElementName" Value="[dbo].[Product].[SizeOfAmountType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[DosageAmountType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="979f4542-15ab-430f-955a-60bb485a4fe6" ChangeDateTime="06/21/2022 12:02:59">
+    <Property Name="ElementName" Value="[dbo].[Product].[SizeType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PetSizeMeasurementUnit]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="74cd201f-46fb-466e-95c5-429a75314b5a" ChangeDateTime="06/21/2022 12:04:09">
+    <Property Name="ElementName" Value="[dbo].[Product].[PetType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AnimalType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8e8dc54f-6ed7-4d28-80ed-28b472fe99c7" ChangeDateTime="06/21/2022 12:04:23">
+    <Property Name="ElementName" Value="[dbo].[Product].[PetTypeSizeMinimum]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AnimalSizeMinimum]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="43c846e5-1120-47c7-8402-f37fc5e4ddcb" ChangeDateTime="06/21/2022 12:04:47">
+    <Property Name="ElementName" Value="[dbo].[Product].[PetTypeSizeMaximum]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AnimalSizeMaximum]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="87e813fe-8715-4d34-bd5c-f9557acd8da2" ChangeDateTime="06/21/2022 12:05:10">
+    <Property Name="ElementName" Value="[dbo].[Product].[DosageAmountType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[DosageAmountMeasurementUnit]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e1d3ae8b-71b1-4d17-af83-e101d7484179" ChangeDateTime="06/21/2022 12:05:25">
+    <Property Name="ElementName" Value="[dbo].[Product].[DosageAmountMeasurementUnit]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[DosageAmountMeasurementUni]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9587c4b8-c785-4635-afa0-2f478551e455" ChangeDateTime="06/21/2022 12:05:35">
+    <Property Name="ElementName" Value="[dbo].[Product].[DosageAmountMeasurementUni]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[DosageAmountMeasurementUnit]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a254457b-6ad4-4163-826c-ca16be814f4a" ChangeDateTime="06/21/2022 12:11:27">
+    <Property Name="ElementName" Value="[dbo].[Product].[PetSizeMeasurementUnit]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AnimalSizeMeasurementUnit]" />
+  </Operation>
 </Operations>

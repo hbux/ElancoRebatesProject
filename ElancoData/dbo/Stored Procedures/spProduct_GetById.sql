@@ -4,8 +4,8 @@ AS
 BEGIN
 	SET NOCOUNT ON
 
-	SELECT Product.Id, Product.[Name], Product.Amount, Product.AmountType, Product.SizeOfAmount, Product.SizeOfAmountType,
-		   Product.PetType, Product.PetTypeSizeMinimum, Product.PetTypeSizeMaximum, Product.SizeType
+	SELECT Product.Id, Product.[Name], Product.Amount, Product.AmountType, Product.[DosageAmount], Product.[DosageAmountMeasurementUnit],
+		   Product.[AnimalType], Product.[AnimalSizeMinimum], Product.[AnimalSizeMaximum], Product.[AnimalSizeMeasurementUnit]
 	FROM dbo.Product
 	WHERE Product.BrandId = @brandId
 END

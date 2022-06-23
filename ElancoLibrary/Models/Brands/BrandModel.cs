@@ -30,6 +30,11 @@ namespace ElancoLibrary.Models.Brands
         public string ImageType { get; set; }
 
         /// <summary>
+        ///     An additional name for the brand. E.g. Milbemycin Oxime / Praziquantel
+        /// </summary>
+        public string AdditionalName { get; set; }
+
+        /// <summary>
         ///     A list of products the brand owns.
         /// </summary>
         public List<ProductModel> Products { get; set; } = new List<ProductModel>();

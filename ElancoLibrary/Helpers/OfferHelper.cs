@@ -1,5 +1,4 @@
 ﻿using ElancoLibrary.Data;
-using ElancoLibrary.Models;
 using ElancoLibrary.Models.Brands;
 using ElancoLibrary.Models.Offers;
 using ElancoLibrary.Models.Products;
@@ -16,17 +15,14 @@ namespace ElancoLibrary.Helpers
     {
         private ILogger<OfferHelper> _logger;
         private IOfferData _offerData;
-        private IBrandData _brandData;
         private List<OfferModel> _allOffers;
-        private List<BrandModel> _allBrands;
 
-        public OfferHelper(ILogger<OfferHelper> logger, IOfferData offerData, IBrandData productData)
+        public OfferHelper(ILogger<OfferHelper> logger, IOfferData offerData)
         {
             _logger = logger;
             _offerData = offerData;
-            _brandData = productData;
 
-            GetAllOffersAndBrands();
+            GetAllOffers();
         }
 
         /// <summary>
@@ -39,17 +35,10 @@ namespace ElancoLibrary.Helpers
         /// <exception cref="NullReferenceException">If no matches are made this exception is thrown to notify the user.</exception>
         public void AutoMatchOffer(List<string> analysedContent, Action<OfferModel> selectOfferCallback)
         {
-            Dictionary<OfferModel, CriteriaModel> offerCriteriaAccuracy = new Dictionary<OfferModel, CriteriaModel>();
+            Dictionary<OfferModel, Accuracy> offersDetected = new Dictionary<OfferModel, Accuracy>();
 
             _logger.LogDebug("AutoMatchOffer started at {Time}", DateTime.UtcNow);
             _logger.LogDebug("Amount of Text detected from product image analysis: {Count}", analysedContent.Count);
-
-            // TODO?
-            // - Create a list of keywords to validate e.g. dogs, cats, product names, number (450) followed by mg or ml
-            // - Add pet type column into database table. OfferDetails? Product? New table?
-            //   Credelio is the name of the product type, but a product should be for dogs, amount of tablets/ml/mg, productTypeId 
-            // - Only 1 product name detected on image? Don't display any offers for two products
-            // - Look at the '3 tablets' compare with offer details 3 tablets = 3 doses
 
             foreach (OfferModel offer in _allOffers)
             {
@@ -64,18 +53,19 @@ namespace ElancoLibrary.Helpers
                         if (analysedContent.Any(x => x.Contains(productWord)))
                         {
                             // Minimum criteria has been met
-                            if (offerCriteriaAccuracy.ContainsKey(offer) == true)
+                            if (offersDetected.ContainsKey(offer) == true)
                             {
                                 // Increase the accuracy rating if offer is inside dictionary
                                 // Also sets met criteria to true
-                                offerCriteriaAccuracy[offer].Accuracy++;
-                                offerCriteriaAccuracy[offer].HasMetMinimumCriteria = true;
+                                offersDetected[offer].AccuracyRating++;
+                                offersDetected[offer].HasMetMinimumCriteria = true;
                             }
                             else
                             {
                                 // Increase the accuracy rating if offer is not inside dictionary
-                                // and sets minimum criteria to true via constructor
-                                offerCriteriaAccuracy.Add(offer, new CriteriaModel(true));
+                                // and sets minimum criteria to true
+                                offersDetected.Add(offer, new Accuracy());
+                                offersDetected[offer].HasMetMinimumCriteria = true;
                             }
                         }
                     }
@@ -90,23 +80,23 @@ namespace ElancoLibrary.Helpers
                     {
                         if (analysedContent.Any(x => x.ToLower().Contains(word.ToLower())) == true)
                         {
-                            if (offerCriteriaAccuracy.ContainsKey(offer) == true)
+                            if (offersDetected.ContainsKey(offer) == true)
                             {
-                                offerCriteriaAccuracy[offer].Accuracy++;
+                                offersDetected[offer].AccuracyRating++;
                             }
                             else
                             {
-                                offerCriteriaAccuracy.Add(offer, new CriteriaModel(false));
+                                offersDetected.Add(offer, new Accuracy());
                             }
                         }
                     }
                 }
             }
 
-            _logger.LogDebug("Potential offers detected: {Count}", offerCriteriaAccuracy.Count);
+            _logger.LogDebug("Potential offers detected: {Count}", offersDetected.Count);
 
             // If no matches could be found, throw exception to notify the user
-            if (offerCriteriaAccuracy.Where(x => x.Value.HasMetMinimumCriteria == true).Count() == 0)
+            if (offersDetected.Where(x => x.Value.HasMetMinimumCriteria == true).Count() == 0)
             {
                 _logger.LogInformation("AutoMatchOffer failed to match an offer with the product image uploaded.");
                 throw new Exception("Sorry, we could not find a matching offer.");
@@ -114,9 +104,9 @@ namespace ElancoLibrary.Helpers
 
             // Gets the most accurate offer based on if the minimum criteria has been met
             // and takes the highest accuracy rating offer
-            OfferModel mostAccurateOffer = offerCriteriaAccuracy
+            OfferModel mostAccurateOffer = offersDetected
                 .Where(x => x.Value.HasMetMinimumCriteria == true)
-                .OrderByDescending(x => x.Value.Accuracy)
+                .OrderByDescending(x => x.Value.AccuracyRating)
                 .First().Key;
 
             _logger.LogDebug("AutoMatchOffer completed at {Time}", DateTime.UtcNow);
@@ -125,27 +115,42 @@ namespace ElancoLibrary.Helpers
             selectOfferCallback(mostAccurateOffer);
         }
 
-        public List<OfferModel> FilterOffers(string searchTerm)
-        {
-            // Search functionality on input or on button click?
-            throw new NotImplementedException();
-        }
-
         /// <summary>
-        ///     Retrieves all offers and products from database.
+        ///     Retrieves all offers and brands from database.
         /// </summary>
-        private async void GetAllOffersAndBrands()
+        private async void GetAllOffers()
         {
             try
             {
                 _allOffers = await _offerData.GetOffers();
-                _allBrands = await _brandData.GetBrands();
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error occured retrieving all offers and products.");
-                throw;
+                _logger.LogWarning(ex, "Error occured retrieving all offers.");
             }
         }
+    }
+
+    class AmountMatch
+    {
+        public int Amount { get; set; } = -1;
+        public string AmountType { get; set; } = null;
+    }
+
+    class Accuracy
+    {
+        /// <summary>
+        ///     The accuracy as a number representing the amount of matches between an offer/product/tag/offer details
+        ///     and the analysed content. The higher the number, the more accurate it is.
+        /// </summary>
+        public int AccuracyRating { get; set; } = 0;
+
+        /// <summary>
+        ///     Minimum criteria required to enable auto selecting a rebate. The minimum criteria being the 
+        ///     analysed product image content matches an offer's product name.
+        ///     E.g. Criteria is true if the analysed content = "Interceptor" and the current iteration of the offer's product
+        ///     is "Interceptor Plus".
+        /// </summary>
+        public bool HasMetMinimumCriteria { get; set; } = false;
     }
 }

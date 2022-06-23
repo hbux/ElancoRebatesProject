@@ -31,31 +31,31 @@ namespace ElancoLibrary.Models.Products
         /// <summary>
         ///     The size of the amount. E.g. 450 (mg)
         /// </summary>
-        public int SizeOfAmount { get; set; }
+        public int DosageAmount { get; set; }
 
         /// <summary>
         ///     The type of the amount size. E.g. mg
         /// </summary>
-        public string SizeOfAmountType { get; set; }
+        public string DosageAmountMeasurementUnit { get; set; }
 
         /// <summary>
         ///     The pet type the product is for. E.g. Dogs
         /// </summary>
-        public string PetType { get; set; }
+        public string AnimalType { get; set; }
 
         /// <summary>
         ///     The minimum size of the pet the product is for. E.g. (between) 11-22
         /// </summary>
-        public decimal PetTypeSizeMinimum { get; set; }
+        public decimal AnimalSizeMinimum { get; set; }
 
         /// <summary>
         ///     The maximum size of the pet the product is for. E.g. (between) 11-22
         /// </summary>
-        public decimal PetTypeSizeMaximum { get; set; }
+        public decimal AnimalSizeMaximum { get; set; }
 
         /// <summary>
         ///     The size type of the pet the product is for. E.g. Kg
         /// </summary>
-        public string SizeType { get; set; }
+        public string AnimalSizeMeasurementUnit { get; set; }
     }
 }

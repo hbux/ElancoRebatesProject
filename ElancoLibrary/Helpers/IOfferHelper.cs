@@ -10,6 +10,5 @@ namespace ElancoLibrary.Helpers
     public interface IOfferHelper
     {
         void AutoMatchOffer(List<string> analysedContent, Action<OfferModel> selectRebate);
-        List<OfferModel> FilterOffers(string searchTerm);
     }
 }

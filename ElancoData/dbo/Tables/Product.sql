@@ -4,11 +4,11 @@
 	[Name] NVARCHAR(50) NULL,
 	[Amount] INT NULL,
 	[AmountType] NVARCHAR(10) NULL,
-	[SizeOfAmount] INT NULL,
-	[SizeOfAmountType] NVARCHAR(10) NULL,
-	[PetType] NVARCHAR(50) NULL,
-	[PetTypeSizeMinimum] DECIMAL NULL,
-	[PetTypeSizeMaximum] DECIMAL NULL,
-	[SizeType] NVARCHAR(10) NULL,
+	[DosageAmount] INT NULL,
+	[DosageAmountMeasurementUnit] NVARCHAR(10) NULL,
+	[AnimalType] NVARCHAR(50) NULL,
+	[AnimalSizeMinimum] DECIMAL(18, 4) NULL,
+	[AnimalSizeMaximum] DECIMAL(18, 4) NULL,
+	[AnimalSizeMeasurementUnit] NVARCHAR(10) NULL,
 	[BrandId] INT FOREIGN KEY REFERENCES Brand(Id) NOT NULL
 )
