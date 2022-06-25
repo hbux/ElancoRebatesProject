@@ -224,19 +224,3 @@ Below is json code which is not included in the Elanco project files as this con
   "BlobStorageAccountName": "your-storage-account-name"
 }
 ````
-
-**local.settings.json:** This json file should be included in the root of your ElancoLibrary.Functions project.
-````
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "StorageConnection": "your-storage-connection",
-    "StorageAccountName": "your-storage-account-name",
-    "FormRecognizerApiKey": "your-fr-api-key",
-    "FormRecognizerEndpoint": "your-fr-endpoint",
-    "FormRecognizerModelId": "your-fr-custom-trained-model-id"
-  }
-}
-````
