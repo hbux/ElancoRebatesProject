@@ -116,17 +116,19 @@ An account can have multiple addresses and multiple pets.
 - [ ] Rebates - automatically match offer
 
 **Additional features**
-- [ ] User interfaces
-          * Scaffolded pages
-          * Information card
-          * Account email - verified/unverified
-          * Account index - successfully/unsuccessfully updating
-          * Account - sticky navigation menu
-          * Login - loading indicator
+- [ ] User interface
+    * Scaffolded pages
+    * Information card
+    * Account email - verified/unverified
+    * Account index - successfully/unsuccessfully updating
+    * Account - sticky navigation menu
+    * Login - loading indicator
+
 - [ ] Validation
-          * Account index
-          * Account pet
-          * Account email
+    * Account index
+    * Account pet
+    * Account email
+
 - [ ] SendGrid API
 - [ ] Rebates - virtualize offers
 
