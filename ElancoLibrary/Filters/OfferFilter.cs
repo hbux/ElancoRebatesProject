@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoLibrary.Helpers
+namespace ElancoLibrary.Filters
 {
-    public class OfferHelper : IOfferHelper
+    public class OfferFilter : IOfferFilter
     {
-        private ILogger<OfferHelper> _logger;
+        private ILogger<OfferFilter> _logger;
         private IOfferData _offerData;
         private List<OfferModel> _allOffers;
 
-        public OfferHelper(ILogger<OfferHelper> logger, IOfferData offerData)
+        public OfferFilter(ILogger<OfferFilter> logger, IOfferData offerData)
         {
             _logger = logger;
             _offerData = offerData;

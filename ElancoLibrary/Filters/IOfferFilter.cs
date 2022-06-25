@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElancoLibrary.Helpers
+namespace ElancoLibrary.Filters
 {
-    public interface IOfferHelper
+    public interface IOfferFilter
     {
         void AutoMatchOffer(List<string> analysedContent, Action<OfferModel> selectRebate);
     }

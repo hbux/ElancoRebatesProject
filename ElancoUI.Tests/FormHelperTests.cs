@@ -1,5 +1,6 @@
 ﻿using ElancoUI.Helpers;
 using ElancoUI.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace ElancoUI.Tests
         public void FormatFields_FormAddressShouldContainValues(string address)
         {
             // Initialising the required classes
-            IFormHelper formHelper = new FormHelper();
-            FormModel form = new FormModel();
+            FormHelper formHelper = new FormHelper(null);
+            FormDisplayModel form = new FormDisplayModel();
 
             // Creating the mocked dictionary which simulates the returned values of an uploaded invoice
             Dictionary<string, string> fields = new Dictionary<string, string>();
@@ -43,8 +44,8 @@ namespace ElancoUI.Tests
             string expectedCity, string expectedState, string expectedZipCode)
         {
             // Initialising the required classes
-            IFormHelper formHelper = new FormHelper();
-            FormModel form = new FormModel();
+            FormHelper formHelper = new FormHelper(null);
+            FormDisplayModel form = new FormDisplayModel();
 
             // Creating the mocked dictionary which simulates the returned values of an uploaded invoice
             Dictionary<string, string> fields = new Dictionary<string, string>();

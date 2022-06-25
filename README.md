@@ -36,7 +36,6 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 * **ElancoUI.Tests:** Holds the unit testing of the ElancoUI classes.
 * **ElancoLibrary:** Holds the business logic of the application. Acts as a layer between the UI and Data Access.
 * **ElancoLibrary.Tests:** Holds the unit testing and mocking of the ElancoLibrary classes.
-* **ElancoLibrary.Functions:** Holds the Azure Functions used throughout the project.
 * **ElancoData:** Holds the tables, stored procedures and data publisher for the products/offers. 
 * **Documentation:** Holds the example receipts, products logos, UML diagrams and user interface mockups.
 
@@ -113,7 +112,7 @@ An account can have multiple addresses and multiple pets.
 - [x] Use local storage to save form data
 - [x] Add functionality to analyse product image and match with a rebate
 - [x] Add logging
-- [x] Add unit testing and mocking
+- [ ] Add unit testing and mocking
 - [ ] Add download rebate as PDF functionality
 - [ ] Add My Rebates section to the user account page (selecting a rebate displays submission details)
 
@@ -169,6 +168,7 @@ Below are resources and documentation links to aid with the development.
 * [Migrating from SQL Server to Azure SQL](https://docs.microsoft.com/en-us/azure/dms/tutorial-sql-server-to-azure-sql)
 * [Using .NET Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet?tabs=environment-variable-windows)
 * [Upload and analyze a file with Azure Blob Storage and Azure Functions](https://docs.microsoft.com/en-us/azure/storage/blobs/blob-upload-function-trigger?tabs=azure-portal)
+* [Ignoring Accented Letters in strings](https://stackoverflow.com/questions/359827/ignoring-accented-letters-in-string-comparison)
 
 ## Source Code Examples
 **SQL data access for retrieving and saving data.**

@@ -7,7 +7,7 @@ namespace ElancoUI.Models
     ///     Form properites which represent each field on the user interface. These properites are bound to
     ///     the user interface input fields.
     /// </summary>
-    public class FormModel
+    public class FormDisplayModel
     {
         [Required(ErrorMessage = "You must upload an invoice!")]
         public string UploadedInvoiceFileName { get; set; }

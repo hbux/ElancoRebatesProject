@@ -1,4 +1,5 @@
-﻿using ElancoUI.Models;
+﻿using ElancoLibrary.Models;
+using ElancoUI.Models;
 using ElancoUI.Models.DbContextModels;
 
 namespace ElancoUI.Helpers
@@ -20,14 +21,14 @@ namespace ElancoUI.Helpers
         /// <summary>
         ///     This maps out each field within the dictionary and applies it to the current form the user is filling out.
         /// </summary>
-        /// <param name="form">The current form the user is filling out.</param>
+        /// <param name="formDisplay">The current form the user is filling out.</param>
         /// <param name="fields">The returned key value pairs from the API call.</param>
-        public void FormatFields(FormModel form, Dictionary<string, string> fields)
+        public void FormatFields(FormDisplayModel formDisplay, Dictionary<string, string> fields)
         {
             try
             {
-                form.ClinicName = fields["Name"];
-                FormatAddress(form, fields["Address"]);
+                formDisplay.ClinicName = fields["Name"];
+                FormatAddress(formDisplay, fields["Address"]);
 
                 _logger.LogDebug("Fields mapped into form model instance at {Time}", DateTime.UtcNow);
             }
@@ -40,9 +41,9 @@ namespace ElancoUI.Helpers
         /// <summary>
         ///     Splits the address analyzed from the API into address line 1, city, state and Zip code.
         /// </summary>
-        /// <param name="form">The current form the user is filling out.</param>
+        /// <param name="formDisplay">The current form the user is filling out.</param>
         /// <param name="address">The address key within the fields dictionary.</param>
-        private void FormatAddress(FormModel form, string address)
+        private void FormatAddress(FormDisplayModel formDisplay, string address)
         {
             // Original format of address: 4006 Chippewa Manistee, MI 49660
 
@@ -51,7 +52,7 @@ namespace ElancoUI.Helpers
 
             if (addressParts.Count == 1)
             {
-                form.ClinicAddress = addressParts[0];
+                formDisplay.ClinicAddress = addressParts[0];
 
                 return;
             }
@@ -59,11 +60,11 @@ namespace ElancoUI.Helpers
             List<string> addressCity = addressParts[0].Trim().Split().ToList();
             // E.g. 4006 + Chippewa + Manistee
 
-            form.ClinicCity = addressCity[addressCity.Count - 1];
+            formDisplay.ClinicCity = addressCity[addressCity.Count - 1];
 
             string clinicAddress = "";
-            addressCity.Where(x => x != form.ClinicCity).ToList().ForEach(x => clinicAddress += x + " ");
-            form.ClinicAddress = clinicAddress.Trim();
+            addressCity.Where(x => x != formDisplay.ClinicCity).ToList().ForEach(x => clinicAddress += x + " ");
+            formDisplay.ClinicAddress = clinicAddress.Trim();
 
             List<string> addressStateZip = addressParts[1].Split().ToList();
             // E.g. MI + 49660 . Phone
@@ -76,8 +77,8 @@ namespace ElancoUI.Helpers
             {
                 try
                 {
-                    form.ClinicState = states[addressStateZip[i].ToUpper()];
-                    form.ClinicZipCode = addressStateZip[i + 1];
+                    formDisplay.ClinicState = states[addressStateZip[i].ToUpper()];
+                    formDisplay.ClinicZipCode = addressStateZip[i + 1];
 
                     return;
                 }
@@ -88,20 +89,20 @@ namespace ElancoUI.Helpers
             }
         }
 
-        public void FormatAccountDetails(Account account, FormModel form, FormInteractionModel formInteraction)
+        public void FormatAccountDetails(Account account, FormDisplayModel formDisplay, FormDisplayInteractionModel formDisplayInteraction)
         {
-            form.CustomerFirstName = account.FirstName;
-            form.CustomerLastName = account.LastName;
-            form.CustomerEmailAddress = account.User.Email;
-            form.CustomerPhone = account.User.PhoneNumber;
+            formDisplay.CustomerFirstName = account.FirstName;
+            formDisplay.CustomerLastName = account.LastName;
+            formDisplay.CustomerEmailAddress = account.User.Email;
+            formDisplay.CustomerPhone = account.User.PhoneNumber;
 
             Address defaultAddress = account.Addresses.FirstOrDefault(a => a.IsDefault == true);
-            form.CustomerAddress = defaultAddress.AddressLine1;
-            form.CustomerCity = defaultAddress.City;
-            form.CustomerState = defaultAddress.State;
-            form.CustomerZipCode = defaultAddress.ZipCode;
+            formDisplay.CustomerAddress = defaultAddress.AddressLine1;
+            formDisplay.CustomerCity = defaultAddress.City;
+            formDisplay.CustomerState = defaultAddress.State;
+            formDisplay.CustomerZipCode = defaultAddress.ZipCode;
 
-            formInteraction.Pets = account.Pets;
+            formDisplayInteraction.Pets = account.Pets;
 
             _logger.LogDebug("Account details mapped into form model instance for user ID: {Id} at {Time}", account.User.Id, DateTime.UtcNow);
         }
@@ -137,35 +138,35 @@ namespace ElancoUI.Helpers
             return states;
         }
 
-        public ElancoLibrary.Models.FormModel FormatFormForSubmission(FormModel form, 
-            FormInteractionModel formInteraction, string userId)
+        public FormModel FormatFormForSubmission(FormDisplayModel formDisplay, 
+            FormDisplayInteractionModel formDisplayInteraction, string userId)
         {
-            ElancoLibrary.Models.FormModel dbForm = new ElancoLibrary.Models.FormModel
+            FormModel form = new FormModel
             {
                 Id = Guid.NewGuid().ToString(),
-                OfferId = formInteraction.RebateSelected.Id,
+                OfferId = formDisplayInteraction.RebateSelected.Id,
                 UserId = userId,
-                InvoiceFileName = form.UploadedInvoiceFileName,
-                CustomerFirstName = form.CustomerFirstName,
-                CustomerLastName = form.CustomerLastName,
-                CustomerEmail = form.CustomerEmailAddress,
-                CustomerAddressLine1 = form.CustomerAddress,
-                CustomerCity = form.CustomerCity,
-                CustomerState = form.CustomerState,
-                CustomerZipCode = form.CustomerZipCode,
-                CustomerPhone = form.CustomerPhone,
-                PetName = form.PetName,
-                ClinicName = form.ClinicName,
-                ClinicAddressLine1 = form.ClinicAddress,
-                ClinicCity = form.ClinicCity,
-                ClinicState = form.ClinicState,
-                ClinicZipCode = form.ClinicZipCode,
-                AmountPurchased = form.AmountPurchased
+                InvoiceFileName = formDisplay.UploadedInvoiceFileName,
+                CustomerFirstName = formDisplay.CustomerFirstName,
+                CustomerLastName = formDisplay.CustomerLastName,
+                CustomerEmail = formDisplay.CustomerEmailAddress,
+                CustomerAddressLine1 = formDisplay.CustomerAddress,
+                CustomerCity = formDisplay.CustomerCity,
+                CustomerState = formDisplay.CustomerState,
+                CustomerZipCode = formDisplay.CustomerZipCode,
+                CustomerPhone = formDisplay.CustomerPhone,
+                PetName = formDisplay.PetName,
+                ClinicName = formDisplay.ClinicName,
+                ClinicAddressLine1 = formDisplay.ClinicAddress,
+                ClinicCity = formDisplay.ClinicCity,
+                ClinicState = formDisplay.ClinicState,
+                ClinicZipCode = formDisplay.ClinicZipCode,
+                AmountPurchased = formDisplay.AmountPurchased
             };
 
             _logger.LogDebug("UI form model instance mapped into database form model for user ID: {Id} at {Time}", userId, DateTime.UtcNow);
 
-            return dbForm;
+            return form;
         }
     }
 }

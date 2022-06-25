@@ -9,17 +9,6 @@ namespace ElancoLibrary.Tests
 {
     public class DataAccessTests
     {
-        [Fact]
-        public void Test_Fact()
-        {
 
-        }
-
-        [Theory]
-        [InlineData("Parameter")]
-        public void Test_Theory(string parameter)
-        {
-
-        }
     }
 }

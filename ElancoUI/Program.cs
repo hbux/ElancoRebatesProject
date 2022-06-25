@@ -4,7 +4,7 @@ using Azure.Storage;
 using Azure.Storage.Blobs;
 using ElancoLibrary.Data;
 using ElancoLibrary.DataAccess;
-using ElancoLibrary.Helpers;
+using ElancoLibrary.Filters;
 using ElancoLibrary.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
@@ -51,7 +51,7 @@ builder.Services.AddScoped<IRebateData, RebateData>();
 builder.Services.AddScoped<IBrandData, BrandData>();
 
 // ElancoLibrary - Other
-builder.Services.AddScoped<IOfferHelper, OfferHelper>();
+builder.Services.AddScoped<IOfferFilter, OfferFilter>();
 
 // ElancoUI
 builder.Services.AddScoped<IAccountData, AccountData>();

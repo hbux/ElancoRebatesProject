@@ -6,7 +6,7 @@
 @using ElancoUI.Components
 
 @using ElancoLibrary.Services
-@using ElancoLibrary.Helpers
+@using ElancoLibrary.Filters
 @using ElancoLibrary.Data
 @using ElancoLibrary.Models.Offers
 @using ElancoLibrary.Models.Products
@@ -21,7 +21,7 @@
 <!-- ElancoLibrary -->
 @inject IApiService ApiService
 @inject IOfferData OfferData
-@inject IOfferHelper OfferHelper
+@inject IOfferFilter OfferFilter
 
 @if (isAnalysingUpload == true)
 {
@@ -136,7 +136,7 @@
 @code {
     private string errorMessage;
     private bool isAnalysingUpload;
-    private FormInteractionModel formInteraction;
+    private FormDisplayInteractionModel formDisplayInteraction;
 
     private List<OfferModel> offers = new List<OfferModel>();
 
@@ -176,7 +176,7 @@
             var analysedContent = await ApiService.AnalyseProductImage(localFilePath);
 
             // Uses the analysed content to attempt to auto match an offer
-            OfferHelper.AutoMatchOffer(analysedContent, SelectOffer);
+            OfferFilter.AutoMatchOffer(analysedContent, SelectOffer);
         }
         catch (Exception ex)
         {
