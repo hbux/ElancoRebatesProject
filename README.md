@@ -131,11 +131,11 @@ An account can have multiple addresses and multiple pets.
 
 - [ ] SendGrid API
 - [ ] Rebates - virtualize offers
+- [ ] Azure blob storage pet images
 
 **Optimisation**
 - [ ] Use razor components in identity
 - [ ] Move sections into components
-- [ ] Azure blob storage pet images
 
 **Publishing**
 - [ ] Migrate from SQLServer to Azure
