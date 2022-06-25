@@ -108,34 +108,32 @@ An account can have multiple addresses and multiple pets.
 
 ## Progress
 **To-do**
-- [x] Create UI for rebate submitted
-- [x] Use local storage to save form data
-- [x] Add functionality to analyse product image and match with a rebate
-- [x] Add logging
-- [ ] Add unit testing and mocking
-- [ ] Add download rebate as PDF functionality
-- [ ] Add My Rebates section to the user account page (selecting a rebate displays submission details)
+- [ ] Unit testing and mocking
+- [ ] Download PDF
+- [ ] 'My Rebates' account section
+- [ ] Index - authenticated user's can enter pet name 
+- [ ] Rebates - search functionality
+- [ ] Rebates - automatically match offer
 
 **Additional features**
-- [ ] Add UI to all scaffolded pages
-- [ ] Add UI to information card modal
-- [ ] Add UI for unverified email on the account page
-- [ ] Add UI for successfully/unsuccessfully updating profile
-- [ ] Add UI loading indicator during login
-- [ ] Add SendGrid API for emails
-- [ ] Add validation for account, pet and address
-- [ ] Add sticky navigation menu for the account page
-- [ ] Add button to enter pet name instead of choosing pet from authenticated user's account
-- [ ] Add search functionality to the rebate selection page
-- [x] Add more rebate offers Click [here](https://yourpetandyou.elanco.com/elanco-rebates) to see the Elanco offers
-- [ ] Add 'load more' button on rebates page
-- [ ] Add a Tags table for each offer/product to make it easier to search and match offers
+- [ ] User interfaces
+          * Scaffolded pages
+          * Information card
+          * Account email - verified/unverified
+          * Account index - successfully/unsuccessfully updating
+          * Account - sticky navigation menu
+          * Login - loading indicator
+- [ ] Validation
+          * Account index
+          * Account pet
+          * Account email
+- [ ] SendGrid API
+- [ ] Rebates - virtualize offers
 
 **Optimisation**
 - [ ] Use razor components in identity
 - [ ] Move sections into components
-- [ ] Switch over to using Azure blobs for account pets and invoices
-- [x] Test analyzing an invoice using Azure Blob Service & Azure Functions
+- [ ] Azure blob storage pet images
 
 **Publishing**
 - [ ] Migrate from SQLServer to Azure
