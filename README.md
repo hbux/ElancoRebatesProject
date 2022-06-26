@@ -41,7 +41,7 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 ---
 
 #### UML Rebate Offer Database Design
-An offer has multiple details and multiple product logos.
+An offer has multiple details and multiple brands. A brand can contain multiple products, products are the medications that Elanco sells.
 
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignV2.png" />
 
