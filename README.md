@@ -12,6 +12,7 @@ Looking for [source code examples](#source-code-examples)? No problem!
     1. [UML account details database design](#uml-user-account-database-design)
     2. [User interface showcase](#user-interface-requirement-changes)
 5. [Tools and frameworks used](#tools-and-frameworks)
+6. [Progress](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Progress.md)
 
 Click [here](#required-for-locally-running) to view the code **required** to locally run this project.
 
