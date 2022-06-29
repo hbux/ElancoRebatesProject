@@ -388,7 +388,6 @@
             };
 
             await StreamInvoice(e.File);
-            await Blob.UploadInvoice(localFilePath, trustedFileName);
 
             var fields = await Api.AnalyseInvoice(localFilePath);
             FormHelper.FormatFields(formDisplay, fields);
