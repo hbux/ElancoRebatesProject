@@ -31,7 +31,7 @@
         </Icon>
     </Modal>
 }
-@if (offers.Count == 0 && string.IsNullOrEmpty(errorMessage) == true)
+@if (isLoadingOffers == true && string.IsNullOrEmpty(errorMessage) == true)
 {
     <Modal Message="Loading offers...">
         <Icon>
@@ -83,6 +83,10 @@
                 <p>Find a rebate below</p>
             </div>
             <div class="available-rebates-container">
+                @if (offers.Count == 0 && isLoadingOffers == false)
+                {
+                    <p>Sorry, no offers have been found.</p>
+                }
                 @foreach (OfferModel offer in offers)
                 {
                     <div class="card" id="rebate-selected">
@@ -136,6 +140,7 @@
 @code {
     private string errorMessage;
     private bool isAnalysingUpload;
+    private bool isLoadingOffers;
     private FormDisplayInteractionModel formDisplayInteraction;
 
     private List<OfferModel> offers = new List<OfferModel>();
@@ -143,7 +148,7 @@
     protected override async Task OnInitializedAsync()
     {
         // Loading all the offers from the database
-        offers = await OfferData.GetOffers();
+        await LoadOffers();
 
         Logger.LogInformation("Navigated to select a rebate at {Time}", DateTime.UtcNow);
     }
@@ -203,5 +208,14 @@
 
         // Redirect the user to the homepage
         Nav.NavigateTo("/");
+    }
+
+    private async Task LoadOffers()
+    {
+        isLoadingOffers = true;
+
+        offers = await OfferData.GetOffers();
+
+        isLoadingOffers = false;
     }
 }

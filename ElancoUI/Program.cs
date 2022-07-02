@@ -35,15 +35,9 @@ builder.Services.AddSingleton(new FormRecognizerClient(
     new Uri(builder.Configuration["Endpoint"]),
     new AzureKeyCredential(builder.Configuration["ApiKey"])));
 
-// Azure Blob Storage
-builder.Services.AddSingleton(new BlobServiceClient(
-    new Uri("https://" + builder.Configuration["BlobStorageAccountName"] + ".blob.core.windows.net"),
-    new StorageSharedKeyCredential(builder.Configuration["BlobStorageAccountName"], builder.Configuration["BlobStorageKey"])));
-
 // ElancoLibrary - Database and API related
 builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<IApiService, ApiService>();
-builder.Services.AddScoped<IBlobService, BlobService>();
 
 // ElancoLibrary - Data related
 builder.Services.AddScoped<IOfferData, OfferData>();

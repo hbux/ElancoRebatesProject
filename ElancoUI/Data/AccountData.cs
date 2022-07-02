@@ -15,6 +15,16 @@ namespace ElancoUI.Data
             _logger = logger;
         }
 
+        public void CreateAccount(IdentityUser user)
+        {
+            ElancoUI.Models.DbContextModels.Account account = new ElancoUI.Models.DbContextModels.Account()
+            {
+                User = user,
+            };
+
+            _context.Account.Add(account);
+        }
+
         public Account GetAccountDetails(IdentityUser user)
         {
             Account account = _context.Account
