@@ -13,7 +13,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IWebHostEnvironment _env;
-        private ILogger<AddPetModel> _logger;
+        private readonly ILogger<AddPetModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]

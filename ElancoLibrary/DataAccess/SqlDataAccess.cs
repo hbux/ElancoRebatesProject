@@ -14,8 +14,8 @@ namespace ElancoLibrary.DataAccess
 {
     public class SqlDataAccess : ISqlDataAccess
     {
-        private IConfiguration _config;
-        private ILogger<SqlDataAccess> _logger;
+        private readonly IConfiguration _config;
+        private readonly ILogger<SqlDataAccess> _logger;
 
         public SqlDataAccess(IConfiguration config, ILogger<SqlDataAccess> logger)
         {

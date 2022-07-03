@@ -13,8 +13,8 @@ namespace ElancoLibrary.Data
 {
     public class OfferData : IOfferData
     {
-        private ISqlDataAccess _dataAccess;
-        private ILogger<OfferData> _logger;
+        private readonly ISqlDataAccess _dataAccess;
+        private readonly ILogger<OfferData> _logger;
 
         public OfferData(ISqlDataAccess dataAccess, ILogger<OfferData> logger)
         {

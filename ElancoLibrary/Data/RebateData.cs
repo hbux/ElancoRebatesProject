@@ -11,8 +11,8 @@ namespace ElancoLibrary.Data
 {
     public class RebateData : IRebateData
     {
-        private ISqlDataAccess _dataAccess;
-        private ILogger<RebateData> _logger;
+        private readonly ISqlDataAccess _dataAccess;
+        private readonly ILogger<RebateData> _logger;
 
         public RebateData(ISqlDataAccess dataAccess, ILogger<RebateData> logger)
         {

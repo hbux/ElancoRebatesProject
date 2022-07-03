@@ -12,9 +12,9 @@ namespace ElancoLibrary.Services
 {
     public class ApiService : IApiService
     {
-        private IConfiguration _config;
-        private FormRecognizerClient _client;
-        private ILogger<ApiService> _logger;
+        private readonly IConfiguration _config;
+        private readonly FormRecognizerClient _client;
+        private readonly ILogger<ApiService> _logger;
 
         public ApiService(IConfiguration config, FormRecognizerClient client, ILogger<ApiService> logger)
         {

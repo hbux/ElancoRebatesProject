@@ -9,7 +9,7 @@ namespace ElancoUI.Helpers
     /// </summary>
     public class FormHelper
     {
-        private ILogger<FormHelper> _logger;
+        private readonly ILogger<FormHelper> _logger;
         private Dictionary<string, string> states;
 
         public FormHelper(ILogger<FormHelper> logger)
@@ -97,12 +97,18 @@ namespace ElancoUI.Helpers
             formDisplay.CustomerPhone = account.User.PhoneNumber;
 
             Address defaultAddress = account.Addresses.FirstOrDefault(a => a.IsDefault == true);
-            formDisplay.CustomerAddress = defaultAddress.AddressLine1;
-            formDisplay.CustomerCity = defaultAddress.City;
-            formDisplay.CustomerState = defaultAddress.State;
-            formDisplay.CustomerZipCode = defaultAddress.ZipCode;
 
-            formDisplayInteraction.Pets = account.Pets;
+            if (defaultAddress != null)
+            {
+                formDisplay.CustomerAddress = defaultAddress.AddressLine1;
+                formDisplay.CustomerCity = defaultAddress.City;
+                formDisplay.CustomerState = defaultAddress.State;
+                formDisplay.CustomerZipCode = defaultAddress.ZipCode;
+            }
+            if (account.Pets.Count != 0 || account.Pets != null)
+            {
+                formDisplayInteraction.Pets = account.Pets;
+            }
 
             _logger.LogDebug("Account details mapped into form model instance for user ID: {Id} at {Time}", account.User.Id, DateTime.UtcNow);
         }

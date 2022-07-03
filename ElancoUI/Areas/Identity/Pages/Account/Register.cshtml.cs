@@ -31,7 +31,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private IAccountData _accountData;
+        private readonly IAccountData _accountData;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,

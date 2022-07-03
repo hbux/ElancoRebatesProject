@@ -6,8 +6,8 @@ namespace ElancoUI.Data
 {
     public class AccountData : IAccountData
     {
-        private ApplicationDbContext _context;
-        private ILogger<AccountData> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly ILogger<AccountData> _logger;
 
         public AccountData(ApplicationDbContext context, ILogger<AccountData> logger)
         {

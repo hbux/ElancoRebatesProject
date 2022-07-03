@@ -11,8 +11,8 @@ namespace ElancoLibrary.Services
 {
     public class BlobService : IBlobService
     {
-        private BlobServiceClient _serviceClient;
-        private ILogger<BlobService> _logger;
+        private readonly BlobServiceClient _serviceClient;
+        private readonly ILogger<BlobService> _logger;
 
         public BlobService(BlobServiceClient serviceClient, ILogger<BlobService> logger)
         {

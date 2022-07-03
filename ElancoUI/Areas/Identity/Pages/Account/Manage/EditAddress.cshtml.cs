@@ -10,7 +10,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private ILogger<EditAddressModel> _logger;
+        private readonly ILogger<EditAddressModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]

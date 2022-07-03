@@ -10,7 +10,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     public class DeletePetModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private ILogger<DeletePetModel> _logger;
+        private readonly ILogger<DeletePetModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]

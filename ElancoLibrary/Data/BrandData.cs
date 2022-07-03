@@ -12,8 +12,8 @@ namespace ElancoLibrary.Data
 {
     public class BrandData : IBrandData
     {
-        private ISqlDataAccess _dataAccess;
-        private ILogger<BrandData> _logger;
+        private readonly ISqlDataAccess _dataAccess;
+        private readonly ILogger<BrandData> _logger;
 
         public BrandData(ISqlDataAccess dataAccess, ILogger<BrandData> logger)
         {

@@ -13,8 +13,8 @@ namespace ElancoLibrary.Filters
 {
     public class OfferFilter : IOfferFilter
     {
-        private ILogger<OfferFilter> _logger;
-        private IOfferData _offerData;
+        private readonly ILogger<OfferFilter> _logger;
+        private readonly IOfferData _offerData;
         private List<OfferModel> _allOffers;
 
         public OfferFilter(ILogger<OfferFilter> logger, IOfferData offerData)
@@ -35,6 +35,9 @@ namespace ElancoLibrary.Filters
         /// <exception cref="NullReferenceException">If no matches are made this exception is thrown to notify the user.</exception>
         public void AutoMatchOffer(List<string> analysedContent, Action<OfferModel> selectOfferCallback)
         {
+            // 1. Match analysed content to a product
+            // 2. Match product to an offer
+
             Dictionary<OfferModel, Accuracy> offersDetected = new Dictionary<OfferModel, Accuracy>();
 
             _logger.LogDebug("AutoMatchOffer started at {Time}", DateTime.UtcNow);

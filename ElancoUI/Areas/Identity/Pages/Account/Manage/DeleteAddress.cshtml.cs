@@ -10,7 +10,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
     public class DeleteAddressModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private ILogger<DeleteAddressModel> _logger;
+        private readonly ILogger<DeleteAddressModel> _logger;
         private readonly IAccountData _accountData;
 
         [BindProperty]
