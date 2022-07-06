@@ -47,7 +47,7 @@ An account is associated to a user which can contain multiple addresses and pets
 #### Development preview
 ![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/ER_gif.gif)
 
-### Phase 1
+### Phase 1 :white_check_mark:
 * Initialised GitHub repository for the project
 * Planned out the project using UML's, user interface diagrams and established goals of the project.
 * Created necessary .NET Core projects, including:
@@ -61,7 +61,7 @@ An account is associated to a user which can contain multiple addresses and pets
     * Select an offer to claim
     * Submit the form
 
-### Phase 2
+### Phase 2 :hammer_and_wrench:
 Received new requirements from the client.
 * Created a login/register (Entity Framework) system to authenticate users
 * Created a registered user's account page to auto-fill into form fields, containing:
@@ -71,7 +71,7 @@ Received new requirements from the client.
 * Implemented logging
 * Implementing unit testing
 
-### Phase 3
+### Phase 3 :heavy_minus_sign:
 No items to currently display.
 
 ## Resources
