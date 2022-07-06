@@ -11,6 +11,8 @@
     3. [Phase 3](#phase-3)
 4. [Resources](#resources)
 
+Looking for the up-to-date [development preview](#development-preview) video?
+
 ## Introduction and Task
 Elanco wants to explore the use of cloud-based cognitive services to complete text analysis on receipts to improve our customer experiences.
 
