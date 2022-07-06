@@ -37,15 +37,15 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 ### UML Diagrams
 #### Offer Database Design
 An offer can contain multiple brand logos and multiple offer details. Brands can contain multiple products.
-<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignV2.png" />
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/Database/DatabaseProductDesignV2.png" />
 
 #### Account Database Design
 An account is associated to a user which can contain multiple addresses and pets. The account entity userId is associated with the Entity Framework Core Database.
-<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseAccountDesign.png" />
+<img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/Database/DatabaseAccountDesign.png" />
 
 ## Development Progress
 #### Development preview
-![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/ER_gif.gif)
+![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/ER_gif.gif)
 
 ### Phase 1 :white_check_mark:
 * Initialised GitHub repository for the project
