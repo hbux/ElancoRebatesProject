@@ -69,7 +69,7 @@ Received new requirements from the client.
     * Pet information
 * Ability for the system to auto-select an offer based on an uploaded image
 * Implemented logging
-* Implementing unit testing
+* Implemented unit testing
 
 ### Phase 3 :heavy_minus_sign:
 No items to currently display.
