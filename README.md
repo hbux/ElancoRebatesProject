@@ -12,7 +12,7 @@ Looking for [source code examples](#source-code-examples)? No problem!
     1. [UML account details database design](#uml-user-account-database-design)
     2. [User interface showcase](#user-interface-requirement-changes)
 5. [Tools and frameworks used](#tools-and-frameworks)
-6. [Progress](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Progress.md)
+6. [Resources](#resources)
 
 Click [here](#required-for-locally-running) to view the code **required** to locally run this project.
 
@@ -106,6 +106,20 @@ Technologies that have and will be brought into this application down the line.
 * SOLID Principles
 * SSDT & Dapper
 * Git
+
+## Resources
+Below are resources and documentation links to aid with the development.
+
+* [ASP.NET Core Blazor forms and validation](https://docs.microsoft.com/en-us/aspnet/core/blazor/forms-validation?view=aspnetcore-6.0#handle-form-submission)
+* [ASP.NET Core Blazor file uploads](https://docs.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-6.0&pivots=server#upload-files-to-a-server)
+* [ASP.NET Core Blazor performance best practices](https://docs.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-6.0)
+* [ASP.NET Core Blazor State Management](https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-6.0&pivots=server#aspnet-core-protected-browser-storage)
+* [ASP.NET Core Blazor Image Streaming](https://docs.microsoft.com/en-us/aspnet/core/blazor/images?view=aspnetcore-6.0#streaming-examples)
+* [Razor Pages CRUD with EF Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/crud?view=aspnetcore-6.0)
+* [Migrating from SQL Server to Azure SQL](https://docs.microsoft.com/en-us/azure/dms/tutorial-sql-server-to-azure-sql)
+* [Using .NET Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet?tabs=environment-variable-windows)
+* [Upload and analyze a file with Azure Blob Storage and Azure Functions](https://docs.microsoft.com/en-us/azure/storage/blobs/blob-upload-function-trigger?tabs=azure-portal)
+* [Ignoring Accented Letters in strings](https://stackoverflow.com/questions/359827/ignoring-accented-letters-in-string-comparison)
 
 ## Source Code Examples
 **SQL data access for retrieving and saving data.**
