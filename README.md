@@ -1,136 +1,97 @@
-## Elanco Rebates - Table of contents
+### Table of contents
+1. [Introduction and task](#introduction-and-task)
+2. [System design](#system-design)
+    1. [Project structure](#project-structure)
+    2. [UML diagrams](#uml-diagrams)
+        1. [Offer database design](#offer-database-design)
+        2. [Account database design](#account-database-design)
+3. [Development progress](#development-progress)
+    1. [Phase 1](#phase-1)
+    2. [Phase 2](#phase-2)
+    3. [Phase 3](#phase-3)
+4. [Resources](#resources)
 
-Looking for [source code examples](#source-code-examples)? No problem!
-
-1. [Introduction](#introduction)
-2. [Task](#task)
-3. [System design and flow](#system-design-and-flow)
-    1. [Project folder structure](#project-structure)
-    2. [User interface showcase](#user-interface)
-    3. [UML rebate offer database design](#uml-rebate-offer-database-design)
-4. [New requirements and requirement changes](#new-requirements-and-requirement-changes)
-    1. [UML account details database design](#uml-user-account-database-design)
-    2. [User interface showcase](#user-interface-requirement-changes)
-5. [Tools and frameworks used](#tools-and-frameworks)
-6. [Progress](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Progress.md)
-
-Click [here](#required-for-locally-running) to view the code **required** to locally run this project.
-
-## Introduction
+## Introduction and Task
 Elanco wants to explore the use of cloud-based cognitive services to complete text analysis on receipts to improve our customer experiences.
 
 We believe this can be achieved by accelerating our rebates process, which today requires our customers to complete multiple forms incorporating details from multiple
 receipts/products. 
 
-## Task
 Using Azure Cognitive Services, build a web-based application which represents the use of image-to-text to extract and display key details from product images and receipts.
 Elanco will provide sample images of test receipts/products and we’d like to see which useful data we can programmatically extract and display in a web interface to validate this approach to streamlining the customer experience.
 
-![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/ER_gif.gif)
-
-## System Design and Flow
+## System Design
 ### Project Structure
-* **ElancoUI:** Holds the user interface pages, user interface models and classes.
-* **ElancoUI.Tests:** Holds the unit testing of the ElancoUI classes.
-* **ElancoLibrary:** Holds the business logic of the application. Acts as a layer between the UI and Data Access.
-* **ElancoLibrary.Tests:** Holds the unit testing and mocking of the ElancoLibrary classes.
-* **ElancoData:** Holds the tables, stored procedures and data publisher for the products/offers. 
-* **Documentation:** Holds the example receipts, products logos, UML diagrams and user interface mockups.
 
----
+| Folder                | Description                                                                                   |
+| -------------         |-------------                                                                                  |
+| ElancoUI              | Holds the user interface pages, user interface models and classes.                            |
+| ElancoUI.Tests        | Holds the unit testing of the ElancoUI classes.                                               |
+| ElancoLibrary         | Holds the business logic of the application. Acts as a layer between the UI and Data Access.  |
+| ElancoLibrary.Tests   | Holds the unit testing and mocking of the ElancoLibrary classes.                              |
+| ElancoData            | Holds the tables, stored procedures and data publisher for the products/offers.               |
+| Documentation         | Holds the example receipts, products logos, UML diagrams and user interface mockups.          |
 
-#### UML Rebate Offer Database Design
-An offer has multiple details and multiple brands. A brand can contain multiple products, products are the medications that Elanco sells.
-
+### UML Diagrams
+#### Offer Database Design
+An offer can contain multiple brand logos and multiple offer details. Brands can contain multiple products.
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseProductDesignV2.png" />
 
-### User Interface
-
-**Form Page:** This is the UI for the rebate form.
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/main_desktop.png" />
-</p>
-
----
-
-**Select Rebate Page:** This is the UI for selecting a rebate offer.
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/rebates_desktop.png" />
-</p>
-
-## New Requirements and Requirement Changes
-
-There have been new requirements added by the client. Essentially, the client wants every field on the rebate form
-to be auto-filled. This can be achieved by adding a login/register functionality where a customer account contains 
-additional details such as:
-* First name and surname
-* Email address
-* Address
-* Multiple pets
-
-The client wants to replace the pet input field to an image of the customer's pet(s). Where the user can select an image of their pet.
-
----
-
-#### UML User Account Database Design
-An account can have multiple addresses and multiple pets.
-
+#### Account Database Design
+An account is associated to a user which can contain multiple addresses and pets. The account entity userId is associated with the Entity Framework Core Database.
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/DatabaseAccountDesign.png" />
 
+## Development Progress
+#### Development preview
+![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/ER_gif.gif)
+
+### Phase 1
+* Initialised GitHub repository for the project
+* Planned out the project using UML's, user interface diagrams and established goals of the project.
+* Created necessary .NET Core projects, including:
+    * UI (Blazor Server)
+    * UI Library (business logic for UI)
+    * Data project (houses tables and stored procedures)
+* Created the MVP (minimum viable product) and achieved a working application, allowing users to:
+    * Manually enter required form fields
+    * Upload a receipt/invoice which auto-fills selected form fields
+    * Auto-save form via local storage
+    * Select an offer to claim
+    * Submit the form
+
+### Phase 2
+Received new requirements from the client.
+* Created a login/register (Entity Framework) system to authenticate users
+* Created a registered user's account page to auto-fill into form fields, containing:
+    * Personal information
+    * Pet information
+* Ability for the system to auto-select an offer based on an uploaded image
+* Implemented logging
+* Implementing unit testing
+
+### Phase 3
+No items to currently display.
+
+## Resources
+Below are resources and documentation links to aid with the development.
+
+* [ASP.NET Core Blazor forms and validation](https://docs.microsoft.com/en-us/aspnet/core/blazor/forms-validation?view=aspnetcore-6.0#handle-form-submission)
+* [ASP.NET Core Blazor file uploads](https://docs.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-6.0&pivots=server#upload-files-to-a-server)
+* [ASP.NET Core Blazor performance best practices](https://docs.microsoft.com/en-us/aspnet/core/blazor/performance?view=aspnetcore-6.0)
+* [ASP.NET Core Blazor State Management](https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-6.0&pivots=server#aspnet-core-protected-browser-storage)
+* [ASP.NET Core Blazor Image Streaming](https://docs.microsoft.com/en-us/aspnet/core/blazor/images?view=aspnetcore-6.0#streaming-examples)
+* [Razor Pages CRUD with EF Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/crud?view=aspnetcore-6.0)
+* [Migrating from SQL Server to Azure SQL](https://docs.microsoft.com/en-us/azure/dms/tutorial-sql-server-to-azure-sql)
+* [Using .NET Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet?tabs=environment-variable-windows)
+* [Upload and analyze a file with Azure Blob Storage and Azure Functions](https://docs.microsoft.com/en-us/azure/storage/blobs/blob-upload-function-trigger?tabs=azure-portal)
+* [Ignoring Accented Letters in strings](https://stackoverflow.com/questions/359827/ignoring-accented-letters-in-string-comparison)
+
 ---
 
-#### User Interface Requirement Changes 
-**Form Page Authenticated:** This is the UI for the rebate form that has been filled when logged in.
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/complete_desktop.png" />
-</p>
+:exclamation: **Important**
 
----
-
-**Account Page:** This is the UI for an authenticated user's account page.
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/account_desktop.png" />
-</p>
-
-## Tools and Frameworks
-Technologies that have and will be brought into this application down the line.
-* Blazor Server
-* Razor Pages
-* Logging
-* Dependency Injection
-* Unit Testing and Mocking
-* Entity Framework Core
-* Identity Framework Core
-* SendGrid API for email sending
-* Azure Form Recognizer for invoice analysis
-* SOLID Principles
-* SSDT & Dapper
-* Git
-
-## Source Code Examples
-**SQL data access for retrieving and saving data.**
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/sql_code.png" width="50%" height="50%"/>
-</p>
-
---- 
-
-**Azure Form Recognizer API call.**
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/api_code.png" width="50%" height="50%"/>
-</p>
-
----
-
-**Form Helper for formatting data into form input fields.**
-<p float="left">
-  <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/markdown-images/formHelper_code.png" width="50%" height="50%"/>
-</p>
-
-## Required for Locally Running
-Below is json code which is not included in the Elanco project files as this contains API key's and endpoints for API services. 
-
-**appsettings.json:** This json file should be included in the root of your ElancoUI project.
+Below is appsettings.json code which is not included in the Elanco project files as this contains API key's and endpoints for API services. This json file should be included in the root of your ElancoUI project.
+ 
 ````
 {
     "ConnectionStrings": {
