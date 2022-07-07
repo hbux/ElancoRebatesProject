@@ -67,6 +67,7 @@ Received new requirements from the client.
 * Created a registered user's account page to auto-fill into form fields, containing:
     * Personal information
     * Pet information
+* Created rebates section on user's account page to display submitted rebates
 * Ability for the system to auto-select an offer based on an uploaded image
 * Implemented logging
 * Implemented unit testing

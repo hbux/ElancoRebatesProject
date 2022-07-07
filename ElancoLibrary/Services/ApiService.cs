@@ -41,9 +41,9 @@ namespace ElancoLibrary.Services
 
                 RecognizedForm invoice = invoices.Single();
 
-                _logger.LogDebug("Analysed invoice at {Time}", DateTime.UtcNow);
+                _logger.LogDebug("Analysed invoice for file path: {FilePath} at {Time}", filePath ,DateTime.UtcNow);
 
-                return ParseInvoice(invoice);
+                return ParseInvoice(invoice, filePath);
             }
         }
 
@@ -56,9 +56,9 @@ namespace ElancoLibrary.Services
 
                 FormPage uploadedImage = rawUpload.Value.FirstOrDefault();
 
-                _logger.LogDebug("Analysed product image at {Time}", DateTime.UtcNow);
+                _logger.LogDebug("Analysed product image for file path: {FilePath} at {Time}", filePath ,DateTime.UtcNow);
 
-                return ParseProductImageContent(uploadedImage);
+                return ParseProductImageContent(uploadedImage, filePath);
             }
         }
 
@@ -67,7 +67,7 @@ namespace ElancoLibrary.Services
         /// </summary>
         /// <param name="invoice">The single invoice returned from the API call.</param>
         /// <returns>A dictionary representing the key value pairs from the uploaded document.</returns>
-        private Dictionary<string, string> ParseInvoice(RecognizedForm invoice)
+        private Dictionary<string, string> ParseInvoice(RecognizedForm invoice, string filePath)
         {
             Dictionary<string, string> fields = new Dictionary<string, string>();
 
@@ -88,10 +88,12 @@ namespace ElancoLibrary.Services
                 }
             }
 
+            _logger.LogDebug("Parsed invoice for file path: {filepath}, data collected: {Data}", filePath, fields);
+
             return fields;
         }
 
-        private List<string> ParseProductImageContent(FormPage uploadedImage)
+        private List<string> ParseProductImageContent(FormPage uploadedImage, string filePath)
         {
             List<string> parsedContent = new List<string>();
 
@@ -99,6 +101,8 @@ namespace ElancoLibrary.Services
             {
                 parsedContent.Add(text.Text);
             }
+
+            _logger.LogDebug("Parsed product image for file path: {filepath}, data collected: {Data}", filePath, parsedContent);
 
             return parsedContent;
         }

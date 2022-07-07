@@ -30,7 +30,7 @@ namespace ElancoLibrary.Services
                 await client.UploadAsync(stream);
             }
 
-            _logger.LogDebug("Image uploaded to blob storage at {Time}", DateTime.UtcNow);
+            _logger.LogDebug("Image uploaded (file name: {FileName}) to blob storage at {Time}", fileName ,DateTime.UtcNow);
         }
     }
 }

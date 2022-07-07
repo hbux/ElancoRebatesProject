@@ -36,20 +36,20 @@ builder.Services.AddSingleton(new FormRecognizerClient(
     new AzureKeyCredential(builder.Configuration["ApiKey"])));
 
 // ElancoLibrary - Database and API related
-builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
-builder.Services.AddScoped<IApiService, ApiService>();
+builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddTransient<IApiService, ApiService>();
 
 // ElancoLibrary - Data related
-builder.Services.AddScoped<IOfferData, OfferData>();
-builder.Services.AddScoped<IRebateData, RebateData>();
-builder.Services.AddScoped<IBrandData, BrandData>();
+builder.Services.AddTransient<IOfferData, OfferData>();
+builder.Services.AddTransient<IRebateData, RebateData>();
+builder.Services.AddTransient<IBrandData, BrandData>();
 
 // ElancoLibrary - Other
-builder.Services.AddScoped<IOfferFilter, OfferFilter>();
+builder.Services.AddTransient<IOfferFilter, OfferFilter>();
 
 // ElancoUI
-builder.Services.AddScoped<IAccountData, AccountData>();
-builder.Services.AddScoped<FormHelper>();
+builder.Services.AddTransient<IAccountData, AccountData>();
+builder.Services.AddTransient<FormHelper>();
 
 var app = builder.Build();
 

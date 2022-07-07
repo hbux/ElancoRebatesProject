@@ -10,7 +10,7 @@ namespace ElancoUI.Models
     public class FormDisplayModel
     {
         [Required(ErrorMessage = "You must upload an invoice!")]
-        public string UploadedInvoiceFileName { get; set; }
+        public string UploadedInvoiceFileName { get; set; } = "dkakss.dca";
         [Required(ErrorMessage = "You must select a rebate!")]
         public string SelectedRebateId { get; set; }
         [Required(ErrorMessage = "You must choose a pet!")]

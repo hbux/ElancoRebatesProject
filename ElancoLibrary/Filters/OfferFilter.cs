@@ -40,9 +40,6 @@ namespace ElancoLibrary.Filters
 
             Dictionary<OfferModel, Accuracy> offersDetected = new Dictionary<OfferModel, Accuracy>();
 
-            _logger.LogDebug("AutoMatchOffer started at {Time}", DateTime.UtcNow);
-            _logger.LogDebug("Amount of Text detected from product image analysis: {Count}", analysedContent.Count);
-
             foreach (OfferModel offer in _allOffers)
             {
                 foreach (BrandModel product in offer.Brands)
@@ -96,14 +93,16 @@ namespace ElancoLibrary.Filters
                 }
             }
 
-            _logger.LogDebug("Potential offers detected: {Count}", offersDetected.Count);
+            _logger.LogDebug($"Potential offers detected: { offersDetected.Count }", offersDetected);
 
             // If no matches could be found, throw exception to notify the user
             if (offersDetected.Where(x => x.Value.HasMetMinimumCriteria == true).Count() == 0)
             {
-                _logger.LogInformation("AutoMatchOffer failed to match an offer with the product image uploaded.");
+                _logger.LogInformation("Failed to auto-match an offer with the analysed content from the image uploaded.", analysedContent);
                 throw new Exception("Sorry, we could not find a matching offer.");
             }
+
+            _logger.LogDebug($"Offers detected: { offersDetected.Count }", offersDetected);
 
             // Gets the most accurate offer based on if the minimum criteria has been met
             // and takes the highest accuracy rating offer
@@ -111,8 +110,6 @@ namespace ElancoLibrary.Filters
                 .Where(x => x.Value.HasMetMinimumCriteria == true)
                 .OrderByDescending(x => x.Value.AccuracyRating)
                 .First().Key;
-
-            _logger.LogDebug("AutoMatchOffer completed at {Time}", DateTime.UtcNow);
 
             // Callback to the delegate to run the SelectOffer(OfferModel offer) method on Rebates.razor
             selectOfferCallback(mostAccurateOffer);
@@ -129,7 +126,7 @@ namespace ElancoLibrary.Filters
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error occured retrieving all offers.");
+                _logger.LogWarning(ex, "Initialising OfferFilter failed, error occured retrieving all offers.");
             }
         }
     }

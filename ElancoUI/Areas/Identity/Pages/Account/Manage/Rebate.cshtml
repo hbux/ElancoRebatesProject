@@ -1,0 +1,93 @@
+﻿@page
+@model ElancoUI.Areas.Identity.Pages.Account.Manage.RebateModel
+@{
+    ViewData["Title"] = "Rebate Information";
+    Layout = "../../../../../Shared/Layouts/_IdentityLayout.cshtml";
+}
+
+<section class="main-section">
+    <div class="main-container">
+        <div class="confirmation-container">
+            <div>
+                <a asp-page="./MyRebates">Back</a>
+                <!-- Display invoice name or image -->
+            </div>
+            @if (Model.Rebate != null)
+            {
+                <div class="confirmation-summary">
+                    <p class="confirmation-summary-title">Submission ID: <span class="confirmation-summary-content">@Model.Rebate.Id</span></p>
+                    <p class="confirmation-summary-title">Submission Date: <span class="confirmation-summary-content">@DateOnly.FromDateTime(Model.Rebate.DateSubmitted) @TimeOnly.FromDateTime(Model.Rebate.DateSubmitted)</span></p>
+                    <p class="confirmation-summary-title">Submission Status: <span class="confirmation-summary-content">@Model.Rebate.RebateStatus</span></p>
+                </div>
+                <div class="confirmation-summary">
+                    <div class="card" id="rebate-selected">
+                        <div class="card-details-rebate">
+                            <div class="rebate-info">
+                                <div class="rebate-images">
+                                    @foreach (ElancoLibrary.Models.Brands.BrandModel brand in Model.Offer.Brands)
+                                    {
+                                        <img src="storage/brands/@(brand.ImageName).@(brand.ImageType)" alt="@brand.BrandName" />
+                                    }
+                                </div>
+                                <div class="rebate-details">
+                                    <div class="details-header">
+                                        <h3>Offer Code: @Model.Offer.OfferCode</h3>
+                                        <p class="confirmation-summary-title">Qty: @Model.Rebate.AmountPurchased</p>
+                                    </div>
+                                    <div class="details-purchased">
+                                        <p>Purchase between:</p>
+                                        <p>@DateOnly.FromDateTime(Model.Offer.ValidPurchaseStart) - @DateOnly.FromDateTime(Model.Offer.ValidPurchaseEnd)</p>
+                                    </div>
+                                    <table>
+                                        <tr>
+                                            <th>Offer Details</th>
+                                            <th>Rebate Value</th>
+                                        </tr>
+                                        @foreach (ElancoLibrary.Models.Offers.OfferDetailsModel details in Model.Offer.Details)
+                                        {
+                                            <tr>
+                                                <td>@details.Amount</td>
+                                                <td>@details.Value.ToString("C")</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="rebate-extra"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="confirmation-summary-details">
+                    <div class="card">
+                        <div class="confirmation-card">
+                            <p class="confirmation-summary-title">Your address</p>
+                            <div class="confirmation-summary-address">
+                                <p>@Model.Rebate.CustomerFirstName @Model.Rebate.CustomerLastName</p>
+                                <p>@Model.Rebate.CustomerAddressLine1</p>
+                                <p>@Model.Rebate.CustomerCity</p>
+                                <p>@Model.Rebate.CustomerState</p>
+                                <p>@Model.Rebate.CustomerZipCode</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="confirmation-card">
+                            <p class="confirmation-summary-title">Clinic address</p>
+                            <div class="confirmation-summary-address">
+                                <p>@Model.Rebate.ClinicAddressLine1</p>
+                                <p>@Model.Rebate.ClinicCity</p>
+                                <p>@Model.Rebate.ClinicState</p>
+                                <p>@Model.Rebate.ClinicZipCode</p>
+                                <p>Product purchased is for @Model.Rebate.PetName</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>Loading...</p>
+            }
+        </div>
+    </div>
+</section>

@@ -36,7 +36,7 @@
         </Icon>
     </Modal>
 }
-@if (string.IsNullOrEmpty(errorMessage) != true)
+@if (string.IsNullOrEmpty(errorMessage) == false)
 {
     <Modal Message="@errorMessage">
         <Icon>
@@ -217,7 +217,7 @@
                         <div class="form-field-pets-container">
                             @foreach (Pet pet in formDisplayInteraction.Pets)
                             {
-                                <div class="form-field-pet" id="@GetPetSelectedCss(pet)" @onclick="(() => SetSelectedPet(pet))">
+                                <div class="form-field-pet" id="@TriggerPetSelectedCss(pet)" @onclick="(() => SetSelectedPet(pet))">
                                     <img src="/storage/account_pets/@pet.ImageName" alt="@pet.Name"/>
                                 </div>
                             }
@@ -332,7 +332,7 @@
     }
 
 
-    private string GetLoadingModalCss()
+    private string TriggerLoadingModalCss()
     {
         if (isAnalysingUpload == true)
         {
@@ -344,7 +344,7 @@
         }
     }
 
-    private string GetPetSelectedCss(Pet pet)
+    private string TriggerPetSelectedCss(Pet pet)
     {
         if (formDisplayInteraction.PetSelected?.Id == pet?.Id)
         {
@@ -452,7 +452,7 @@
 
             try
             {
-                await RebateData.SubmitRebate(dbForm);
+                await RebateData.SubmitRebate(dbForm, userId);
                 await ProtectedLocalStore.DeleteAsync("er-form-off");
                 await ProtectedLocalStore.DeleteAsync("er-form-selPet");
                 formDisplay = new FormDisplayModel();
@@ -465,6 +465,9 @@
             catch (Exception ex)
             {
                 errorMessage = ex.Message;
+                Logger.LogWarning(ex, "Failed to submit rebate at {Time}", DateTime.UtcNow);
+
+                StateHasChanged();
 
                 return false;
             }

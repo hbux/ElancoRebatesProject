@@ -1,14 +1,16 @@
 ﻿@page "/Confirmation/ThankYou/{submissionId}"
 
 @using ElancoLibrary.Models
-
-@using ElancoUI.Components
-@using ElancoUI.Helpers
 @using ElancoLibrary.Services
 @using ElancoLibrary.Data
 @using ElancoLibrary.Models.Offers
 @using ElancoLibrary.Models.Products
 @using ElancoLibrary.Models.Brands
+
+@using ElancoUI.Components
+@using ElancoUI.Helpers
+@using ElancoUI.Models.DbContextModels
+@using ElancoUI.Data
 
 <!-- Microsoft -->
 @inject ILogger<ThankYou> Logger
@@ -16,6 +18,7 @@
 <!-- ElancoLibrary -->
 @inject IRebateData RebateData
 @inject IOfferData OfferData
+@inject IAccountData AccountData
 
 @if (string.IsNullOrEmpty(errorMessage) != true)
 {
@@ -148,6 +151,9 @@
     private OfferModel rebateOffer;
     private FormModel form;
 
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
     [Parameter]
     public string SubmissionId { get; set; }
 
@@ -155,13 +161,20 @@
     {
         try
         {
-            form = await RebateData.GetSubmissionDetails(SubmissionId);
+            var authState = await AuthenticationStateTask;
+            var user = authState.User;
 
-            rebateOffer = await OfferData.GetOfferById(form.OfferId);
+            if (user.Identity.IsAuthenticated)
+            {
+                Account account = AccountData.GetAccountDetailsByEmail(user.Identity.Name);
 
-            await RebateData.UpdateUserAccess(form.Id);
+                form = await RebateData.GetSubmissionDetails(SubmissionId, account.User.Id);
 
-            Logger.LogInformation("Displaying rebate submission details for User ID: {Id} at {Time}", form.UserId, DateTime.UtcNow);
+                rebateOffer = await OfferData.GetOfferById(form.OfferId);
+                await RebateData.UpdateUserAccess(form.Id);
+
+                Logger.LogInformation("Displaying rebate submission details for User ID: {Id} at {Time}", form.UserId, DateTime.UtcNow);
+            }
         }
         catch (Exception ex)
         {

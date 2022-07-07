@@ -17,7 +17,7 @@ namespace ElancoUI.Tests
         [InlineData("3910 Mount Kalulu Drive Los Angeles, CA 102910")]
         public void FormatFields_FormAddressShouldContainValues(string address)
         {
-            // Initialising the required classes
+            // Initialising the required classes - use mocking to mock logger
             FormHelper formHelper = new FormHelper(null);
             FormDisplayModel form = new FormDisplayModel();
 
@@ -43,7 +43,7 @@ namespace ElancoUI.Tests
         public void FormatFields_FormAddressShouldParseCorrectly(string address, string expectedAddressLine1, 
             string expectedCity, string expectedState, string expectedZipCode)
         {
-            // Initialising the required classes
+            // Initialising the required classes - use mocking to mock logger
             FormHelper formHelper = new FormHelper(null);
             FormDisplayModel form = new FormDisplayModel();
 
