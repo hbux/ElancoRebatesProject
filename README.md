@@ -7,8 +7,8 @@
         2. [Account database design](#account-database-design)
 3. [Development progress](#development-progress)
     1. [Phase 1](#phase-1-white_check_mark)
-    2. [Phase 2](#phase-2-hammer_and_wrench)
-    3. [Phase 3](#phase-3-heavy_minus_sign)
+    2. [Phase 2](#phase-2-white_check_mark)
+    3. [Phase 3](#phase-3-hammer_and_wrench)
 4. [Resources](#resources)
 
 Looking for the up-to-date [development preview](#development-preview) video?
@@ -61,7 +61,7 @@ An account is associated to a user which can contain multiple addresses and pets
     * Select an offer to claim
     * Submit the form
 
-### Phase 2 :hammer_and_wrench:
+### Phase 2 :white_check_mark:
 Received new requirements from the client.
 * Created a login/register (Entity Framework) system to authenticate users
 * Created a registered user's account page to auto-fill into form fields, containing:
@@ -70,10 +70,23 @@ Received new requirements from the client.
 * Created rebates section on user's account page to display submitted rebates
 * Ability for the system to auto-select an offer based on an uploaded image
 * Implemented logging
-* Implemented unit testing
+* Implemented unit testing and mocking
 
-### Phase 3 :heavy_minus_sign:
-No items to currently display.
+### Phase 3 :hammer_and_wrench:
+* Clean up work, including:
+  * Fixing current bugs
+  * Ironing out issues of the system
+  * More complete more unit tests and mocking
+  * Refactoring auto-select offer to detect more accurately
+  * Adding account pet and address validation
+  * Adding login loading indicator
+* Adding SendGrid as email sender
+* Hosting web application on Azure
+* Migrating from SQLServer to Azure SQL
+* Adding more user interfaces, such as:
+  * Scaffolded pages
+  * Information card modal
+  * MyRebates account section error modals
 
 ## Resources
 Below are resources and documentation links to aid with the development.
