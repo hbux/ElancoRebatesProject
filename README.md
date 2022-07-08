@@ -6,9 +6,9 @@
         1. [Offer database design](#offer-database-design)
         2. [Account database design](#account-database-design)
 3. [Development progress](#development-progress)
-    1. [Phase 1](#phase-1-white_check_mark)
-    2. [Phase 2](#phase-2-white_check_mark)
-    3. [Phase 3](#phase-3-hammer_and_wrench)
+    1. [Phase 1 :white_check_mark:](#phase-1-white_check_mark)
+    2. [Phase 2 :white_check_mark:](#phase-2-white_check_mark)
+    3. [Phase 3 :hammer_and_wrench:](#phase-3-hammer_and_wrench)
 4. [Resources](#resources)
 
 Looking for the up-to-date [development preview](#development-preview) video?
