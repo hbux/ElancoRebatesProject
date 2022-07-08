@@ -214,7 +214,14 @@
     {
         isLoadingOffers = true;
 
-        offers = await OfferData.GetOffers();
+        try
+        {
+            offers = await OfferData.GetOffers();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
 
         isLoadingOffers = false;
     }
