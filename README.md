@@ -74,16 +74,16 @@ Received new requirements from the client.
 
 ### Phase 3 :hammer_and_wrench:
 * Clean up work, including:
-  * Fixing current bugs
-  * Ironing out issues of the system
-  * More complete more unit tests and mocking
-  * Refactoring auto-select offer to detect more accurately
-  * Adding account pet and address validation
-  * Adding login loading indicator
-* Adding SendGrid as email sender
-* Hosting web application on Azure
-* Migrating from SQLServer to Azure SQL
-* Adding more user interfaces, such as:
+  * Fixed bugs
+  * Ironed out issues of the system
+  * More complete unit tests and mocking
+  * Refactored auto-select offer to detect more accurately
+  * Added account pet and address validation
+  * Added login loading indicator
+* Added SendGrid as email sender
+* Hosted web application on Azure
+* Migrated from SQLServer to Azure SQL
+* Added more user interfaces, such as:
   * Scaffolded pages
   * Information card modal
   * MyRebates account section error modals
