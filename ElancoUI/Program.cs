@@ -28,11 +28,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-//builder.Services.AddSignalR().AddAzureSignalR(options =>
-//{
-//    options.ServerStickyMode =
-//        Microsoft.Azure.SignalR.ServerStickyMode.Required;
-//});
+builder.Services.AddSignalR().AddAzureSignalR(options =>
+{
+    options.ServerStickyMode =
+        Microsoft.Azure.SignalR.ServerStickyMode.Required;
+});
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
 // Azure Form Recognizer 
