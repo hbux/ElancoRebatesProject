@@ -1,7 +1,5 @@
 using Azure;
 using Azure.AI.FormRecognizer;
-using Azure.Storage;
-using Azure.Storage.Blobs;
 using ElancoLibrary.Data;
 using ElancoLibrary.DataAccess;
 using ElancoLibrary.Filters;
@@ -9,12 +7,8 @@ using ElancoLibrary.Services;
 using ElancoUI.Areas.Identity;
 using ElancoUI.Data;
 using ElancoUI.Helpers;
-using ElancoUI.Models;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,17 +22,21 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-//builder.Services.AddSignalR().AddAzureSignalR(options =>
-//{
-//    options.ServerStickyMode =
-//        Microsoft.Azure.SignalR.ServerStickyMode.Required;
-//});
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
 // Azure Form Recognizer 
 builder.Services.AddSingleton(new FormRecognizerClient(
     new Uri(builder.Configuration["Endpoint"]),
     new AzureKeyCredential(builder.Configuration["ApiKey"])));
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddSignalR().AddAzureSignalR(options =>
+    {
+        options.ServerStickyMode =
+            Microsoft.Azure.SignalR.ServerStickyMode.Required;
+    });
+}
 
 // ElancoLibrary - Database and API related
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
