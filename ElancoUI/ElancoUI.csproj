@@ -25,10 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Development\unsafe_uploads\zuplw5j2.b4n" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="wwwroot\Development\unsafe_uploads\zuplw5j2.b4n" />
     <None Include="wwwroot\Production\unsafe_uploads\zuplw5j2.b4n" />
     <None Include="wwwroot\storage\brands\0da39352-3f4c-4d1f-8fcf-ffded7dc8a12.jpg" />
     <None Include="wwwroot\storage\brands\10547b46-38f5-4d29-9f49-18ddff2ee6c3.jpg" />
