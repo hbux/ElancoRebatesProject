@@ -2,7 +2,7 @@
 1. [Introduction and task](#introduction-and-task)
 2. [System design](#system-design)
     1. [Project structure](#project-structure)
-    2. [UML diagrams](#uml-diagrams)
+    2. [ERD diagrams](#erd-diagrams)
         1. [Offer database design](#offer-database-design)
         2. [Account database design](#account-database-design)
 3. [Development progress](#development-progress)
@@ -34,7 +34,7 @@ Elanco will provide sample images of test receipts/products and we’d like to s
 | ElancoData            | Holds the tables, stored procedures and data publisher for the products/offers.               |
 | Documentation         | Holds the example receipts, products logos, UML diagrams and user interface mockups.          |
 
-### UML Diagrams
+### ERD Diagrams
 #### Offer Database Design
 An offer can contain multiple brand logos and multiple offer details. Brands can contain multiple products.
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/OfferDbV2.png" />
@@ -82,6 +82,7 @@ Received new requirements from the client.
   * Added login loading indicator
 * Added SendGrid as email sender
 * Hosted web application on Azure
+* Setup CI/CD pipeline using Azure DevOps
 * Migrated from SQLServer to Azure SQL
 * Added more user interfaces, such as:
   * Scaffolded pages
