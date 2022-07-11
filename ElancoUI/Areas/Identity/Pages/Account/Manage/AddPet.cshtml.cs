@@ -46,7 +46,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
             }
 
             string trustedFileName = $"{ Guid.NewGuid() }_{ PetUpload.FileName }";
-            string filePath = Path.Combine(_env.ContentRootPath, "wwwroot", "storage", "account_pets", trustedFileName);
+            string filePath = Path.Combine("wwwroot", "storage", "account_pets", trustedFileName);
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
