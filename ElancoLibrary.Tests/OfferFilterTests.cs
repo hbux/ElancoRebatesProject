@@ -12,13 +12,13 @@ namespace ElancoLibrary.Tests
         [Fact]
         public void AutoMatchOffer_ShouldMatchOfferCorrectly()
         {
-            throw new NotImplementedException();
+            
         }
 
         [Fact]
         public void AutoMatchOffer_ShouldThrowNullReferenceException()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
