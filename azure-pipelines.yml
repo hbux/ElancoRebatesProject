@@ -21,14 +21,21 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: publish
+    arguments: '-o $(build.artifactstagingdirectory)'
 
-- task: VSTest@2
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish UI'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: uiDrop
+  condition: succeededOrFailed()
+
+- task: DeleteFiles@1
+  displayName: 'Delete UI Files'
+  inputs:
+    SourceFolder: '$(build.artifactstagingdirectory)'
+    Contents: '**'
