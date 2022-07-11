@@ -379,12 +379,21 @@
         try
         {
             string trustedFileName = Path.GetRandomFileName();
-            string localFilePath = Path.Combine(Env.ContentRootPath, "wwwroot", Env.EnvironmentName, "unsafe_uploads", trustedFileName);
+            string localFilePath = string.Empty;
 
-            using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
+            if (Env.IsProduction())
             {
-                await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
-            };
+                localFilePath = @"C:\home\site\wwwroot\Production\unsafe_uploads\zuplw5j2.b4n";
+            }
+            else
+            {
+                localFilePath = Path.Combine(Env.ContentRootPath, "wwwroot", Env.EnvironmentName, "unsafe_uploads", trustedFileName);
+
+                using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
+                {
+                    await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
+                };
+            }
 
             await StreamInvoice(e.File);
 
