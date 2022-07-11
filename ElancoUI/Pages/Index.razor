@@ -378,6 +378,8 @@
 
         try
         {
+            throw new Exception("This is a CI/CD C# edit test");
+
             string trustedFileName = Path.GetRandomFileName();
             string localFilePath = Path.Combine(Env.EnvironmentName, "unsafe_uploads", trustedFileName);
 
