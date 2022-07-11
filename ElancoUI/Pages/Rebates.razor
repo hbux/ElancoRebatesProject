@@ -169,7 +169,7 @@
         {
             // Followed Microsoft documentation regarding file uploads. Copies the user's file into the server's directory
             string trustedFileName = Path.GetRandomFileName();
-            string localFilePath = Path.Combine(Env.ContentRootPath, "wwwroot", Env.EnvironmentName, "unsafe_uploads", trustedFileName);
+            string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
             using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
             {
                 await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
