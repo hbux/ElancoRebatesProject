@@ -167,19 +167,13 @@
 
         try
         {
-            // Followed Microsoft documentation regarding file uploads. Copies the user's file into the server's directory
-            string trustedFileName = Path.GetRandomFileName();
-            string localFilePath = Path.Combine(Env.ContentRootPath, "wwwroot", "storage", Env.EnvironmentName, trustedFileName);
-
-            using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
-            {
-                await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
-            };
+            string hardCodedFileName = "Invoice6.png";
+            string filePath = Path.Combine(Env.WebRootPath, "storage", Env.EnvironmentName, hardCodedFileName);
 
             Logger.LogInformation("Product image uploaded at {Time}", DateTime.UtcNow);
 
-            // Triggers the API analysis of the copied file 
-            var analysedContent = await ApiService.AnalyseProductImage(localFilePath);
+            // Triggers the API analysis of the copied file
+            var analysedContent = await ApiService.AnalyseProductImage(filePath);
 
             // Uses the analysed content to attempt to auto match an offer
             OfferFilter.AutoMatchOffer(analysedContent, SelectOffer);
