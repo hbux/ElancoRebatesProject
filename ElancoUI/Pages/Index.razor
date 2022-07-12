@@ -400,7 +400,7 @@
 
                 Logger.LogInformation("Upload invoice in {Env.EnvironmentName} environment for file: {FileName} with path: {Path}", Env.EnvironmentName, trustedFileName, filePath);
 
-                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                using (FileStream stream = File.Create(filePath))
                 {
                     Logger.LogInformation("Entered using statement for stream filepath: {StreamFilePath} compared to filepath: {Path}", stream.Name, filePath);
 
