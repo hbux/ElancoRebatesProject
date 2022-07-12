@@ -378,13 +378,26 @@
 
         try
         {
-            // Try with two backslashes
             string trustedFileName = Path.GetRandomFileName();
-            string productionFilePath = @"wwwroot\images\Invoice6.png";
+            string filePath = string.Empty;
+
+            if (Env.IsDevelopment())
+            {
+                filePath = Path.Combine(Env.ContentRootPath, "wwwroot", "storage", Env.EnvironmentName, trustedFileName);
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
+                };
+            }
+            else
+            {
+                filePath = @"wwwroot\storage\Production\ba43tf1y.4at";
+            }
 
             await StreamInvoice(e.File);
 
-            var fields = await Api.AnalyseInvoice(productionFilePath);
+            var fields = await Api.AnalyseInvoice(filePath);
             FormHelper.FormatFields(formDisplay, fields);
 
             formDisplay.UploadedInvoiceFileName = trustedFileName;

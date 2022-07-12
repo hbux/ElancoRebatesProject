@@ -57,6 +57,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\storage\account_pets\" />
+    <Folder Include="wwwroot\storage\Development\" />
   </ItemGroup>
 
 </Project>
