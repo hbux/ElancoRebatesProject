@@ -378,17 +378,13 @@
 
         try
         {
+            // Try with two backslashes
             string trustedFileName = Path.GetRandomFileName();
-            string localFilePath = Path.Combine(Env.ContentRootPath, Env.EnvironmentName, "unsafe_uploads", trustedFileName);
-
-            using (FileStream stream = new FileStream(localFilePath, FileMode.Create))
-            {
-                await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
-            };
+            string productionFilePath = @"wwwroot\images\Invoice6.png";
 
             await StreamInvoice(e.File);
 
-            var fields = await Api.AnalyseInvoice(localFilePath);
+            var fields = await Api.AnalyseInvoice(productionFilePath);
             FormHelper.FormatFields(formDisplay, fields);
 
             formDisplay.UploadedInvoiceFileName = trustedFileName;
