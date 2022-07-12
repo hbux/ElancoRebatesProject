@@ -376,6 +376,8 @@
     {
         isAnalysingUpload = true;
 
+        Logger.LogInformation("Input file name: {FileName}", e.File.Name);
+
         try
         {
             string trustedFileName = Path.GetRandomFileName();
@@ -392,18 +394,34 @@
             }
             else
             {
-                filePath = $@"wwwroot\storage\{Env.EnvironmentName}\ba43tf1y.4at";
+                Logger.LogInformation("CRP: {ContentRootPath}, Env: {Environment}, WRP: {WebRootPath}, PathCombine: {PathCombine}", Env.ContentRootPath, Env.EnvironmentName, Env.WebRootPath, Path.Combine(Env.ContentRootPath, "wwwroot", "storage", Env.EnvironmentName, trustedFileName));
+
+                filePath = $@"wwwroot\storage\{Env.EnvironmentName}\{trustedFileName}";
+
+                Logger.LogInformation("Upload invoice in {Env.EnvironmentName} environment for file: {FileName} with path: {Path}", Env.EnvironmentName, trustedFileName, filePath);
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    Logger.LogInformation("Entered using statement for stream filepath: {StreamFilePath} compared to filepath: {Path}", stream.Name, filePath);
+
+                    await e.File.OpenReadStream(4_000_000).CopyToAsync(stream);
+                };
             }
 
+            Logger.LogInformation("Passed copy to async for file name: {FileName}", trustedFileName);
             await StreamInvoice(e.File);
 
+            Logger.LogInformation("Passed IJSRuntime streaming invoice for display");
             var fields = await Api.AnalyseInvoice(filePath);
+
+            Logger.LogInformation("Passed analysing invoice for filepath: {FilePath} and returned {Fields.Count} content from analysis", filePath, fields.Count);
             FormHelper.FormatFields(formDisplay, fields);
 
             formDisplay.UploadedInvoiceFileName = trustedFileName;
         }
         catch (Exception ex)
         {
+            Logger.LogWarning(ex, "Failed to upload image.");
             errorMessage = ex.Message;
         }
 
