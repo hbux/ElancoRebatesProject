@@ -5,13 +5,13 @@
     2. [ERD diagrams](#erd-diagrams)
         1. [Offer database design](#offer-database-design)
         2. [Account database design](#account-database-design)
-3. [Development progress](#development-progress)
+3. [Development progress](#development-progress-white_check_mark)
     1. [Phase 1 :white_check_mark:](#phase-1-white_check_mark)
     2. [Phase 2 :white_check_mark:](#phase-2-white_check_mark)
     3. [Phase 3 :hammer_and_wrench:](#phase-3-hammer_and_wrench)
 4. [Resources](#resources)
 
-Looking for the up-to-date [development preview](#development-preview) video?
+Looking for the up-to-date (**13/07/2022**) [production preview](#production-preview) video?
 
 ## Introduction and Task
 Elanco wants to explore the use of cloud-based cognitive services to complete text analysis on receipts to improve our customer experiences.
@@ -43,13 +43,13 @@ An offer can contain multiple brand logos and multiple offer details. Brands can
 An account is associated to a user which can contain multiple addresses and pets. The account entity userId is associated with the Entity Framework Core Database.
 <img src="https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/Wireframes/AccountDb.png" />
 
-## Development Progress
-#### Development preview
+## Development Progress :white_check_mark:
+#### Production preview
 ![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/DevelopmentPreview.gif)
 
 ### Phase 1 :white_check_mark:
 * Initialised GitHub repository for the project
-* Planned out the project using UML's, user interface diagrams and established goals of the project.
+* Planned out the project using ERD's, user interface diagrams and established goals of the project.
 * Created necessary .NET Core projects, including:
     * UI (Blazor Server)
     * UI Library (business logic for UI)
@@ -72,7 +72,8 @@ Received new requirements from the client.
 * Implemented logging
 * Implemented unit testing and mocking
 
-### Phase 3 :hammer_and_wrench:
+### Phase 3 :white_check_mark:
+Received new requirements from the client, and requirement changes.
 * Clean up work, including:
   * Fixed bugs
   * Ironed out issues of the system
@@ -80,6 +81,20 @@ Received new requirements from the client.
 * Hosted web application on Azure
 * Setup CI/CD pipeline using Azure DevOps
 * Migrated from SQLServer to Azure SQL
+
+### Project Conclusion
+
+After the 3 phases/sprints of development, the project meets its requirements provided by the client. A live demo of the application was showcased to the client, where we re-irrerated the choice of technlogies used, and why we made certain decisions. the client had the ability to ask any questions during the demo. 
+
+Ultimately, the client was happy final product as well as with the technologies used for this application. A few weeks later, the client asked if a non-technical recorded demo could be made of the application, as client's upper management will watch.
+
+As the client is apart of a very large company, a vast change to the customer experience of submitting rebates, developed by students, is not feasible. This will need to be authorised by upper management.
+
+:exclamation: **Important update for Elanco Rebates Project**
+
+The live webpage for the application has been halted as of **13/07/2022**, this is due to the incurring charges and costs to maintain the working web application. The incurring charges are from resources such as Azure SQL server & connected databases and the Azure form recognizer API.
+
+If you wish to see the **Production preview 13/07/2022**, please see [this link](#production-preview). 
 
 ## Resources
 Below are resources and documentation links to aid with the development.
@@ -93,40 +108,3 @@ Below are resources and documentation links to aid with the development.
 * [Migrating from SQL Server to Azure SQL](https://docs.microsoft.com/en-us/azure/dms/tutorial-sql-server-to-azure-sql)
 * [Azure Blob Storage in .NET](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet?tabs=environment-variable-windows)
 * [Ignoring Accented Letters in strings](https://stackoverflow.com/questions/359827/ignoring-accented-letters-in-string-comparison)
-
----
-
-:exclamation: **Important**
-
-Below is appsettings.json code which is not included in the Elanco project files as this contains API key's and endpoints for API services. This json file should be included in the root of your ElancoUI project.
- 
-````
-{
-    "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=aspnet-ElancoUI-CDA36F0B-4463-4A16-9EDF-38D3BBF5DB5F;Trusted_Connection=True;MultipleActiveResultSets=true",
-    "ElancoData": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ElancoData;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
-
-  // Api Key is the key to access Azure Form Recognizer API.
-  "ApiKey": "your-api-key",
-
-  // Endpoint is the URL of the Form Recognizer.
-  "Endpoint": "your-form-recognizer-endpoint",
-
-  // Model ID is the custom trained model for retrieving specific details from an uploaded image.
-  "ModelId": "your-custom-trained-model-id"
-  
-  // Blob Storage Key is the access key for the storage account, not an individual container
-  "BlobStorageKey": "your-storage-account-access-key",
-
-  // Blob Storage Name is the name of the storage account, not an individual container
-  "BlobStorageAccountName": "your-storage-account-name"
-}
-````
