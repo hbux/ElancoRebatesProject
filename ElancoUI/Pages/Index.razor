@@ -378,8 +378,13 @@
 
         try
         {
-            string hardCodedFileName = "Invoice6.png";
+            string hardCodedFileName = Path.GetRandomFileName();
             string filePath = Path.Combine(Env.WebRootPath, "storage", Env.EnvironmentName, hardCodedFileName);
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                await fs.CopyToAsync(e.File.OpenReadStream());
+            }
 
             await StreamInvoice(e.File);
 
