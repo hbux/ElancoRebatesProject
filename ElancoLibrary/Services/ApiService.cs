@@ -2,11 +2,6 @@
 using Azure.AI.FormRecognizer.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Services
 {
@@ -47,6 +42,11 @@ namespace ElancoLibrary.Services
             }
         }
 
+        /// <summary>
+        ///     Analyses an uploaded file. Extracts basic text from an uploaded image.
+        /// </summary>
+        /// <param name="filePath">The absolute source to the uploaded file</param>
+        /// <returns>A list of text the API analyses</returns>
         public async Task<List<string>> AnalyseProductImage(string filePath)
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
@@ -56,7 +56,7 @@ namespace ElancoLibrary.Services
 
                 FormPage uploadedImage = rawUpload.Value.FirstOrDefault();
 
-                _logger.LogDebug("Analysed product image for file path: {FilePath} at {Time}", filePath ,DateTime.UtcNow);
+                _logger.LogDebug("Analysed product image for file path: {FilePath} at {Time}", filePath, DateTime.UtcNow);
 
                 return ParseProductImageContent(uploadedImage, filePath);
             }
@@ -93,6 +93,12 @@ namespace ElancoLibrary.Services
             return fields;
         }
 
+        /// <summary>
+        ///     Adds each text detected from an uploaded image and places it into a list.
+        /// </summary>
+        /// <param name="uploadedImage">The page representing the analysed text</param>
+        /// <param name="filePath">The absolute source to the uploaded file</param>
+        /// <returns></returns>
         private List<string> ParseProductImageContent(FormPage uploadedImage, string filePath)
         {
             List<string> parsedContent = new List<string>();

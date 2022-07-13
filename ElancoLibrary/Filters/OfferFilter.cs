@@ -1,13 +1,7 @@
 ﻿using ElancoLibrary.Data;
 using ElancoLibrary.Models.Brands;
 using ElancoLibrary.Models.Offers;
-using ElancoLibrary.Models.Products;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Filters
 {

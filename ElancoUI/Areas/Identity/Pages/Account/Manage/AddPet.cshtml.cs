@@ -1,6 +1,4 @@
 using ElancoUI.Data;
-using ElancoUI.Helpers;
-using ElancoUI.Models;
 using ElancoUI.Models.DbContextModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

@@ -1,13 +1,7 @@
 ﻿using ElancoLibrary.DataAccess;
 using ElancoLibrary.Models.Brands;
 using ElancoLibrary.Models.Offers;
-using ElancoLibrary.Models.Products;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Data
 {
@@ -66,6 +60,12 @@ namespace ElancoLibrary.Data
             return offers;
         }
 
+        /// <summary>
+        ///     Retrieves a specific offer by it's unique ID.
+        /// </summary>
+        /// <param name="offerId"></param>
+        /// <returns>An offer model representing the offer that has been successfully retrieved.</returns>
+        /// <exception cref="NullReferenceException"></exception>
         public async Task<OfferModel> GetOfferById(int offerId)
         {
             var p = new

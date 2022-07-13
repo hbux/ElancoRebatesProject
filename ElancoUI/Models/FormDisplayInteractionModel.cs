@@ -1,7 +1,5 @@
 ﻿using ElancoLibrary.Models.Offers;
 using ElancoUI.Models.DbContextModels;
-using Microsoft.AspNetCore.Components.Forms;
-using System.ComponentModel.DataAnnotations;
 
 namespace ElancoUI.Models
 {

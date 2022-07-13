@@ -2,11 +2,6 @@
 using ElancoLibrary.Models.Brands;
 using ElancoLibrary.Models.Products;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Data
 {
@@ -21,6 +16,11 @@ namespace ElancoLibrary.Data
             _logger = logger;
         }
 
+        /// <summary>
+        ///     Retrieves all brands and products from the database.
+        /// </summary>
+        /// <returns>A complete list of all brands</returns>
+        /// <exception cref="NullReferenceException"></exception>
         public async Task<List<BrandModel>> GetBrands()
         {
             var brands = await _dataAccess.LoadData<BrandModel, dynamic>("dbo.spBrand_GetAll", new { }, "ElancoData");

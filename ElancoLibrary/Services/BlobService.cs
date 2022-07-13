@@ -1,11 +1,5 @@
 ﻿using Azure.Storage.Blobs;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Services
 {
@@ -20,6 +14,12 @@ namespace ElancoLibrary.Services
             _logger = logger;
         }
 
+        /// <summary>
+        ///     Uploads an uploaded invoice to a container in Azure Blob storage.
+        /// </summary>
+        /// <param name="filePath">The absolute source to the uploaded file</param>
+        /// <param name="fileName">The name of the file that is being uploaded</param>
+        /// <returns></returns>
         public async Task UploadInvoice(string filePath, string fileName)
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))

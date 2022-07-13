@@ -1,12 +1,10 @@
 ﻿using ElancoLibrary.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Models
 {
+    /// <summary>
+    ///     A backend class representing each field in the form.
+    /// </summary>
     public class FormModel
     {
         public string Id { get; set; }

@@ -1,11 +1,6 @@
 ﻿using ElancoLibrary.DataAccess;
 using ElancoLibrary.Models;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElancoLibrary.Data
 {
@@ -20,6 +15,13 @@ namespace ElancoLibrary.Data
             _logger = logger;
         }
 
+        /// <summary>
+        ///     Submits a rebate to the database.
+        /// </summary>
+        /// <param name="form">The form that is being submitted</param>
+        /// <param name="userId">Validates the currrent session user equals the form user ID</param>
+        /// <returns></returns>
+        /// <exception cref="UnauthorizedAccessException"></exception>
         public async Task SubmitRebate(FormModel form, string userId)
         {
             if (form.UserId != userId)
@@ -32,6 +34,14 @@ namespace ElancoLibrary.Data
             _logger.LogDebug("Rebate with ID: {Id} inserted into database at {Time}", form.Id, DateTime.UtcNow);
         }
 
+        /// <summary>
+        ///     Retrieves the details of a submission by the submission ID.
+        /// </summary>
+        /// <param name="submissionId">The submission ID to retrieve</param>
+        /// <param name="userId">Validates the currrent session user equals the form user ID</param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="UnauthorizedAccessException"></exception>
         public async Task<FormModel> GetSubmissionDetails(string submissionId, string userId)
         {
             var p = new
@@ -59,6 +69,12 @@ namespace ElancoLibrary.Data
             return rebate;
         }
 
+        /// <summary>
+        ///     Prevents all users from viewing the submission details. Once the submission has been viewed,
+        ///     this method ensures the submission details cannot be displayed again.
+        /// </summary>
+        /// <param name="submissionId">The submission ID to update</param>
+        /// <returns></returns>
         public async Task UpdateUserAccess(string submissionId)
         {
             var p = new
@@ -71,6 +87,11 @@ namespace ElancoLibrary.Data
             _logger.LogDebug("Updated database for user access of submission ID: {Id} at {Time}", submissionId, DateTime.UtcNow);
         }
 
+        /// <summary>
+        ///     Retrieves a list of all submissions from a specific user ID.
+        /// </summary>
+        /// <param name="userId">The user ID to retrieve submissions for</param>
+        /// <returns>A complete list of all submissions</returns>
         public async Task<List<FormModel>> GetAllSubmissions(string userId)
         {
             var p = new

@@ -76,18 +76,10 @@ Received new requirements from the client.
 * Clean up work, including:
   * Fixed bugs
   * Ironed out issues of the system
-  * More complete unit tests and mocking
-  * Refactored auto-select offer to detect more accurately
   * Added account pet and address validation
-  * Added login loading indicator
-* Added SendGrid as email sender
 * Hosted web application on Azure
 * Setup CI/CD pipeline using Azure DevOps
 * Migrated from SQLServer to Azure SQL
-* Added more user interfaces, such as:
-  * Scaffolded pages
-  * Information card modal
-  * MyRebates account section error modals
 
 ## Resources
 Below are resources and documentation links to aid with the development.
