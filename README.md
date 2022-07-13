@@ -1,3 +1,11 @@
+:exclamation: **Important update for Elanco Rebates Project**
+
+The live webpage for the application has been halted as of **13/07/2022**, this is due to the incurring charges and costs to maintain the working web application. The incurring charges are from resources such as Azure SQL Server, connected databases and the Azure Form Recognizer API and SignalR connections.
+
+Instead, are you looking for the **up-to-date (13/07/2022)** [production preview](#production-preview) video?
+
+---
+
 ### Table of contents
 1. [Introduction and task](#introduction-and-task)
 2. [System design](#system-design)
@@ -5,13 +13,12 @@
     2. [ERD diagrams](#erd-diagrams)
         1. [Offer database design](#offer-database-design)
         2. [Account database design](#account-database-design)
-3. [Development progress](#development-progress-white_check_mark)
+3. [Development progress :white_check_mark:](#development-progress-white_check_mark)
     1. [Phase 1 :white_check_mark:](#phase-1-white_check_mark)
     2. [Phase 2 :white_check_mark:](#phase-2-white_check_mark)
-    3. [Phase 3 :hammer_and_wrench:](#phase-3-hammer_and_wrench)
+    3. [Phase 3 :white_check_mark:](#phase-3-white_check_mark)
+4. [Project conclusion & final client meeting](#project-conclusion)
 4. [Resources](#resources)
-
-Looking for the up-to-date (**13/07/2022**) [production preview](#production-preview) video?
 
 ## Introduction and Task
 Elanco wants to explore the use of cloud-based cognitive services to complete text analysis on receipts to improve our customer experiences.
@@ -82,6 +89,8 @@ Received new requirements from the client, and requirement changes.
 * Setup CI/CD pipeline using Azure DevOps
 * Migrated from SQLServer to Azure SQL
 
+---
+
 ### Project Conclusion
 
 After the 3 phases/sprints of development, the project meets its requirements provided by the client. A live demo of the application was showcased to the client, where we re-irrerated the choice of technlogies used, and why we made certain decisions. the client had the ability to ask any questions during the demo. 
@@ -89,12 +98,6 @@ After the 3 phases/sprints of development, the project meets its requirements pr
 Ultimately, the client was happy final product as well as with the technologies used for this application. A few weeks later, the client asked if a non-technical recorded demo could be made of the application, as client's upper management will watch.
 
 As the client is apart of a very large company, a vast change to the customer experience of submitting rebates, developed by students, is not feasible. This will need to be authorised by upper management.
-
-:exclamation: **Important update for Elanco Rebates Project**
-
-The live webpage for the application has been halted as of **13/07/2022**, this is due to the incurring charges and costs to maintain the working web application. The incurring charges are from resources such as Azure SQL server & connected databases and the Azure form recognizer API.
-
-If you wish to see the **Production preview 13/07/2022**, please see [this link](#production-preview). 
 
 ## Resources
 Below are resources and documentation links to aid with the development.
