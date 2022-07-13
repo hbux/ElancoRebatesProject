@@ -3,6 +3,7 @@ using ElancoUI.Models.DbContextModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace ElancoUI.Areas.Identity.Pages.Account.Manage
 {
@@ -15,10 +16,7 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
         private readonly IAccountData _accountData;
 
         [BindProperty]
-        public Pet NewPet { get; set; }
-
-        [BindProperty]
-        public IFormFile PetUpload { get; set; }
+        public InputModel NewPet { get; set; }
 
         public AddPetModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
             IWebHostEnvironment env, IAccountData accountData, ILogger<AddPetModel> logger)
@@ -37,30 +35,57 @@ namespace ElancoUI.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPost()
         {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            string trustedFileName = $"{ Guid.NewGuid() }_{ PetUpload.FileName }";
-            string filePath = Path.Combine("wwwroot", "storage", "account_pets", trustedFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            try
             {
-                await PetUpload.CopyToAsync(fileStream);
+                string trustedFileName = $"{Guid.NewGuid()}_{NewPet.PetUpload.FileName}";
+                string filePath = Path.Combine("wwwroot", "storage", "account_pets", trustedFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await NewPet.PetUpload.CopyToAsync(fileStream);
+                }
+
+                Pet pet = new Pet
+                {
+                    Name = NewPet.PetName,
+                    ImageName = trustedFileName,
+                };
+
+                ElancoUI.Models.DbContextModels.Account account = _accountData.GetAccountDetails(user);
+                account.Pets.Add(pet);
+                _accountData.SaveAccountDetails();
             }
-
-            NewPet.ImageName = trustedFileName;
-
-            ElancoUI.Models.DbContextModels.Account account = _accountData.GetAccountDetails(user);
-            account.Pets.Add(NewPet);
-            _accountData.SaveAccountDetails();
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "Upload failed.");
+                return Page();
+            }
 
             _logger.LogInformation("User ID: {Id} created new pet at {Time}", user.Id, DateTime.UtcNow);
 
             await _signInManager.RefreshSignInAsync(user);
             return RedirectToPage("Index");
+        }
+
+        public class InputModel
+        {
+            [Required]
+            [MaxLength(50)]
+            public string PetName { get; set; }
+
+            [Required]
+            public IFormFile PetUpload { get; set; } 
         }
     }
 }

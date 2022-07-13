@@ -13,18 +13,22 @@
                 <div class="form-field">
                     <label asp-for="NewAddress.AddressLine1" class="form-label">Address</label>
                     <input asp-for="NewAddress.AddressLine1" class="form-control" />
+                    <span asp-validation-for="NewAddress.AddressLine1" class="validation-message"></span>
                 </div>
                 <div class="form-field">
                     <label asp-for="NewAddress.City" class="form-label">City</label>
                     <input asp-for="NewAddress.City" class="form-control" />
+                    <span asp-validation-for="NewAddress.City" class="validation-message"></span>
                 </div>
                 <div class="form-field">
                     <label asp-for="NewAddress.State" class="form-label">State</label>
                     <input asp-for="NewAddress.State" class="form-control" />
+                    <span asp-validation-for="NewAddress.State" class="validation-message"></span>
                 </div>
                 <div class="form-field">
                     <label asp-for="NewAddress.ZipCode" class="form-label">Zip Code</label>
                     <input asp-for="NewAddress.ZipCode" class="form-control" />
+                    <span asp-validation-for="NewAddress.ZipCode" class="validation-message"></span>
                 </div>
             </div>
         </div>
