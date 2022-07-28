@@ -94,7 +94,7 @@
 
                     <div class="account-pet">
                         <input type="hidden" asp-for="@pet.Id" />
-                        <img src="~@file" width="140" height="120"/>
+                        <img src="@file" width="140" height="120"/>
                         <div class="account-pet-details">
                             <h5>@pet.Name</h5>
                             <a class="account-pet-details-cta" asp-page="./EditPet" asp-route-id="@pet.Id">
