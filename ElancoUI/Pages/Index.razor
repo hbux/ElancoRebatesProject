@@ -217,8 +217,10 @@
                         <div class="form-field-pets-container">
                             @foreach (Pet pet in formDisplayInteraction.Pets)
                             {
+                                string path = pet.ImageName + "." + pet.ImageType;
+
                                 <div class="form-field-pet" id="@TriggerPetSelectedCss(pet)" @onclick="(() => SetSelectedPet(pet))">
-                                    <img src="/storage/account_pets/@pet.ImageName" alt="@pet.Name"/>
+                                    <img src="/images/@path" alt="@pet.Name"/>
                                 </div>
                             }
                         </div>
