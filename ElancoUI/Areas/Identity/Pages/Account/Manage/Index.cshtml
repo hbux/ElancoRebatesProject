@@ -90,7 +90,7 @@
             <div class="account-pets-container">
                 @foreach (ElancoUI.Models.DbContextModels.Pet pet in Model.Account.Pets)
                 {
-                    string file = "~/images" + "/" + pet.ImageName;
+                    string file = "~/images" + "/" + pet.ImageName + "." + pet.ImageType;
 
                     <div class="account-pet">
                         <input type="hidden" asp-for="@pet.Id" />
