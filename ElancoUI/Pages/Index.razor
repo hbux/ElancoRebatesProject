@@ -220,7 +220,7 @@
                                 string path = pet.ImageName + "." + pet.ImageType;
 
                                 <div class="form-field-pet" id="@TriggerPetSelectedCss(pet)" @onclick="(() => SetSelectedPet(pet))">
-                                    <img src="/images/@path" alt="@pet.Name"/>
+                                    <img src="/storage/account_pets/@path" alt="@pet.Name"/>
                                 </div>
                             }
                         </div>
