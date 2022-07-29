@@ -52,7 +52,7 @@ An account is associated to a user which can contain multiple addresses and pets
 
 ## Development Progress :white_check_mark:
 #### Production preview
-![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/DevelopmentPreview.gif)
+![Alt Text](https://github.com/hbux/ElancoRebatesProject/blob/main/Documentation/ProductionPreview.gif)
 
 ### Phase 1 :white_check_mark:
 * Initialised GitHub repository for the project
