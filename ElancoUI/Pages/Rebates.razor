@@ -167,8 +167,13 @@
 
         try
         {
-            string hardCodedFileName = "Credelio2.jpg";
-            string filePath = Path.Combine(Env.WebRootPath, "storage", Env.EnvironmentName, hardCodedFileName);
+            string trustedFileName = Path.GetRandomFileName();
+            string filePath = Path.Combine(Env.WebRootPath, "storage", Env.EnvironmentName, trustedFileName);
+
+            using(FileStream fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await e.File.OpenReadStream(4_000_000).CopyToAsync(fileStream);
+            }
 
             Logger.LogInformation("Product image uploaded at {Time}", DateTime.UtcNow);
 

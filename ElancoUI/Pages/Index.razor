@@ -380,15 +380,20 @@
 
         try
         {
-            string hardCodedFileName = "Invoice6.png";
-            string filePath = Path.Combine(Env.WebRootPath, "storage", Env.EnvironmentName, hardCodedFileName);
+            string trustedFileName = Path.GetRandomFileName();
+            string filePath = Path.Combine(Env.WebRootPath, "storage", Env.EnvironmentName, trustedFileName);
+
+            using(FileStream fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await e.File.OpenReadStream(4_000_000).CopyToAsync(fileStream);
+            }
 
             await StreamInvoice(e.File);
 
             var fields = await Api.AnalyseInvoice(filePath);
             FormHelper.FormatFields(formDisplay, fields);
 
-            formDisplay.UploadedInvoiceFileName = hardCodedFileName;
+            formDisplay.UploadedInvoiceFileName = trustedFileName;
         }
         catch (Exception ex)
         {
